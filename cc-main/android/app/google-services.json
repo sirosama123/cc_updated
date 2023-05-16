@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "868821018697",
+    "project_id": "crescentcareapp-f58eb",
+    "storage_bucket": "crescentcareapp-f58eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868821018697:android:a4dfa3963ed83cbbe4b798",
+        "android_client_info": {
+          "package_name": "com.cc.crescentcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868821018697-89n21ghmtb0q40m4a6299ppuc35s1iu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQYNaER4dEzFGP__HWEloeWgnzDYJXrbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868821018697-89n21ghmtb0q40m4a6299ppuc35s1iu4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
