@@ -20,6 +20,7 @@ import 'package:project1/screens/landingpage.dart';
 import 'package:project1/screens/notification.dart';
 import 'package:project1/screens/profile.dart';
 import 'package:project1/screens/subscreens/appointment.dart';
+import 'package:project1/screens/subscreens/appointmentList.dart';
 import 'package:project1/screens/subscreens/doctoronline.dart';
 import 'package:project1/screens/subscreens/labPrescription.dart';
 import 'package:project1/screens/subscreens/prescription.dart';
@@ -265,11 +266,11 @@ class _firstLandingState extends State<firstLanding> with TickerProviderStateMix
                       SizedBox(width: 20.w,),
                       Container(child: Image.asset('assets/images/appointment.png'),height: 25.h,width: 25.w,),
                       SizedBox(width: 35.w,),
-                      Heading3(head: "Appointment")
+                      Heading3(head: "Appointment List")
                     ],),
                     onTap: (){
                       Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ComingSoon(PageName: "Appointment")));
+                      MaterialPageRoute(builder: (context) => AppointList()));
                     },
                   ),
                   onTap: (){},

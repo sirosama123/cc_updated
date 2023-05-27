@@ -72,7 +72,7 @@ class DoctorList extends StatelessWidget {
               child: DoctorListView(
                 designation: doctors[index]['Speciality'], 
                 hospital: doctors[index]['department'], 
-                name: doctors[index]['ConsultantNames'],
+                name: doctors[index]['ConsultantNames'], hsptlname: '',
                 ),
             ),
           );

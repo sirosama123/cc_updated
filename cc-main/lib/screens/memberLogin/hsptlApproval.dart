@@ -41,6 +41,7 @@ class HsptlApproval extends StatelessWidget {
   String? gen;
   String? ed;
   String? hsptlName;
+  String? city;
   HsptlApproval({
     super.key,
     required this.relation,
@@ -54,7 +55,8 @@ class HsptlApproval extends StatelessWidget {
     required this.age,
     required this.gen,
     required this.ed,
-    required this.hsptlName
+    required this.hsptlName,
+    required this.city
     });
 
   @override
@@ -83,7 +85,7 @@ header.cells[0].value = '$hsptlName';
 
 //Add rows to grid
 PdfGridRow row = grid.rows.add();
-row.cells[0].value = ' Karachi';
+row.cells[0].value = ' $city';
 
 header.cells[0].style.stringFormat = PdfStringFormat(
     alignment: PdfTextAlignment.center,
@@ -502,7 +504,7 @@ page.graphics.drawString(
   format: PdfStringFormat(alignment: PdfTextAlignment.left),
 );
 page.graphics.drawString(
-  'Re: Approval Letter of ABC (Health X)',
+  'Re: Approval Letter of OPD',
   PdfStandardFont(PdfFontFamily.helvetica, 11,style:PdfFontStyle.bold),
   bounds: Rect.fromLTWH(0, 205, page.getClientSize().width, 100),
   format: PdfStringFormat(alignment: PdfTextAlignment.left),

@@ -23,21 +23,26 @@ import '../widgets/memberPageBars.dart';
 import 'dependents.dart';
 import 'doctorList.dart';
 
-class HospitalDepts extends StatelessWidget {
+class HospitalDepts extends StatefulWidget {
   List<dynamic> hospitaldepts;
   String? name;
   HospitalDepts({super.key,required this.hospitaldepts,required this.name});
 
   @override
+  State<HospitalDepts> createState() => _HospitalDeptsState();
+}
+
+class _HospitalDeptsState extends State<HospitalDepts> {
+  @override
+ bool abc=false;
   Widget build(BuildContext context) {
     var dr_list;
     getDrList(String dept) async {
       final dio = Dio();
       try {
-          EasyLoading.show(
-                        status: 'loading...',
-                        maskType: EasyLoadingMaskType.black,
-                      );
+          setState(() {
+            abc=true;
+          });
         final response = await dio.get(
             'https://script.google.com/macros/s/AKfycbwxRIL2aFRA-WL9_A994KDZ795i0eW0cBjHX8kDpGcxzCdWyK5lrBGg0QS4DdoB-Esq/exec?department=$dept');
         if (response.statusCode == 200) {
@@ -48,16 +53,22 @@ class HospitalDepts extends StatelessWidget {
          Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DoctorList(doctors: dr_list['data'], hsptlName: name,)));
-              EasyLoading.dismiss();
+                                    builder: (context) => DoctorList(doctors: dr_list['data'], hsptlName: widget.name,)));
+              setState(() {
+                abc=false;
+              });
         } else {
           print('API request failed with status code ${response.statusCode}');
-          EasyLoading.dismiss();
+          setState(() {
+            abc=false;
+          });
         }
       } catch (e) {
         print('Error retrieving data from API: $e');
         print('Data not exist');
-        EasyLoading.dismiss();
+        setState(() {
+          abc=false;
+        });
       }
     }
     return Scaffold(
@@ -82,24 +93,71 @@ class HospitalDepts extends StatelessWidget {
               onPressed: () {},
             ),
           ]),
-      body: Padding(
-        padding:EdgeInsets.symmetric(horizontal: 10.w),
-        child:ListView.builder(
-          itemCount: hospitaldepts.length,
+      body: Stack(
+        children: [
+          Padding(
+            padding:EdgeInsets.symmetric(horizontal: 10.w),
+            child:
+             Padding(
+               padding:  EdgeInsets.only(top: 5.h),
+               child: GridView.count(
+                  crossAxisCount: 2, // Number of columns
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                
+                  children: List.generate(widget.hospitaldepts.length, (index) {
+                    print(widget.hospitaldepts);
+                    return GestureDetector(
+                      onTap: (){
+                       getDrList(widget.hospitaldepts[index]['dept']);
+                      },
+                      child:  HosDept(
+                        img: widget.hospitaldepts[index]['img'], 
+                        name: widget.hospitaldepts[index]['dept']));
+                  }),),
+             ),
+            // ListView.builder(
+            //   itemCount: widget.hospitaldepts.length,
 
-          itemBuilder: (context,index){
-            return Padding(
-              padding:EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: (){
-                  getDrList(hospitaldepts[index]['dept']);
-                },
-                child: HosDept(
-                  img: hospitaldepts[index]['img'], 
-                  name: hospitaldepts[index]['dept'])
-              ),
-            );
-          })
+            //   itemBuilder: (context,index){
+            //     return Padding(
+            //       padding:EdgeInsets.all(8.0),
+            //       child: GestureDetector(
+            //         onTap: (){
+            //           getDrList(widget.hospitaldepts[index]['dept']);
+            //         },
+            //         child: HosDept(
+            //           img: widget.hospitaldepts[index]['img'], 
+            //           name: widget.hospitaldepts[index]['dept'])
+            //       ),
+            //     );
+            //   })
+            
+          ),
+           abc==true? Align(
+              alignment: Alignment.center,
+              child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: Colors.black.withOpacity(0.4),
+                  
+                  child: Center(
+                    child: Container(
+                      height: 80.h,
+                      width: 80.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white,width: 1),
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: Colors.transparent
+                      ),
+                      child: Center(
+                        child: CircularProgressIndicator(color: Colors.white,),
+                      ),
+                    ),
+                  ),
+                ),
+            ):Container(),
+        ],
         
       ),
       

@@ -24,7 +24,11 @@ import 'approval.dart';
 
 
 class DependentsData extends StatelessWidget {
-  const DependentsData({super.key});
+  String? pharmAddress;
+  String? aprFor;
+  String? subject;
+
+  DependentsData({super.key,required this.pharmAddress,required this.aprFor,required this.subject});
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +117,7 @@ class DependentsData extends StatelessWidget {
                                       idate: Provider11.data1['data'][index]['IssueDate'].toString(), 
                                       name: Provider11.data1['data'][index]['Name'].toString(),
                                       pc: Provider11.data1['data'][index]['PlanCode'].toString(),
-                                      relation: Provider11.data1['data'][index]['Relation'].toString(),
+                                      relation: Provider11.data1['data'][index]['Relation'].toString(), pharmAddress: pharmAddress, apprFor: aprFor, subject: subject,
                                       )));
                   },
                   style: NeumorphicStyle(
@@ -152,176 +156,6 @@ class DependentsData extends StatelessWidget {
               );
             }
             )
-
-
-
-
-          //  Column(
-          //   children: [
-          //     SizedBox(height: 10.h,),
-              
-          //   SizedBox(height: 10.h,),
-          //     Neumorphic(
-              
-          //     child: Padding(
-          //       padding:  EdgeInsets.symmetric(horizontal: 10.w),
-          //       child: Container(
-                  
-          //         width: double.infinity,
-          //         child: Column(
-          //           children: [
-          //             SizedBox(height: 5.h,),
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.start,
-          //               children: [
-          //                 Image.asset("assets/images/spouse.png",height: 20.h,width: 20.w,),
-          //                 SizedBox(width: 5.w,),
-          //                 Multi3(color: Colors.white, subtitle: "Spouse", weight: FontWeight.bold, size: 16),
-          //               ],
-          //             ),
-          //             Divider(color: Colors.white,),
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 Multi3(color: Colors.white, subtitle: "Name", weight: FontWeight.bold, size: 16),
-          //                 SizedBox(width: 5.w,),
-          //                 Multi3(color: Colors.white, subtitle: "snsdnk", weight: FontWeight.bold, size: 16),
-          //               ],
-          //             ),
-          //              Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 Multi3(color: Colors.white, subtitle: "CNIC", weight: FontWeight.bold, size: 16),
-          //                 SizedBox(width: 5.w,),
-          //                 Multi3(color: Colors.white, subtitle: "737672375745272", weight: FontWeight.bold, size: 16),
-          //               ],
-          //             ),
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 Container(),
-          //                  NeumorphicButton(
-
-          //       margin: EdgeInsets.only(top: 12),
-          //       onPressed: () {
-                  
-          //       },
-          //       style: NeumorphicStyle(
-          //         shadowLightColor: Colors.blue,
-          //         shape: NeumorphicShape.flat,
-          //         boxShape:
-          //             NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-          //         //border: NeumorphicBorder()
-          //       ),
-          //       padding:  EdgeInsets.all(6.0),
-          //       child: Multi3(color: Colors.blue, subtitle: "Issue", weight: FontWeight.bold, size: 12),
-          //       ),
-          //               ],
-          //             ),
-          //             SizedBox(height: 5.h,)
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-
-              
-          //     style: NeumorphicStyle(
-          //       shape: NeumorphicShape.flat,
-          //       // shadowDarkColor: Color.fromARGB(255, 0, 38, 69),
-          //       color: Color(0xff2b578e),
-          //       // shadowLightColor: Color.fromARGB(255, 0, 38, 69),
-          //       lightSource: LightSource.bottomRight,
-          //       depth: -20,
-          //       disableDepth: false,
-          //       border: NeumorphicBorder(
-          //       color: Color(0x33000000),
-          //       width: 0.1,
-                
-          //     )),
-          //   ),
-          //   SizedBox(height: 10.h,),
-          //     Neumorphic(
-              
-          //     child: Padding(
-          //       padding:  EdgeInsets.symmetric(horizontal: 10.w),
-          //       child: Container(
-                  
-          //         width: double.infinity,
-          //         child: Column(
-          //           children: [
-          //             SizedBox(height: 5.h,),
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.start,
-          //               children: [
-          //                 Image.asset("assets/images/son.png",height: 20.h,width: 20.w,),
-          //                 SizedBox(width: 5.w,),
-          //                 Multi3(color: Colors.white, subtitle: "Son", weight: FontWeight.bold, size: 16),
-          //               ],
-          //             ),
-          //             Divider(color: Colors.white,),
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 Multi3(color: Colors.white, subtitle: "Name", weight: FontWeight.bold, size: 16),
-          //                 SizedBox(width: 5.w,),
-          //                 Multi3(color: Colors.white, subtitle: "snsdnk", weight: FontWeight.bold, size: 16),
-          //               ],
-          //             ),
-          //              Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 Multi3(color: Colors.white, subtitle: "CNIC", weight: FontWeight.bold, size: 16),
-          //                 SizedBox(width: 5.w,),
-          //                 Multi3(color: Colors.white, subtitle: "737672375745272", weight: FontWeight.bold, size: 16),
-          //               ],
-          //             ),
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 Container(),
-          //                  NeumorphicButton(
-
-          //       margin: EdgeInsets.only(top: 12),
-          //       onPressed: () {
-                  
-          //       },
-          //       style: NeumorphicStyle(
-          //         shadowLightColor: Colors.blue,
-          //         shape: NeumorphicShape.flat,
-          //         boxShape:
-          //             NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-          //         //border: NeumorphicBorder()
-          //       ),
-          //       padding:  EdgeInsets.all(6.0),
-          //       child: Text(
-          //         "Go to full sample",
-                 
-          //       )),
-          //               ],
-          //             ),
-          //             SizedBox(height: 5.h,)
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-
-              
-          //     style: NeumorphicStyle(
-          //       shape: NeumorphicShape.flat,
-          //       // shadowDarkColor: Color.fromARGB(255, 0, 38, 69),
-          //       color: Color(0xff2b578e),
-          //       // shadowLightColor: Color.fromARGB(255, 0, 38, 69),
-          //       lightSource: LightSource.bottomRight,
-          //       depth: -20,
-          //       disableDepth: false,
-          //       border: NeumorphicBorder(
-          //       color: Color(0x33000000),
-          //       width: 0.1,
-                
-          //     )),
-          //   ),
-          //   ],
-          // ),
     );
   }
 }

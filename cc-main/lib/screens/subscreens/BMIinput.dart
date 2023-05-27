@@ -12,7 +12,9 @@ import 'package:project1/widgets/nheading2.dart';
 import 'package:project1/widgets/square_head.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:wheel_chooser/wheel_chooser.dart';
 import '../../widgets/boldHeading1.dart';
+import 'package:number_selection/number_selection.dart';
 
 class BMIinput extends StatefulWidget {
   const BMIinput({super.key});
@@ -42,17 +44,22 @@ class _BMIinputState extends State<BMIinput> {
   TextEditingController age = TextEditingController(text: "20");
   TextEditingController weight = TextEditingController(text: "50");
   int? gen = 0 ;
-  double _height = 8.0;
- Future<bool> _onWillPop()async{
-    Navigator.pop(context); 
-    return false;
-  }
+  int _height_inch = 8;
+  int _height_feet = 0;
+
  
   @override
   Widget build(BuildContext context) {
   final Provider11 = Provider.of<Provider1>(context); 
     return  Scaffold(
          appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios,color: Colors.white,),
+            
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
         backgroundColor: Color(0xff2b578e),
             title: Text("BMI"),
              actions: <Widget>[
@@ -144,7 +151,7 @@ class _BMIinputState extends State<BMIinput> {
                   SizedBox(height: 10.h,),
                   Container(
                     width: double.infinity,
-                    height: 130.h,
+                    // height: 130.h,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10.r),
@@ -164,31 +171,114 @@ class _BMIinputState extends State<BMIinput> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          NHeading2(head: "HEIGHT"),
+                          Row(
+                            children: [
+                            
+              SizedBox(width: 20.w,),
+             
+                            ],
+                          ),
+                           NHeading2(head: "HEIGHT"),
                            Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                              children: [
-                               BHeading1(head: "${_height.toStringAsFixed(1).toString()}",color: Color(0xff164584),),
+                               BHeading1(head: "${_height_inch} . ${_height_feet}",color: Color(0xff164584),),
                                Links(head: "ft")
                              ],
                            ),
-                           SfSlider(
-                            min: 1,
-                            max: 8,
-                            value: _height,
-                            interval: 1,
-                            showTicks: false,
-                            showLabels: false,
-                            activeColor: Color(0xff164584),
-                            semanticFormatterCallback: (dynamic value){
-                              return 'The selected value is $value';
-                            },
-                            onChanged: (dynamic newValue) {
-                              setState(() {
-                                _height = newValue;
-                              });
-                            },
-                          ),
+                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                                Column(
+                                  children: [
+                                    Center(
+                child: Container(
+                  height: 50.h,
+                  width: 100.w,
+                  child: NumberSelection(
+                    
+                    theme: NumberSelectionTheme(
+                      
+                       draggableCircleColor: Color(0xff2b578e),
+                        iconsColor: Colors.white,
+                        numberColor: Colors.white,
+                        backgroundColor: Color.fromARGB(255, 102, 139, 185),
+                        outOfConstraintsColor: Colors.deepOrange),
+                    initialValue: _height_inch,
+                    
+                    minValue: 1,
+                    maxValue: 8,
+                    direction: Axis.horizontal,
+                    withSpring: true,
+                    onChanged: (int value) => setState(() {
+                      _height_inch=value;
+                    }),
+                    enableOnOutOfConstraintsAnimation: true,
+                    onOutOfConstraints: () =>
+                        print("This value is too high or too low"),
+                  ),
+                ),
+              ),
+              SizedBox(height: 3.h,),
+              Links(head: "feet")
+                                  ],
+                                ),
+            
+                Column(
+                  children: [
+                    Center(
+                    child: Container(
+                      height: 50.h,
+                      width: 100.w,
+                      child: NumberSelection(
+                        
+                        theme: NumberSelectionTheme(
+                          
+                            draggableCircleColor: Color(0xff2b578e),
+                            iconsColor: Colors.white,
+                            numberColor: Colors.white,
+                            backgroundColor: Color.fromARGB(255, 102, 139, 185),
+                            outOfConstraintsColor: Colors.deepOrange),
+                        initialValue: _height_feet,
+                        
+                        minValue: 0,
+                        maxValue: 11,
+                        direction: Axis.horizontal,
+                        withSpring: true,
+                        onChanged: (int value) => setState(() {
+                          _height_feet=value;
+                        }),
+                        enableOnOutOfConstraintsAnimation: true,
+                        onOutOfConstraints: () =>
+                            print("This value is too high or too low"),
+                      ),
+                    ),
+              ),
+              SizedBox(height: 3.h,),
+              Links(head: "inch")
+                  ],
+                ),
+                            ],
+                           )
+                          //  SfSlider(
+                          //   min: 1,
+                          //   max: 8.11,
+                          //   value: _height,
+                          //   interval: 0.01,
+                          //   showTicks: false,
+                          //   showLabels: false,
+                          //   activeColor: Color(0xff164584),
+                          //   semanticFormatterCallback: (dynamic value){
+                          //     return 'The selected value is $value';
+                          //   },
+                          //   onChanged: (dynamic newValue) {
+                          //     setState(() {
+                          //       _height = newValue;
+                          //     });
+                          //   },
+                          // ),
+
+                       
             
                         ],
                       ),
@@ -436,9 +526,11 @@ class _BMIinputState extends State<BMIinput> {
                                       }
                                       Provider11.bmiAge= int.parse(age.text);
                                       Provider11.finalWeight_kg = double.parse(weight.text.toString());
-                                      Provider11.hei_ft = _height;
-                                      Provider11.finalHeight_m = _height*0.304;
+                                      Provider11.hei_ft = double.parse("${_height_inch.toString()}.${_height_feet.toString()}");
+                                      Provider11.finalHeight_m = double.parse("${_height_inch.toString()}.${_height_feet.toString()}")*0.304;
                                       Provider11.BMI();
+                                      Provider11.EstWeight();
+                                      print('${Provider11.estWeight} est weight');
                                       Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) => BMIresult()),);

@@ -14,7 +14,7 @@ class MemberPageBar1 extends StatelessWidget {
       width: double.infinity,
        decoration: BoxDecoration(   
         borderRadius: BorderRadius.circular(10.0),           
-              color: Color(0xffafc4dd),
+              color: Color(0xff2b578e),
               boxShadow: [
                 BoxShadow(
                   color: Color(0xffA4A4A4),

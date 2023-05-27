@@ -19,7 +19,10 @@ import '../screens/memberLogin/showOnMap.dart';
 class PharmaName extends StatelessWidget {
   String? city;
   String? address;
-  PharmaName({super.key,required this.address,required this.city});
+  String? name;
+  String? aprfor;
+  String? subject;
+  PharmaName({super.key,required this.address,required this.city,required this.name,required this.aprfor,required this.subject});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class PharmaName extends StatelessWidget {
        Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ShowOnMap(loc: loc!, address: address, name: 'Dvago', city: city,)));
+                                    builder: (context) => ShowOnMap(loc: loc!, address: address, name: name, city: city,)));
       return LatLng(location.latitude, location.longitude);
   }
 
@@ -45,7 +48,7 @@ class PharmaName extends StatelessWidget {
                 Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DependentsData()));
+                                    builder: (context) => DependentsData(pharmAddress: address, aprFor: aprfor, subject: subject,)));
             },
             child: Container(
               width: double.infinity,
@@ -61,8 +64,8 @@ class PharmaName extends StatelessWidget {
                   ],
                 color: Color(0xff2b578e),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.r),
-                  bottomLeft: Radius.circular(30.r),
+                  topLeft: Radius.circular(10.r),
+                  bottomLeft: Radius.circular(10.r),
                   topRight: Radius.circular(10.r),
                   bottomRight: Radius.circular(10.r),
                 )
@@ -111,20 +114,30 @@ class PharmaName extends StatelessWidget {
                 
               },
               child: Container(
-                height: 40.h,
-                width: 40.w,
+                height: 35.h,
+                width: 45.w,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage("assets/images/map2.jpg"),fit: BoxFit.contain),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(-1, 0.5),
-                      color: Color.fromARGB(255, 54, 124, 211),
-                      spreadRadius: 3,
-                      blurRadius: 6
-                    )
-                  ],
-                  shape: BoxShape.circle,
-                  color: Colors.white,
+                   boxShadow: [
+                      BoxShadow(
+                        offset: Offset(-1, 0.5),
+                        color: Color.fromARGB(255, 54, 124, 211),
+                        spreadRadius: 3,
+                        blurRadius: 6
+                      )
+                    ],
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 20.h,
+                    width: 20.w,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: AssetImage("assets/images/map2.jpg"),fit: BoxFit.contain),
+                     
+                    ),
+                  ),
                 ),
               ),
             ),

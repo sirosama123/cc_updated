@@ -62,25 +62,42 @@ class LandingCard extends StatelessWidget {
               onPressed: () {},
             ),
           ]),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                child: GestureDetector(
-                onTap: (){
-                    Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AllCards()));
-                },
-                child: MemberPageBar1(
-                  heading: 'My Profile      ',
-                  imgAddress: 'assets/images/user.png',
-                ),
-                ),
-              )
-            ],
+          body: Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 10.w),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                        height: 10.h,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 150.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.r),
+                            image: DecorationImage(
+                                image: AssetImage("assets/images/banner.png"),
+                                fit: BoxFit.cover)),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                  GestureDetector(
+                  onTap: (){
+                      Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AllCards()));
+                  },
+                  child: MemberPageBar1(
+                    heading: 'My Profile      ',
+                    imgAddress: 'assets/images/user.png',
+                  ),
+                  )
+                ],
+              ),
+            ),
           ),
       ),
       );

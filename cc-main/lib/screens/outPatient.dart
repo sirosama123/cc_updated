@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
@@ -10,6 +11,11 @@ import 'package:project1/widgets/slider.dart';
 import 'package:project1/widgets/squares.dart';
 import 'package:hellodoc_service_pkg/main.dart';
 import 'package:hellodoc_service_pkg/screens/HomeScreen.dart';
+import 'package:provider/provider.dart';
+
+import 'Provider/provider1.dart';
+import 'appointmentBook.dart/appointmentHosp.dart';
+import 'appointmentDisclaimer.dart';
 
 
 class OutPatient extends StatefulWidget {
@@ -20,7 +26,10 @@ class OutPatient extends StatefulWidget {
   @override
   _OutPatientState createState() => _OutPatientState();
 }
-
+void abcd() async {
+                                  WidgetsFlutterBinding.ensureInitialized();
+                                  runApp(HDApp());
+                              }
 class _OutPatientState extends State<OutPatient> with TickerProviderStateMixin {
   TabController? _tabController;
 
@@ -41,6 +50,7 @@ class _OutPatientState extends State<OutPatient> with TickerProviderStateMixin {
   }
 
   @override
+  bool abc = false;
   Widget build(BuildContext context) {
     return Scaffold(
      appBar: AppBar(
@@ -106,75 +116,182 @@ class Landing1 extends StatefulWidget {
 
 class _Landing1State extends State<Landing1> {
   @override
+  bool abc = false;
   Widget build(BuildContext context) {
+    final Provider11 = Provider.of<Provider1>(context);
+    var hospcities;
+    var data1;
+    getDataInsured(String? cnic) async {
+      Provider11.data1=[];
+      final dio = Dio();
+      try {
+          setState(() {
+            abc=true;
+          });
+        final response = await dio.get(
+            'https://script.google.com/macros/s/AKfycbwhf6DqjHQAWYToV7AZVhe-p_T_TgfIoV7sclnN4PJtOR60IA5BEfHNzVXOFkv2R0HOmQ/exec?headcnic=$cnic'
+            );
+        if (response.statusCode == 200) {
+          final data = response.data;
+          data1=response.data['data'];
+          Provider11.data1= response.data;
+          print(data['data'][0]);
+          print(data1);
+          setState(() {
+            abc=false;
+          });
+          
+        } else {
+          print('API request failed with status code ${response.statusCode}');
+          setState(() {
+            abc=false;
+          });
+        }
+      } catch (e) {
+        print('Error retrieving data from API: $e');
+        print('Data not exist');
+        setState(() {
+            abc=false;
+          });
+      }
+    }
+    getPanelHospitals() async {
+      getDataInsured(Provider11.cnic);
+      final dio = Dio();
+      try {
+          setState(() {
+            abc=true;
+          });
+        final response = await dio.get(
+            'https://script.google.com/macros/s/AKfycbzZ2utHnysZGpU5ZYZQn3so8FNFU3ys2mFtbmpEQbYONyXiXzHAapbUWWsQnnpowgunAg/exec');
+        if (response.statusCode == 200) {
+          final data = response.data;
+          hospcities=response.data;
+          print(data['data'][0]);
+          print(hospcities['data'].runtimeType);
+          data1.isEmpty? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AppointmentDisclaimer())): Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MemberHospitalsApointment(hospitalcities: hospcities['data'],)));
+              setState(() {
+            abc=false;
+          });
+        } else {
+          print('API request failed with status code ${response.statusCode}');
+          setState(() {
+            abc=false;
+          });
+        }
+      } catch (e) {
+        print('Error retrieving data from API: $e');
+        print('Data not exist');
+        setState(() {
+            abc=false;
+          });
+      }
+    }
       return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  Scaffold(
-         
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 10.h,),
-                  Slider23(),
-                  SizedBox(height: 10.h,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 24.w),
-                  child: Container(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                         
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      home:  Stack(
+        children: [
+          Scaffold(
+             
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 10.h,),
+                      Slider23(),
+                      SizedBox(height: 10.h,),
+                    Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 24.w),
+                      child: Container(
+                        child: SingleChildScrollView(
+                          child: Column(
                             children: [
-                              GestureDetector(
-                                child: Squares(imgAddress: 'assets/images/medicine.png', heading: "Medicine at your Doorstep"),
-                                onTap: (){
-                                        Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) => Prescription()));
-                                },
-                                ),
-                              GestureDetector(child: Squares(imgAddress: "assets/images/doctor.png", heading: "Doctor Online"),
-                              onTap: (){
-                              //     void main() async {
-                              //     WidgetsFlutterBinding.ensureInitialized();
-                              //     runApp(HDApp());
-                              // }
-                                  Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => HomeScreen()));
-                              },),
+                             
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    child: Squares(imgAddress: 'assets/images/medicine.png', heading: "Medicine at your Doorstep"),
+                                    onTap: (){
+                                            Navigator.push(context,
+                                            MaterialPageRoute(builder: (context) => Prescription()));
+                                    },
+                                    ),
+                                  GestureDetector(child: Squares(imgAddress: "assets/images/doctor.png", heading: "Doctor Online"),
+                                  onTap: (){
+                                      void main() async {
+
+  ///////////////////////////////////////////
+  WidgetsFlutterBinding.ensureInitialized();
+  ///////////////////////////////////////////
+  runApp(HDApp());
+}
+                                      // Navigator.push(context,
+                                      // MaterialPageRoute(builder: (context) => HomeScreen()));
+                                  },),
+                                ],
+                              ),
+                              SizedBox(height: 17.h,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    child: Squares(imgAddress: "assets/images/flask.png", heading: "Lab at your Doorstep"),
+                                    onTap: (() {
+                                       Navigator.push(context,
+                                       MaterialPageRoute(builder: (context) => LabPrescription()));
+                                    }),
+                                    ),
+                                  GestureDetector(
+                                    child: Squares(imgAddress: "assets/images/bookapp.png", heading: "Appointment Services"),
+                                    onTap: ()async{
+                                      await getPanelHospitals();
+                                      // Navigator.push(context,
+                                      // MaterialPageRoute(builder: (context) => ComingSoon(PageName: "Appointment Services")));
+                                    },
+                                    )
+                                ],
+                              ),
+              
                             ],
                           ),
-                          SizedBox(height: 17.h,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                child: Squares(imgAddress: "assets/images/flask.png", heading: "Lab at your Doorstep"),
-                                onTap: (() {
-                                   Navigator.push(context,
-                                   MaterialPageRoute(builder: (context) => LabPrescription()));
-                                }),
-                                ),
-                              GestureDetector(
-                                child: Squares(imgAddress: "assets/images/appointment.png", heading: "Appointment Services"),
-                                onTap: (){
-                                  Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => ComingSoon(PageName: "Appointment Services")));
-                                },
-                                )
-                            ],
-                          ),
-          
-                        ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+              abc==true? Align(
+              alignment: Alignment.center,
+              child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: Colors.black.withOpacity(0.4),
+                  
+                  child: Center(
+                    child: Container(
+                      height: 80.h,
+                      width: 80.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white,width: 1),
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: Colors.transparent
+                      ),
+                      child: Center(
+                        child: CircularProgressIndicator(color: Colors.white,),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
+            ):Container(),
+        ],
+      ),
       
     );
   }

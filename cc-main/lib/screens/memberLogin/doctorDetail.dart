@@ -23,6 +23,7 @@ import '../../widgets/heading3.dart';
 import '../../widgets/hosdept.dart';
 import '../../widgets/hospitalName.dart';
 import '../../widgets/multi3.dart';
+import '../../widgets/multi3S.dart';
 import '../../widgets/square_head.dart';
 import '../widgets/memberPageBars.dart';
 import 'dependents.dart';
@@ -58,10 +59,23 @@ class DoctorDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(  
-        
+    return Scaffold(  
+        //  appBar: AppBar(
+        //     backgroundColor: Color(0xff2b578e),
+        //     title: Text("Doctor Details"),
+        //      leading: GestureDetector(
+        //     child: Icon( Icons.arrow_back_ios, color: Colors.white,  ),
+        //        onTap: () {
+        //          Navigator.pop(context);
+        //         } ,
+        // ) ,
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: const Icon(Icons.search,color: Colors.white,),
+            
+        //     onPressed: () {},
+        //   ), ]
+        //   ),
         body: Container(
         height: double.infinity,
       decoration: const BoxDecoration(
@@ -82,7 +96,7 @@ class DoctorDetail extends StatelessWidget {
               child: Column(
                 children: [
                    Padding(
-                padding:  EdgeInsets.only(bottom:50.h),
+                padding:  EdgeInsets.only(bottom:30.h),
                 child: Container(
                   height: 250.h,
                   width: double.infinity,
@@ -91,42 +105,44 @@ class DoctorDetail extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(180),bottomRight: Radius.circular(180))
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 40.h,),
-                      Container(
-                        height: 60.h,
-                        width: 60.w,
-                        decoration: new BoxDecoration(
-                        image: new DecorationImage(
-                        image: new AssetImage("assets/images/logo.png",),
-                      
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 30.h,),
+                        Container(
+                          height: 60.h,
+                          width: 60.w,
+                          decoration: new BoxDecoration(
+                          image: new DecorationImage(
+                          image: new AssetImage("assets/images/logo.png",),
                         
-                )
-                ),
-                          ),
-                          Heading3(head: "Crescent Care Pvt Ltd"),
-                          SizedBox(height: 30.h,),
-                          Container(  
-                      height: 100.h,
-                      width: 100.w,
-                      decoration: BoxDecoration(
-                         boxShadow: [
-            BoxShadow(
-                    offset: Offset(-1, -1),
-                    color: Colors.black,
-                    spreadRadius: 1,
-                    blurRadius: 9)
-          ],
-                        borderRadius: BorderRadius.circular(25.r),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/doctor2.jpg"),
-                          fit: BoxFit.cover
-                          )
+                          
+                                  )
+                                  ),
+                            ),
+                            Heading3(head: "Crescent Care Pvt Ltd"),
+                            SizedBox(height: 30.h,),
+                            Container(  
+                        height: 100.h,
+                        width: 100.w,
+                        decoration: BoxDecoration(
+                           boxShadow: [
+                              BoxShadow(
+                      offset: Offset(-1, -1),
+                      color: Colors.black,
+                      spreadRadius: 1,
+                      blurRadius: 9)
+                            ],
+                          borderRadius: BorderRadius.circular(25.r),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/doctor2.jpg"),
+                            fit: BoxFit.cover
+                            )
+                        ),
                       ),
+                      ],
                     ),
-                    ],
                   ),             
                   ),
               ),
@@ -145,115 +161,156 @@ class DoctorDetail extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.r)
                    ),
                 margin:  EdgeInsets.symmetric(horizontal: 20.w),
-                child:  Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child:  SingleChildScrollView(
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Name", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$name", weight: FontWeight.bold, size: 12),
+                          SizedBox(height: 20.h,),
+                          Row(
+                            
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "Name", weight: FontWeight.bold, size: 12),),
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "$name", weight: FontWeight.bold, size: 12),),
+                            ],
+                          ),
+                          SizedBox(height: 10.h,),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "Speciality", weight: FontWeight.bold, size: 12),),
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "$speciality", weight: FontWeight.bold, size: 12),),
+                            ],
+                          ),
+                          SizedBox(height: 10.h,),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "Department", weight: FontWeight.bold, size: 12),),
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "$department", weight: FontWeight.bold, size: 12),),
+                            ],
+                          ),
+                          SizedBox(height: 10.h,),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "Avaialble Days", weight: FontWeight.bold, size: 12),),
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "$day1 $day2 $day3", weight: FontWeight.bold, size: 12),),
+                            ],
+                          ),
+                          SizedBox(height: 10.h,),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "Available Timings", weight: FontWeight.bold, size: 12),),
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "$time1 $time2 $time3", weight: FontWeight.bold, size: 12),),
+                            ],
+                          ),
+                          SizedBox(height: 10.h,),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "Hospital Name", weight: FontWeight.bold, size: 12),),
+                              Expanded(
+                                flex: 2,
+                                child:  Multi3S(color: Color(0xff164584), subtitle: "$hsptlName", weight: FontWeight.bold, size: 12),),
+                            ],
+                          ),
+                    //                         Row(
+                    //                            mainAxisAlignment: MainAxisAlignment.center,
+                    //                             crossAxisAlignment: CrossAxisAlignment.center,
+                    //                       children: [
+                    //                         Expanded(
+                    //                           flex: 2,
+                    //                           child: Column(
+                    //                             mainAxisAlignment: MainAxisAlignment.start,
+                    //                             crossAxisAlignment: CrossAxisAlignment.start,
+                    //                             children: [
+                    //                               Multi3(color: Color(0xff164584), subtitle: "Name", weight: FontWeight.bold, size: 12),
+                    //                               SizedBox(height: 10.h,),
+                    //                                Multi3(color: Color(0xff164584), subtitle: "Speciality", weight: FontWeight.bold, size: 12),
+                    // SizedBox(height: 10.h,),
+                        
+                    //  Multi3(color: Color(0xff164584), subtitle: "Department", weight: FontWeight.bold, size: 12),
+                    //                          SizedBox(height: 10.h,),
+                    //                            Multi3(color: Color(0xff164584), subtitle: "Available Days", weight: FontWeight.bold, size: 12),
+                    // SizedBox(height: 10.h,),
+                    // Multi3(color: Color(0xff164584), subtitle: "Available Timings", weight: FontWeight.bold, size: 12),
+                    // SizedBox(height: 10.h,),
+                    //  Multi3(color: Color(0xff164584), subtitle: "Hospital Name", weight: FontWeight.bold, size: 12),
+                    
+                    //                             ],
+                    //                           )
+                    //                           ),
+                    //                           Expanded(
+                    //                           flex: 3,
+                    //                           child:  Column(
+                    //                              mainAxisAlignment: MainAxisAlignment.start,
+                    //                             crossAxisAlignment: CrossAxisAlignment.start,
+                    //                             children: [
+                    //                               Multi3(color: Color(0xff164584), subtitle: "$name", weight: FontWeight.bold, size: 12),
+                    //  SizedBox(height: 10.h,),
+                    // Multi3(color: Color(0xff164584), subtitle: "$speciality", weight: FontWeight.bold, size: 12),
+                    // SizedBox(height: 10.h,),
+                    // Multi3(color: Color(0xff164584), subtitle: "$department", weight: FontWeight.bold, size: 12),
+                    //  SizedBox(height: 10.h,),
+                    // Multi3(color: Color(0xff164584), subtitle: "$day1 $day2 $day3", weight: FontWeight.bold, size: 12),
+                    // SizedBox(height: 10.h,),
+                    // Multi3(color: Color(0xff164584), subtitle: "$time1 $time2 $time3", weight: FontWeight.bold, size: 12),
+                    // SizedBox(height: 10.h,),
+                    // Multi3(color: Color(0xff164584), subtitle: "$hsptlName", weight: FontWeight.bold, size: 12),
+                    //                             ],
+                    //                           )
+                    //                           ),
+                    //                       ],
+                    //                     ),
+                      SizedBox(height: 10.h,),
+                          Container(
+                                    height: 50,
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child:  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        // backgroundColor: Color(0xff164584),
+                                        backgroundColor: Color(0xff174584),
+                                          shape: RoundedRectangleBorder(                       
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                      child:  TitleHeading(head: 'Book An Appointment',),
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                          MaterialPageRoute(builder:
+                                            (context) => 
+                                            HsptlDependentsData(hsptlName: hsptlName, city: '',)
+                                            )
+                                          );
+                                      },
+                                    )
+                                ),
                         ],
                       ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Speciality", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$speciality", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Department", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$department", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Day 1", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$day1", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Timing 1", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$time1", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Day 2", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$day2", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Timing 2", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$time2", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Day 3", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$day3", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Timing 3", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$time3", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Multi3(color: Color(0xff164584), subtitle: "Wing", weight: FontWeight.bold, size: 12),
-                          Multi3(color: Color(0xff164584), subtitle: "$wing", weight: FontWeight.bold, size: 12),
-                        ],
-                      ),
-                      SizedBox(height: 10.h,),
-                      Container(
-                                height: 50,
-                                width: double.infinity,
-                                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                child:  ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    // backgroundColor: Color(0xff164584),
-                                    backgroundColor: Color(0xff174584),
-                                      shape: RoundedRectangleBorder(                       
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  child:  TitleHeading(head: 'Book An Appointment',),
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                      MaterialPageRoute(builder:
-                                        (context) => 
-                                        HsptlDependentsData(hsptlName: hsptlName,)
-                                        )
-                                      );
-                                  },
-                                )
-                            ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -264,7 +321,7 @@ class DoctorDetail extends StatelessWidget {
           ],
       ),
         ),
-      )
+      // )
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:project1/screens/aboutus.dart';
 import 'package:project1/screens/firstLanding.dart';
 import 'package:project1/screens/send.dart';
 import 'package:project1/screens/splashScreen.dart';
+import 'package:project1/screens/subscreens/abc.dart';
 import 'package:project1/screens/subscreens/appointment.dart';
 import 'package:project1/screens/subscreens/map2.dart';
 import 'package:project1/screens/subscreens/push.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
       home:
       // Test3()
        SplashScreen()
+    
     ),
       );}
     );

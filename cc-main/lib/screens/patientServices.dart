@@ -38,7 +38,7 @@ class _Services1State extends State<Services1> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               GestureDetector(
-                                child: Squares(imgAddress: 'assets/images/map.png', heading: "Hospital Locator"),
+                                child: Squares(imgAddress: 'assets/images/location1.png', heading: "Hospital Locator"),
                                 onTap: (){
                                     Navigator.push(context,
                                     MaterialPageRoute(builder: (context) => SelectionCity()));
@@ -51,15 +51,7 @@ class _Services1State extends State<Services1> {
                               },),
                             ],
                           ),
-                          SizedBox(height: 17.h,),
-                          GestureDetector(
-                            child: WideSquares(imgAddress: "assets/images/calculator.png", heading: "BMI calculator"),
-                            onTap: (){
-                              Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => BMIinput()));
-                            },
-                            
-                            ),
+                         
           
                         ],
                       ),

@@ -24,6 +24,7 @@ class HosDept extends StatelessWidget {
       height: 70.h,
       width: double.infinity,
       decoration: BoxDecoration(
+        color: Color(0xff2b578e),
          boxShadow: [
                   BoxShadow(
                     offset: Offset(1, 1),
@@ -33,28 +34,31 @@ class HosDept extends StatelessWidget {
                   )
                 ],
         borderRadius: BorderRadius.circular(10.r),
-        image: DecorationImage(image: NetworkImage("$img"),fit: BoxFit.cover)
+        // image: DecorationImage(image: NetworkImage("$img"),fit: BoxFit.cover)
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 45.w,vertical: 5.h),
-        child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25.0),
-                              child: BackdropFilter(
-                                filter:
-                                    ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                                     child: Container(
-                                    height: 100.h,
-                                    width:double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                    // color: Colors.transparent.withOpacity(0.2),
+        padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 5.h),
+        child: Center(
+                                    child: Multi3(color: Colors.white, subtitle: "$name", weight: FontWeight.bold, size: 16),
                                   ),
-                                  child: Center(
-                                    child: Multi3(color: Colors.white, subtitle: "$name", weight: FontWeight.bold, size: 21),
-                                  ),
-                                  )
-                                    )
-                                    ),
+        // ClipRRect(
+        //                       borderRadius: BorderRadius.circular(25.0),
+        //                       child: BackdropFilter(
+        //                         filter:
+        //                             ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        //                              child: Container(
+        //                             height: 100.h,
+        //                             width:double.infinity,
+        //                           decoration: BoxDecoration(
+        //                             borderRadius: BorderRadius.circular(25.0),
+        //                             // color: Colors.transparent.withOpacity(0.2),
+        //                           ),
+        //                           child: Center(
+        //                             child: Multi3(color: Colors.white, subtitle: "$name", weight: FontWeight.bold, size: 21),
+        //                           ),
+        //                           )
+        //                             )
+        //                             ),
       ),
       );
     

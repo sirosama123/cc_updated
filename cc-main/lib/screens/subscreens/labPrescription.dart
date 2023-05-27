@@ -817,8 +817,8 @@ class _LabPrescriptionState extends State<LabPrescription> {
     final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendEmail');
     final response = await callable.call(
      <String, dynamic>{
-      'email': 'abdulsamiarain82@gmail.com',
-      'cc':"samirehman17102000@gmail.com",
+      'email': 'osama.zellesolutions@gmail.com',
+      'cc':"crescentcareapp@gmail.com",
       'subject': 'Crescentcare ${type} Order',
       'body': '''
         Patient Name : ${Provider11.PatientName}

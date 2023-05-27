@@ -26,20 +26,26 @@ import 'depts.dart';
 
 
 
-class PharmaCities extends StatelessWidget {
+class PharmaCities extends StatefulWidget {
   List<dynamic> pharmacities;
   PharmaCities({super.key,required this.pharmacities});
 
   @override
+  State<PharmaCities> createState() => _PharmaCitiesState();
+}
+
+class _PharmaCitiesState extends State<PharmaCities> {
+  @override
+  bool abc = false;
+
   Widget build(BuildContext context) {
     var pharmalist;
      getPharmaciesCitywise(String? city,String? img) async {
       final dio = Dio();
       try {
-         EasyLoading.show(
-                        status: 'loading...',
-                        maskType: EasyLoadingMaskType.black,
-                      );
+        setState(() {
+          abc=true;
+        });
         final response = await dio.get(
             'https://script.google.com/macros/s/AKfycbzitTttcGRo4h3VXKcLO51Qua_k3pQy5MACnmdq8x3NO-pyMZJ8u8jsmS9JEDUDx2qJ/exec?city=$city');
         if (response.statusCode == 200) {
@@ -52,16 +58,20 @@ class PharmaCities extends StatelessWidget {
         } else {
           print('API request failed with status code ${response.statusCode}');
         }
-        EasyLoading.dismiss();
+        setState(() {
+          abc=false;
+        });
       } catch (e) {
         print('Error retrieving data from API: $e');
         print('Data not exist');
-        EasyLoading.dismiss();
+        setState(() {
+          abc=false;
+        });
       }
     }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      builder: EasyLoading.init(),
+    
       home: Scaffold(
        appBar: AppBar(
             backgroundColor: Color(0xff2b578e),
@@ -79,21 +89,48 @@ class PharmaCities extends StatelessWidget {
             onPressed: () {},
           ), ]
           ),
-      body: Padding(
-        padding:EdgeInsets.only(top: 15.h,right: 10.w,left: 10.w,bottom: 5.h),
-        child: GridView.count(
-            crossAxisCount: 3, // Number of columns
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          
-            children: List.generate(pharmacities.length, (index) {
-              print(pharmacities);
-              return GestureDetector(
-                onTap: (){
-                  getPharmaciesCitywise(pharmacities[index]['city'],pharmacities[index]['img2']);
-                },
-                child: Square3(imgAddress: pharmacities[index]['img'], heading: pharmacities[index]['city']));
-            }),),
+      body: Stack(
+        children: [
+          Padding(
+            padding:EdgeInsets.only(top: 15.h,right: 10.w,left: 10.w,bottom: 5.h),
+            child: GridView.count(
+                crossAxisCount: 3, // Number of columns
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              
+                children: List.generate(widget.pharmacities.length, (index) {
+                  print(widget.pharmacities);
+                  return GestureDetector(
+                    onTap: (){
+                      getPharmaciesCitywise(widget.pharmacities[index]['city'],widget.pharmacities[index]['img2']);
+                    },
+                    child: Square3(imgAddress: widget.pharmacities[index]['img'], heading: widget.pharmacities[index]['city']));
+                }),),
+          ),
+           abc==true? Align(
+              alignment: Alignment.center,
+              child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: Colors.black.withOpacity(0.4),
+                  
+                  child: Center(
+                    child: Container(
+                      height: 80.h,
+                      width: 80.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white,width: 1),
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: Colors.transparent
+                      ),
+                      child: Center(
+                        child: CircularProgressIndicator(color: Colors.white,),
+                      ),
+                    ),
+                  ),
+                ),
+            ):Container(),
+        ],
       )
     ),
     );

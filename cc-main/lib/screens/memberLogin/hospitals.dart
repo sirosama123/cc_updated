@@ -20,23 +20,31 @@ import 'package:project1/widgets/hsptlName.dart';
 import '../../widgets/hospitalName.dart';
 import '../widgets/memberPageBars.dart';
 import 'depts.dart';
+import 'hsptldependents.dart';
 
 
 
-class MemberHospitals extends StatelessWidget {
+class MemberHospitals extends StatefulWidget {
   List<dynamic> hospitalcities;
-  MemberHospitals({super.key,required this.hospitalcities});
+  String? cityName;
+  MemberHospitals({super.key,required this.hospitalcities,required this.cityName});
 
   @override
+  State<MemberHospitals> createState() => _MemberHospitalsState();
+}
+
+class _MemberHospitalsState extends State<MemberHospitals> {
+  @override
+  bool abc =false;
+
   Widget build(BuildContext context) {
     var deptList;
-     getDeptHospitals(String? name) async {
+     getDeptHospitals(String? name, String? link) async {
       final dio = Dio();
       try {
-          EasyLoading.show(
-                        status: 'loading...',
-                        maskType: EasyLoadingMaskType.black,
-                      );
+         setState(() {
+           abc = true;
+         });
         final response = await dio.get(
             'https://script.google.com/macros/s/AKfycbx1_eSliQQqLeHgo6W11TrGUDP8eFNgsGDkjwKN1W0Qat5gMcgefj_Ec39wpLXAQkwB/exec');
         if (response.statusCode == 200) {
@@ -44,28 +52,32 @@ class MemberHospitals extends StatelessWidget {
           deptList=response.data;
           print(data['data'][0]);
           print(deptList['data'].runtimeType);
-         Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HospitalDepts(hospitaldepts:deptList['data'], name: name ,)));
-              EasyLoading.dismiss();
+          
+
+              setState(() {
+                abc = false;
+              });
         } else {
           print('API request failed with status code ${response.statusCode}');
-          EasyLoading.dismiss();
+         setState(() {
+           abc=false;
+         });
         }
       } catch (e) {
         print('Error retrieving data from API: $e');
         print('Data not exist');
-        EasyLoading.dismiss();
+        setState(() {
+          abc=false;
+        });
       }
     }
     return MaterialApp(
-      builder: EasyLoading.init(),
+
       debugShowCheckedModeBanner: false,
       home: Scaffold(
       appBar: AppBar(
             backgroundColor: Color(0xff2b578e),
-            title: Text("Hospitals"),
+            title: Text("${widget.cityName}"),
              leading: GestureDetector(
             child: Icon( Icons.arrow_back_ios, color: Colors.white,  ),
                onTap: () {
@@ -79,25 +91,54 @@ class MemberHospitals extends StatelessWidget {
             onPressed: () {},
           ), ]
           ),
-      body: Padding(
-        padding:EdgeInsets.symmetric(horizontal: 10.w),
-        child:ListView.builder(
-          itemCount: hospitalcities.length,
-
-          itemBuilder: (context,index){
-            return Padding(
-              padding:EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: (){
-                  getDeptHospitals(hospitalcities[index]['name'].toString());
-                },
-                child: hsptlName(
-                  img: hospitalcities[index]['logo'], 
-                  name: hospitalcities[index]['name']),
-              ),
-            );
-          })
-        
+      body: Stack(
+        children: [
+          GridView.count(
+              crossAxisCount: 2, // Number of columns
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            
+              children: List.generate(widget.hospitalcities.length, (index) {
+                print(widget.hospitalcities);
+                return GestureDetector(
+                  onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HsptlDependentsData(hsptlName: widget.hospitalcities[index]['name'], city: widget.cityName,)
+                                 ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: hsptlName(
+                      img: widget.hospitalcities[index]['logo'], 
+                      name: widget.hospitalcities[index]['name']),
+                  ));
+              }),),
+           abc==true? Align(
+              alignment: Alignment.center,
+              child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: Colors.black.withOpacity(0.4),
+                  
+                  child: Center(
+                    child: Container(
+                      height: 80.h,
+                      width: 80.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white,width: 1),
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: Colors.transparent
+                      ),
+                      child: Center(
+                        child: CircularProgressIndicator(color: Colors.white,),
+                      ),
+                    ),
+                  ),
+                ),
+            ):Container(),
+        ],
       ),
     ),
     );

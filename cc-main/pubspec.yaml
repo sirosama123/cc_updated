@@ -97,6 +97,8 @@ dependencies:
   tap_to_expand: ^0.6.1
   flutter_easyloading: ^3.0.5
   material_dialogs: ^1.1.4
+  wheel_chooser: ^1.1.2
+  number_selection: ^1.0.0
 
   
 

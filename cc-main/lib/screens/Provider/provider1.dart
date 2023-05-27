@@ -165,6 +165,7 @@ class Provider1 extends ChangeNotifier{
 
   double? bmi;
   int? bmiAge;
+  double? estWeight;
 
   String? imagePath;
   DateTime? Recieving;
@@ -327,7 +328,21 @@ class Provider1 extends ChangeNotifier{
     notifyListeners();
   }
   
- 
+ EstWeight(){
+   if(bmi!<18.5){
+      estWeight=20*(finalHeight_m!*finalHeight_m!);
+   }
+   else if(bmi!>18.5 && bmi!<24.9){
+      estWeight=finalWeight_kg;
+   }
+   else if(bmi!>25.0 && bmi!<30.0){
+      estWeight=29*(finalHeight_m!*finalHeight_m!);
+   }
+   else if(bmi!>30.0){
+      estWeight=34*(finalHeight_m!*finalHeight_m!);
+   }
+    notifyListeners();
+ }
 
 
 

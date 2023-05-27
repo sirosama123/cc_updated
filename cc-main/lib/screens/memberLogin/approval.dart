@@ -40,6 +40,9 @@ class Approval extends StatelessWidget {
   String? age;
   String? gen;
   String? ed;
+  String? pharmAddress;
+  String? apprFor;
+  String? subject;
   
   Approval({
     super.key,
@@ -53,11 +56,15 @@ class Approval extends StatelessWidget {
     required this.dob,
     required this.age,
     required this.gen,
-    required this.ed
+    required this.ed,
+    required this.pharmAddress,
+    required this.apprFor,
+    required this.subject
     });
 
   @override
   Widget build(BuildContext context) {
+    final Provider11 = Provider.of<Provider1>(context);
     generatePdf()async{
        //Create a new PDF documentation
 //Create a new PDF documentation
@@ -78,11 +85,11 @@ grid.headers.add(1);
 
 //Add the rows to the grid
 PdfGridRow header = grid.headers[0];
-header.cells[0].value = 'AGA KHAN UNIVERSITY HOSPITAL';
+header.cells[0].value = '$subject';
 
 //Add rows to grid
 PdfGridRow row = grid.rows.add();
-row.cells[0].value = 'National Stadium Road, Karachi';
+row.cells[0].value = pharmAddress;
 
 header.cells[0].style.stringFormat = PdfStringFormat(
     alignment: PdfTextAlignment.center,
@@ -103,7 +110,7 @@ grid.style = PdfGridStyle(
     cellPadding: PdfPaddings(left: 10, right: 10, top: 1, bottom: 1),
     backgroundBrush: PdfBrushes.transparent,
     textBrush: PdfBrushes.black,
-    font: PdfStandardFont(PdfFontFamily.helvetica, 15, style: PdfFontStyle.bold));
+    font: PdfStandardFont(PdfFontFamily.helvetica, pharmAddress!.length>60?10:12, style: PdfFontStyle.regular));
 
 
 
@@ -161,37 +168,37 @@ row2.cells[1].value = '$relation';
 //Add rows to grid
 PdfGridRow row4 = grid2.rows.add();
 row4.cells[0].value = 'Employee Name';
-row4.cells[1].value = 'SELF';
+row4.cells[1].value = '${Provider11.name}';
 
 //Add rows to grid
 PdfGridRow row5 = grid2.rows.add();
 row5.cells[0].value = 'Date of Birth / Age';
-row5.cells[1].value = 'SELF';
+row5.cells[1].value = '$dob / $age';
 
 //Add rows to grid
 PdfGridRow row6 = grid2.rows.add();
 row6.cells[0].value = 'Card No';
-row6.cells[1].value = 'SELF';
+row6.cells[1].value = '$cnic';
 
 //Add rows to grid
 PdfGridRow row7 = grid2.rows.add();
 row7.cells[0].value = 'Plan';
-row7.cells[1].value = 'SELF';
+row7.cells[1].value = '$pc';
 
 //Add rows to grid
 PdfGridRow row8 = grid2.rows.add();
 row8.cells[0].value = 'Participant Name';
-row8.cells[1].value = 'SELF';
+row8.cells[1].value = '$name';
 
 //Add rows to grid
 PdfGridRow row9 = grid2.rows.add();
 row9.cells[0].value = 'Designation';
-row9.cells[1].value = 'SELF';
+row9.cells[1].value = '$relation';
 
 //Add rows to grid
 PdfGridRow row10 = grid2.rows.add();
 row10.cells[0].value = 'Employee Id';
-row10.cells[1].value = 'SELF';
+row10.cells[1].value = '$dn';
 
 header2.cells[0].style.stringFormat = PdfStringFormat(
     alignment: PdfTextAlignment.center,
@@ -424,7 +431,7 @@ header8.cells[0].value = ' Patient/Employee is requested to inform Crescent Care
 
 
 page.graphics.drawString(
-    '23 march 2023', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '${DateTime.now().day} ${DateTime.now().month} ${DateTime.now().year}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 20), Offset(0, 20))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -435,7 +442,7 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   cardId', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':   $cnic', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 35), Offset(50, 35))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -446,7 +453,7 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   policyNo', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':   $dn', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 50), Offset(50, 50))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -457,7 +464,7 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   PartnerId', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':   Nil', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 65), Offset(50, 65))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -468,7 +475,7 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   {Gender}/{Age}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':   ${gen}/${age}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 80), Offset(50, 80))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -478,7 +485,7 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   Product', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':   Nil', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 95), Offset(50, 95))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -501,7 +508,7 @@ page.graphics.drawString(
   format: PdfStringFormat(alignment: PdfTextAlignment.left),
 );
 page.graphics.drawString(
-  'Re: Approval Letter of ABC (Health X)',
+  'Re: Approval Letter of $apprFor',
   PdfStandardFont(PdfFontFamily.helvetica, 11,style:PdfFontStyle.bold),
   bounds: Rect.fromLTWH(0, 205, page.getClientSize().width, 100),
   format: PdfStringFormat(alignment: PdfTextAlignment.left),
@@ -691,7 +698,7 @@ document.dispose();
                     onPressed:()async{
             //Create a new PDF documentation
 //Create a new PDF documentation
-
+generatePdf();
           }, 
                     style: NeumorphicStyle(
                       shadowLightColor: Colors.blue,

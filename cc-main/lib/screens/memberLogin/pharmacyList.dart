@@ -59,7 +59,7 @@ class PharmaList extends StatelessWidget {
               height: 150.h,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(img.toString()),
+                  image: AssetImage('assets/images/2Pharmacy.jpeg'),
                   fit: BoxFit.fill
                   )
               ),
@@ -72,7 +72,7 @@ class PharmaList extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: pharmalist.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return PharmaName(address: pharmalist[index]['address'].toString(), city: city,);
+                  return PharmaName(address: pharmalist[index]['address'].toString(), city: city, name: 'Pharmacy', aprfor: 'Pharmacy', subject: 'Pharmacy',);
                   ListTile(
                     title: Text(pharmalist[index]['address']),
                   );

@@ -47,7 +47,7 @@ class _AdminLabOrderDetailState extends State<AdminLabOrderDetail> {
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pushReplacement(
+    Navigator.push(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) => AdminfirstLanding(tab: 0)));

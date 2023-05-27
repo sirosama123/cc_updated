@@ -11,6 +11,7 @@ import 'package:project1/widgets/lightHeading.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../widgets/WextraHeading1.dart';
+import '../../widgets/heading2.dart';
 
 class BMIresult extends StatefulWidget {
   const BMIresult({super.key});
@@ -31,14 +32,13 @@ class _BMIresultState extends State<BMIresult> {
               title: const Text("BMI Result"),
                 leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
-                onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => firstLanding(tab: 0,)) )
+                onPressed: () => Navigator.of(context).pop()
             ), 
           ),
                 body: Center(
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 15.w),
-                      child: SingleChildScrollView(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 15.w),
                         child: Column(
                           children: [
                             SizedBox(height: 20.h,),
@@ -117,7 +117,7 @@ class _BMIresultState extends State<BMIresult> {
                                           )
                                          ],
                                        ),
-                      
+                        
                                     SizedBox(height: 10.h,),
                                       Row(
                                         children: [
@@ -220,7 +220,7 @@ class _BMIresultState extends State<BMIresult> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      WEHeading1(head: "${Provider11.hei_ft!.toStringAsFixed(1).toString()}",color: Colors.white,),
+                                      WEHeading1(head: "${Provider11.hei_ft!.toStringAsFixed(2).toString()}",color: Colors.white,),
                                       WLinks(head: "ft", color: Colors.white)
                                     ],
                                   )
@@ -260,6 +260,33 @@ class _BMIresultState extends State<BMIresult> {
                              )
                               ],
                              ),
+                             SizedBox(height: 20.h,),     
+                        Container(
+                              width: double.infinity,
+                              height: 90.h,
+                             decoration: BoxDecoration(
+                                color: Color(0xff2b578e),
+                                borderRadius: BorderRadius.circular(10.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xffA4A4A4),
+                                    blurRadius: 6.0.r,
+                                    spreadRadius: 1.0.r,
+                                    offset: const Offset(0.0, 0.0),
+                                    // Shadow position
+                                  ),
+                                ],         
+                              ),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    WHeading3(head: "ESTIMATED WEIGHT SHOULD BE"),
+                                    SizedBox(height: 5.h,),
+                                    WEHeading1(head:"${Provider11.estWeight!.toStringAsFixed(3).toString()} Kg",color: Colors.white,
+                                                         )
+                                  ],
+                                          ),
+                             ) ,
                              SizedBox(height: 20.h,),
                           ],
                         ),

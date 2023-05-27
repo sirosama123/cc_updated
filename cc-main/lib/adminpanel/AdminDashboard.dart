@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,6 +15,9 @@ import 'package:project1/widgets/smallDBsquare.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
+import 'appointmentViewadmin.dart';
+import 'doctorAppointments.dart';
 
 class AdminDashboard extends StatefulWidget {
   late int count;
@@ -185,7 +189,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                          Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            DBsquare(mainhead: "Doctor Appointments", counts: 6, bgColor: Colors.blue, height: 100,width: 150,),
+                                            ApointmentSizeWidget(),
                                             DBsquare(mainhead: "Online Doctor\nAppointment", counts: 7, bgColor: Colors.purple, height: 100,width: 150,),
                                           ],
                                         )
@@ -242,7 +246,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                           },
                                           ),
                                         
-                                         smallDBsquare(mainhead: "Doctor Appointments", counts: 6, bgColor: Colors.blue, height: 50,width: 75,),
+                                         ApointmentSizeWidget2(),
                                          smallDBsquare(mainhead: "Online Doctor\nAppointment", counts: 7, bgColor: Colors.purple,  height: 50,width: 75,)
                                       ],
                                     )
@@ -388,6 +392,69 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
   }
 }
+
+
+class ApointmentSizeWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('appointments_admin')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+        if (!snapshot.hasData) {
+          return Text('No data available');
+        }
+
+        int size = snapshot.data!.size;
+        return GestureDetector(
+          onTap: (){
+            Navigator.push(context,
+                       MaterialPageRoute(builder: (context) => DoctorAppointmentsAdminPanel()));
+          },
+          child: DBsquare(mainhead: "Doctor Appointments", counts: double.parse(size.toString()), bgColor: Colors.blue, height: 100,width: 150,));
+      },
+    );
+  }
+}
+
+class ApointmentSizeWidget2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('appointments_admin')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+        if (!snapshot.hasData) {
+          return Text('No data available');
+        }
+
+        int size = snapshot.data!.size;
+        return GestureDetector(
+          onTap: (){
+         Navigator.push(context,
+         MaterialPageRoute(builder: (context) => DoctorAppointmentsAdminPanel()));
+          },
+          child: smallDBsquare(mainhead: "Doctor Appointments", counts: double.parse(size.toString()), bgColor: Colors.blue, height: 50,width: 70,));
+      },
+    );
+  }
+}
+
+
 
   class ChartData {
         ChartData(this.x, this.y, this.color);

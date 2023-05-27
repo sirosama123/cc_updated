@@ -26,7 +26,8 @@ import 'hsptlApproval.dart';
 
 class HsptlDependentsData extends StatelessWidget {
   String? hsptlName;
-  HsptlDependentsData({super.key,required this.hsptlName});
+  String? city;
+  HsptlDependentsData({super.key,required this.hsptlName,required this.city});
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +116,7 @@ class HsptlDependentsData extends StatelessWidget {
                                       idate: Provider11.data1['data'][index]['IssueDate'].toString(), 
                                       name: Provider11.data1['data'][index]['Name'].toString(),
                                       pc: Provider11.data1['data'][index]['PlanCode'].toString(),
-                                      relation: Provider11.data1['data'][index]['Relation'].toString(), hsptlName: hsptlName,
+                                      relation: Provider11.data1['data'][index]['Relation'].toString(), hsptlName: hsptlName, city: city,
                                       )));
                   },
                   style: NeumorphicStyle(
