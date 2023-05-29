@@ -250,7 +250,14 @@ class _Landing1State extends State<Landing1> {
                                   GestureDetector(
                                     child: Squares(imgAddress: "assets/images/bookapp.png", heading: "Appointment Services"),
                                     onTap: ()async{
-                                      await getPanelHospitals();
+                                      if (Provider11.usage=="cooperative") {
+                                        await getPanelHospitals();
+                                      } else {
+                                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AppointmentDisclaimer()));
+                                      }
                                       // Navigator.push(context,
                                       // MaterialPageRoute(builder: (context) => ComingSoon(PageName: "Appointment Services")));
                                     },

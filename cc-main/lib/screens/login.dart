@@ -166,6 +166,7 @@ class _LoginState extends State<Login> {
             Provider11.number = data['phone'];
             Provider11.cnic = data['cnic'];
             Provider11.policy=data['policy'];
+            Provider11.usage = data['usage'];
           });
           setState(() {
             // statee = true;

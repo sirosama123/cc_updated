@@ -153,6 +153,7 @@ class Provider1 extends ChangeNotifier{
   String? number;
   String? gen;
   String? dbuid;
+  String? usage;
 
   double? Wei_kg;
   double? wei_lbs;

@@ -78,11 +78,6 @@ class _DoctorAppointmentsAdminPanelState extends State<DoctorAppointmentsAdminPa
       
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(onPressed: (){
-            Navigator.of(context).pop();
-          }, icon: Icon(Icons.backpack)),
-        ),
             body:StreamBuilder<QuerySnapshot>(
         stream: admin_appointments,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -98,7 +93,7 @@ class _DoctorAppointmentsAdminPanelState extends State<DoctorAppointmentsAdminPa
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
               return Container(
-        height:180.h,
+        // height:180.h,
         child: Padding(
                   padding:EdgeInsets.only(top: 5.h,right: 10.w,left: 10.w),
                   child: Neumorphic(
@@ -155,7 +150,7 @@ class _DoctorAppointmentsAdminPanelState extends State<DoctorAppointmentsAdminPa
                                 ),
                                 child: Padding(
                                   padding:  EdgeInsets.all(5),
-                                  child: Multi3(color: Colors.white, subtitle:data['status']=="cancelled"?"Cancelled":"Confirmed", weight: FontWeight.bold, size: 12),
+                                  child: Multi3(color: Colors.white, subtitle:data['status']=="cancelled"?"Cancelled":data['status']=="pending"?"Pending":"Confirmed", weight: FontWeight.bold, size: 12),
                                 )),
                             ],
                           ),

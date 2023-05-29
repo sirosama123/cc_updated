@@ -183,7 +183,7 @@ class _LandingPageState extends State<LandingPage> {
                                       // Provider11.medLab();
                                       // print(Provider11.medlabs);
                                       // print(Provider11.cnic);
-                                      if (Provider11.cnic == null) {
+                                      if (Provider11.usage == "international") {
                                         getCardData(Provider11.policy.toString());
                                       } else {
                                         // EasyLoading.show(

@@ -54,6 +54,7 @@ class _SignUpState extends State<SignUp>  {
    bool state2 = true;
   bool? state3;
   bool? state4=false;
+  String? usage;
   Widget build(BuildContext context) {
 
     
@@ -103,6 +104,7 @@ class _SignUpState extends State<SignUp>  {
             "profile": "https://cdn-icons-png.flaticon.com/512/1077/1077012.png",
             "cnic":cnic.text,
             "policy":policy.text,
+            "usage":usage,
             });
     
      
@@ -384,6 +386,8 @@ Row(
       onTap: (){
         setState(() {
           state3=true;
+          usage='cooperative';
+          print(usage);
 
         });
         policy.clear();
@@ -408,6 +412,8 @@ GestureDetector(
   onTap: (){
         setState(() {
           state3=false;
+          usage='international';
+          print(usage);
         });
         print(state3);
         cnic.clear();
@@ -486,6 +492,12 @@ SizedBox(height: 10.h,),
                     ],
                     
                     controller:policy ,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Field is empty';
+                      }
+                      return null;
+                    },
                   ),
                 ):Container(),
                 
@@ -586,12 +598,15 @@ SizedBox(height: 10.h,),
                         ),
                       child:  TitleHeading(head: 'Sign Up',),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          if (state3==true||state3==false) {
+                        if (_formKey.currentState!.validate()&&usage!=null) {
+                            
                             Signup();
-                          } else {
-                            print("please select");
-                          }
+                          
+                           
+                        
+                }
+                else{
+                   print("please select");
                 }
                           
                       },
