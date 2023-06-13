@@ -1,20 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:project1/initialScreen.dart';
 import 'package:project1/screens/Provider/provider1.dart';
-import 'package:project1/screens/aboutus.dart';
 import 'package:project1/screens/firstLanding.dart';
-import 'package:project1/screens/send.dart';
 import 'package:project1/screens/splashScreen.dart';
-import 'package:project1/screens/subscreens/abc.dart';
-import 'package:project1/screens/subscreens/appointment.dart';
-import 'package:project1/screens/subscreens/map2.dart';
-import 'package:project1/screens/subscreens/push.dart';
-import 'package:project1/screens/subscreens/selectionCityDis.dart';
-import 'package:project1/test2.dart';
-import 'package:project1/test3.dart';
 import 'package:provider/provider.dart';
 
 

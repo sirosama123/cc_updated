@@ -50,9 +50,7 @@ class _Activities1State extends State<Activities1> with TickerProviderStateMixin
   @override
   bool abc = false;
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
        appBar: AppBar(
               backgroundColor: Color(0xff2b578e),
               title: Text("Out Patient Services"),
@@ -102,7 +100,7 @@ class _Activities1State extends State<Activities1> with TickerProviderStateMixin
            Dashboard(count: 0,)
           ],
         ),
-      ),
+     
     );
   }
 }

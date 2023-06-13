@@ -46,11 +46,14 @@ class _LandingPageState extends State<LandingPage> {
           abc=true;
         });
         final response = await dio.get(
-            'https://script.google.com/macros/s/AKfycbwhf6DqjHQAWYToV7AZVhe-p_T_TgfIoV7sclnN4PJtOR60IA5BEfHNzVXOFkv2R0HOmQ/exec?headcnic=$cnic');
+            'https://script.google.com/macros/s/AKfycbyo0wI08qmH1T4u55gdGY3dQiC4IeuvpoCqouJcp87Zt7KMNUPKR7wGG35VDBRaaMPMRw/exec?headcnic=$cnic');
         // EasyLoading.dismiss();
         if (response.statusCode == 200) {
           final data = response.data;
           Provider11.data1 = data;
+          Provider11.empId=data['data'][0]['empId'].toString();
+          Provider11.pcode=data['data'][0]['PlanCode'].toString();
+         
           data['data'].isEmpty?Navigator.push(
               context, MaterialPageRoute(builder: (context) => MemberDisclaimer())):Navigator.push(
               context, MaterialPageRoute(builder: (context) => MemberPage()));
@@ -106,9 +109,7 @@ class _LandingPageState extends State<LandingPage> {
       }
     }
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return  Scaffold(
         body: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -276,7 +277,7 @@ class _LandingPageState extends State<LandingPage> {
             ):Container(),
           ],
         ),
-      ),
+  
       
     );
   }

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 import 'package:project1/screens/subscreens/subscreenWidgets/teamCarousel.dart';
-import 'package:syncfusion_flutter_treemap/treemap.dart';
+
 import 'package:project1/widgets/MHeading1.dart';
 import 'package:project1/widgets/dbSquares.dart';
-import 'package:syncfusion_flutter_maps/maps.dart';
+
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 

@@ -770,10 +770,11 @@ class LabPrescription extends StatefulWidget {
 }
 
 class _LabPrescriptionState extends State<LabPrescription> {
+  final _formKey = GlobalKey<FormState>();
     String? imagePath;
     bool load = false;
     var uuid = Uuid();
-
+   
     TextEditingController patientname = TextEditingController();
     TextEditingController age = TextEditingController();
     DateTime? RecievingDate = DateTime(2023,1,7);
@@ -793,26 +794,26 @@ class _LabPrescriptionState extends State<LabPrescription> {
       {'label': '03:30PM - 04:00PM', 'value': '12'},
     ];
 
-  @override
-    void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
+  // @override
+  //   void initState() {
+  //   super.initState();
+  //   BackButtonInterceptor.add(myInterceptor);
+  // }
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   BackButtonInterceptor.remove(myInterceptor);
+  //   super.dispose();
+  // }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context); // Do some stuff.
-    return true;
-  }
+  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  //   Navigator.pop(context); // Do some stuff.
+  //   return true;
+  // }
 
   Widget build(BuildContext context) {
     final Provider11 = Provider.of<Provider1>(context); 
-    
+   
      sendmail(String type, String patientname ,String patientage,String orderpersonemail,String orderpersoncontact,String url) async{
     final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendEmail');
     final response = await callable.call(
@@ -1173,182 +1174,74 @@ return MaterialApp(
                       Padding(
                         padding:  EdgeInsets.symmetric(horizontal: 10.w),
                         child: Container(
-                          child: Column(
-                            children: [
-                               SizedBox(height: 10.h,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Form(
+                             key: _formKey,
+                            child: Column(
                               children: [
-                                WhiteLabelss(lab: 'Patient Name'),
-                                SizedBox(height: 5.h,),
-                                TextField(
-                                controller: patientname,
-                                style: TextStyle(color: Colors.white),
-                                  decoration: new InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(      
-                                            borderSide: BorderSide(color: Colors.white),   
-                                            ),  
-                                    focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.white),
-                                        ),
-                                      suffixIcon: Icon(Icons.person,color: Colors.white,)
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10.h,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                WhiteLabelss(lab: 'Patient Age'),
-                                SizedBox(height: 5.h,),
-                                TextField(
-                                controller: age,
-                                style:const TextStyle(color: Colors.white),
-                                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                            inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly,
-                                LengthLimitingTextInputFormatter(4),
-                            ],
-                                  decoration: const InputDecoration(
+                                 SizedBox(height: 10.h,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  WhiteLabelss(lab: 'Patient Name'),
+                                  SizedBox(height: 5.h,),
+                                  TextFormField(
+                                     validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Text is empty';
+                }
+                return null;
+              },
+                                  controller: patientname,
+                                  style: TextStyle(color: Colors.white),
+                                    decoration: new InputDecoration(
                                       enabledBorder: UnderlineInputBorder(      
                                               borderSide: BorderSide(color: Colors.white),   
                                               ),  
                                       focusedBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(color: Colors.white),
-                                          ),  
-                                      suffixIcon: Icon(Icons.person,color: Colors.white,)
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20.h,),
-                            Container(
-                              width: double.infinity,
-                              height:110.h ,
-                               decoration: BoxDecoration(       
-                                borderRadius: BorderRadius.circular(10.0),           
-                                    color: Colors.white,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Color(0xffA4A4A4),
-                                          blurRadius: 6.0,
-                                          spreadRadius: 1.0,
-                                          offset: Offset(0.0, 0.0),
-                                          // Shadow position
-                                        ),
-                                      ],
-                                    ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                 
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    // SizedBox(height: 5.h,),
-                                    BlueLabelss(lab: "Select Date"),
-                                    
-                                    GestureDetector(
-                                      child: Square2(imgAddress: "assets/images/calendar.png",),
-                                      onTap:  ()async {
-                                                 DateTime? newDate = await showDatePicker (
-                                                    context: context, 
-                                                    initialDate:DateTime(2023) , 
-                                                    firstDate: DateTime(2023), 
-                                                    lastDate: DateTime(2024)
-                                                    );
-                                                    if (newDate == null) {
-                                                      return;
-                                                    } else {
-                                                      setState(() {
-                                                        RecievingDate = newDate;
-                                                      },);
-                                                      
-                                                    }
-
-                                                },
-                                      ),
-                                      
-                                  ],
-                                ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    BlueLabelss(lab: "Select Time"),
-                                    // SizedBox(height: 10.h,),
-                                    GestureDetector(
-                                      child: Square2(imgAddress: "assets/images/clock.png",),
-                                      onTap:()  {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (ctx) => AlertDialog(
-                                                    title:  Links(head: "Please Select the time"),
-                                                      content: SingleChildScrollView(
-                                            child: Column(
-                                              children: <Widget>[
-                                              const  Divider(),
-                                                GestureDetector(child: Links(head: "9:00AM - 9:30AM"),onTap: (){setState(() {
-                                                  timee = "9:00AM - 9:30AM";
-                                                });  Navigator.of(ctx).pop();
-                                                                      },),
-                                              const  Divider(),
-                                                GestureDetector(child: Links(head: "9:30AM - 10:00AM"),onTap: (){setState(() {
-                                                  timee = "9:30AM - 10:00AM";
-                                                });Navigator.of(ctx).pop();},),
-                                              const  Divider(),
-                                                GestureDetector(child: Links(head: "10:00AM - 10:30AM"),onTap: (){setState(() {
-                                                  timee = "10:00AM - 10:30AM";
-                                                }); Navigator.of(ctx).pop();},),
-                                              const  Divider(),
-                                                GestureDetector(child: Links(head: "10:30AM - 11:00AM"),onTap: (){setState(() {
-                                                  timee = "10:30AM - 11:00AM";
-                                                }); Navigator.of(ctx).pop();},),
-                                              const  Divider(),
-                                                GestureDetector(child: Links(head: "11:00AM - 11:30AM"),onTap: (){setState(() {
-                                                  timee = "11:00AM - 11:30AM";
-                                                });Navigator.of(ctx).pop();},),
-                                              const  Divider(),
-                                                GestureDetector(child: Links(head: "11:30AM - 12:00PM"),onTap: (){setState(() {
-                                                  timee = "11:30AM - 12:00PM";
-                                                }); Navigator.of(ctx).pop();},),
-                                              const  Divider(),
-                                                GestureDetector(child: Links(head: "12:00PM - 12:30PM"),onTap: (){setState(() {
-                                                  timee = "12:00PM - 12:30PM";
-                                                });Navigator.of(ctx).pop();},),
-                                              const  Divider(),
-                                              ],
-                                            ),
                                           ),
-                                                    actions: <Widget>[
-                                                      TextButton(
-                                                      onPressed: () {
-                                                          Navigator.of(ctx).pop();},
-                                                        child: Container(
-                                                          color: const Color(0xff2b578e),
-                                                          padding: const EdgeInsets.all(14),
-                                                          child: const Text("Yes",style: TextStyle(color: Colors.white),),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-              );
-                },
-                                      ),
-                                      
-                                  ],
-                                ),
+                                        suffixIcon: Icon(Icons.person,color: Colors.white,)
+                                    ),
+                                  ),
                                 ],
                               ),
-                            ),
-                      
-
                               SizedBox(height: 10.h,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  WhiteLabelss(lab: 'Patient Age'),
+                                  SizedBox(height: 5.h,),
+                                  TextFormField(
+                                       validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Text is empty';
+                }
+                return null;
+              },
+                                  controller: age,
+                                  style:const TextStyle(color: Colors.white),
+                                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                              inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(4),
+                              ],
+                                    decoration: const InputDecoration(
+                                        enabledBorder: UnderlineInputBorder(      
+                                                borderSide: BorderSide(color: Colors.white),   
+                                                ),  
+                                        focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                            ),  
+                                        suffixIcon: Icon(Icons.person,color: Colors.white,)
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20.h,),
                               Container(
-                                height: 70.h,
                                 width: double.infinity,
-                                 decoration: BoxDecoration(   
-        
+                                height:110.h ,
+                                 decoration: BoxDecoration(       
                                   borderRadius: BorderRadius.circular(10.0),           
                                       color: Colors.white,
                                         boxShadow: const [
@@ -1362,104 +1255,231 @@ return MaterialApp(
                                         ],
                                       ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    EHeading1(head: "${RecievingDate!.day}"+ ","+" ${RecievingDate!.month}"+  ","+" ${RecievingDate!.year}",),
-                                    Container(
-                                      height: 30.h,
-                                      width: 170.w,
-                                      decoration: BoxDecoration(   
+                                   
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      // SizedBox(height: 5.h,),
+                                      BlueLabelss(lab: "Select Date"),
+                                      
+                                      GestureDetector(
+                                        child: Square2(imgAddress: "assets/images/calendar.png",),
+                                        onTap:  ()async {
+                                                   DateTime? newDate = await showDatePicker (
+                                                      context: context, 
+                                                      initialDate:DateTime(2023) , 
+                                                      firstDate: DateTime(2023), 
+                                                      lastDate: DateTime(2024)
+                                                      );
+                                                      if (newDate == null) {
+                                                        return;
+                                                      } else {
+                                                        setState(() {
+                                                          RecievingDate = newDate;
+                                                        },);
+                                                        
+                                                      }
+                          
+                                                  },
+                                        ),
                                         
-                                              borderRadius: BorderRadius.circular(10.0),           
-                                                  color: Color(0xff164584),
-                                                    boxShadow: const [
-                                                      BoxShadow(
-                                                        color: Color(0xffA4A4A4),
-                                                        blurRadius: 6.0,
-                                                        spreadRadius: 1.0,
-                                                        offset: Offset(0.0, 0.0),
-                                                        // Shadow position
-                                                      ),
-                                                    ],
-                                                  ),
-                                      child: Padding(
-                                        padding:  EdgeInsets.symmetric(vertical: 6.h),
-                                        child: WHeading3(head: "${timee}"),
-                                      ),
-                                    )
+                                    ],
+                                  ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      BlueLabelss(lab: "Select Time"),
+                                      // SizedBox(height: 10.h,),
+                                      GestureDetector(
+                                        child: Square2(imgAddress: "assets/images/clock.png",),
+                                        onTap:()  {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (ctx) => AlertDialog(
+                                                      title:  Links(head: "Please Select the time"),
+                                                        content: SingleChildScrollView(
+                                              child: Column(
+                                                children: <Widget>[
+                                                const  Divider(),
+                                                  GestureDetector(child: Links(head: "9:00AM - 9:30AM"),onTap: (){setState(() {
+                                                    timee = "9:00AM - 9:30AM";
+                                                  });  Navigator.of(ctx).pop();
+                                                                        },),
+                                                const  Divider(),
+                                                  GestureDetector(child: Links(head: "9:30AM - 10:00AM"),onTap: (){setState(() {
+                                                    timee = "9:30AM - 10:00AM";
+                                                  });Navigator.of(ctx).pop();},),
+                                                const  Divider(),
+                                                  GestureDetector(child: Links(head: "10:00AM - 10:30AM"),onTap: (){setState(() {
+                                                    timee = "10:00AM - 10:30AM";
+                                                  }); Navigator.of(ctx).pop();},),
+                                                const  Divider(),
+                                                  GestureDetector(child: Links(head: "10:30AM - 11:00AM"),onTap: (){setState(() {
+                                                    timee = "10:30AM - 11:00AM";
+                                                  }); Navigator.of(ctx).pop();},),
+                                                const  Divider(),
+                                                  GestureDetector(child: Links(head: "11:00AM - 11:30AM"),onTap: (){setState(() {
+                                                    timee = "11:00AM - 11:30AM";
+                                                  });Navigator.of(ctx).pop();},),
+                                                const  Divider(),
+                                                  GestureDetector(child: Links(head: "11:30AM - 12:00PM"),onTap: (){setState(() {
+                                                    timee = "11:30AM - 12:00PM";
+                                                  }); Navigator.of(ctx).pop();},),
+                                                const  Divider(),
+                                                  GestureDetector(child: Links(head: "12:00PM - 12:30PM"),onTap: (){setState(() {
+                                                    timee = "12:00PM - 12:30PM";
+                                                  });Navigator.of(ctx).pop();},),
+                                                const  Divider(),
+                                                ],
+                                              ),
+                                            ),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                        onPressed: () {
+                                                            Navigator.of(ctx).pop();},
+                                                          child: Container(
+                                                            color: const Color(0xff2b578e),
+                                                            padding: const EdgeInsets.all(14),
+                                                            child: const Text("Yes",style: TextStyle(color: Colors.white),),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                        );
+                                          },
+                                        ),
+                                        
+                                    ],
+                                  ),
                                   ],
                                 ),
                               ),
-                              
+                                                
+                          
                                 SizedBox(height: 10.h,),
-                                 load == false?Container(
-                      
-                        height: 50,
-                        width: double.infinity,
-                        padding: const EdgeInsets.fromLTRB(20,2,10,2),
-                        child:ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff164584),
-                              shape: RoundedRectangleBorder(                       
-                                borderRadius: BorderRadius.circular(20), 
-                              ),
-                            ),
-                          child:  TitleHeading(head: 'Request Sent',),
-                          onPressed: () async{
-                            Provider11.Recieving= RecievingDate;
-                            Provider11.uniqueID = uuid.v4();
-                            Provider11.PatientName = patientname.text;
-                            Provider11.PatientAge = age.text;
-                            Provider11.time = timee;                         
-                           
-                           if (
-                            Provider11.Recieving!=null &&
-                            Provider11.uniqueID!=null &&
-                            Provider11.PatientName!=null &&
-                            Provider11.PatientAge!=null &&
-                            Provider11.time!=null &&
-                            Provider11.imagePath != null
-                            ) {
-                                Provider11.lab_dates.clear();
-                                Provider11.patient_names_lab.clear();
-                                Provider11.patients_age_lab.clear();
-                                Provider11.prescription_url_lab.clear();
-                                Provider11.status_lab.clear();
-                                Provider11.uid_lab.clear();
-                                Provider11.labs.clear();
-                                Provider11.serialNo_lab.clear();
-                                Provider11.notify_med.clear();
-
-                            await uploadImageToFirestore();    
-                            Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => super.widget));    
-                           } else {
-                             Alert(
-                                context: context,                
-                                type: AlertType.info,
-                                title: "CrescentCare Alert",
-                                desc: "Please Give the valid Information.",
-                                buttons: [
-                                  DialogButton(
-                                    child: const Text(
-                                      "Go Back",
-                                      style: TextStyle(color: Colors.white, fontSize: 20),
-                                    ),
-                                    onPressed: () => Navigator.pop(context),
-                                    color: Color(0xff164584),
-                                    radius: BorderRadius.circular(0.0),
+                                Container(
+                                  height: 70.h,
+                                  width: double.infinity,
+                                   decoration: BoxDecoration(   
+                                  
+                                    borderRadius: BorderRadius.circular(10.0),           
+                                        color: Colors.white,
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Color(0xffA4A4A4),
+                                              blurRadius: 6.0,
+                                              spreadRadius: 1.0,
+                                              offset: Offset(0.0, 0.0),
+                                              // Shadow position
+                                            ),
+                                          ],
+                                        ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      EHeading1(head: "${RecievingDate!.day}"+ ","+" ${RecievingDate!.month}"+  ","+" ${RecievingDate!.year}",),
+                                      Container(
+                                        height: 30.h,
+                                        width: 170.w,
+                                        decoration: BoxDecoration(   
+                                          
+                                                borderRadius: BorderRadius.circular(10.0),           
+                                                    color: Color(0xff164584),
+                                                      boxShadow: const [
+                                                        BoxShadow(
+                                                          color: Color(0xffA4A4A4),
+                                                          blurRadius: 6.0,
+                                                          spreadRadius: 1.0,
+                                                          offset: Offset(0.0, 0.0),
+                                                          // Shadow position
+                                                        ),
+                                                      ],
+                                                    ),
+                                        child: Padding(
+                                          padding:  EdgeInsets.symmetric(vertical: 6.h),
+                                          child: WHeading3(head: "${timee}"),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                ],
-                              ).show();
-                           }  
-                          },
-                        )
-                    ): Container(child: const CircularProgressIndicator(color: Colors.white,)),       
-                    SizedBox(height: 20.h,)
-        
-                            ],
+                                ),
+                                
+                                  SizedBox(height: 10.h,),
+                                   load == false?Container(
+                                                
+                                                  height: 50,
+                                                  width: double.infinity,
+                                                  padding: const EdgeInsets.fromLTRB(20,2,10,2),
+                                                  child:ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff164584),
+                                shape: RoundedRectangleBorder(                       
+                                  borderRadius: BorderRadius.circular(20), 
+                                ),
+                              ),
+                            child:  TitleHeading(head: 'Request Sent',),
+                            onPressed: () async{
+                              Provider11.Recieving= RecievingDate;
+                              Provider11.uniqueID = uuid.v4();
+                              Provider11.PatientName = patientname.text;
+                              Provider11.PatientAge = age.text;
+                              Provider11.time = timee;                         
+                             
+                             if (
+                              Provider11.Recieving!=null &&
+                              Provider11.uniqueID!=null &&
+                              Provider11.PatientName!=null &&
+                              Provider11.PatientAge!=null &&
+                              Provider11.time!=null &&
+                              Provider11.imagePath !=null &&
+                              age.text!=null &&patientname.text!=null
+
+                              ) {
+                                  Provider11.lab_dates.clear();
+                                  Provider11.patient_names_lab.clear();
+                                  Provider11.patients_age_lab.clear();
+                                  Provider11.prescription_url_lab.clear();
+                                  Provider11.status_lab.clear();
+                                  Provider11.uid_lab.clear();
+                                  Provider11.labs.clear();
+                                  Provider11.serialNo_lab.clear();
+                                  Provider11.notify_med.clear();
+                           if (_formKey.currentState!.validate()) {
+                   await uploadImageToFirestore();    
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => super.widget));
+                }
+                                
+                             } else {
+                               Alert(
+                                  context: context,                
+                                  type: AlertType.info,
+                                  title: "CrescentCare Alert",
+                                  desc: "Please Give the valid Information.",
+                                  buttons: [
+                                    DialogButton(
+                                      child: const Text(
+                                        "Go Back",
+                                        style: TextStyle(color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () => Navigator.pop(context),
+                                      color: Color(0xff164584),
+                                      radius: BorderRadius.circular(0.0),
+                                    ),
+                                  ],
+                                ).show();
+                             }  
+                            },
+                                                  )
+                                              ): Container(child: const CircularProgressIndicator(color: Colors.white,)),       
+                                              SizedBox(height: 20.h,)
+                                  
+                              ],
+                            ),
                           ),
                         ),
                       )

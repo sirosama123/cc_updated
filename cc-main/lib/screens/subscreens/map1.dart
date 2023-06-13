@@ -2869,21 +2869,21 @@ class _MapMultiMarkerState extends State<MapMultiMarker> {
   ];
 
   final Map<String, Marker> _markers = {};
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
+  // void initState() {
+  //   super.initState();
+  //   BackButtonInterceptor.add(myInterceptor);
+  // }
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   BackButtonInterceptor.remove(myInterceptor);
+  //   super.dispose();
+  // }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context);
-    return true;
-  }
+  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  //   Navigator.pop(context);
+  //   return true;
+  // }
 
   String? lon;
   String? lat;

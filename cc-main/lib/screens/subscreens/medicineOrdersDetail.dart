@@ -29,26 +29,26 @@ class _MedicineOrderDetailState extends State<MedicineOrderDetail> {
     
      super.initState();
     
-    BackButtonInterceptor.add(myInterceptor);
+    // BackButtonInterceptor.add(myInterceptor);
     } 
-  @override
+  // @override
    
    
 
-  @override
-  void dispose() {
+  // @override
+  // void dispose() {
     
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+  //   BackButtonInterceptor.remove(myInterceptor);
+  //   super.dispose();
+  // }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    final Provider11 = Provider.of<Provider1>(context); 
-    Provider11.medicines.clear();
-    Provider11.med_detail.clear();
-    Navigator.pop(context); // Do some stuff.
-    return true;
-  }
+  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  //   final Provider11 = Provider.of<Provider1>(context); 
+  //   Provider11.medicines.clear();
+  //   Provider11.med_detail.clear();
+  //   Navigator.pop(context); // Do some stuff.
+  //   return true;
+  // }
   Widget build(BuildContext context) {
 
     final Provider11 = Provider.of<Provider1>(context); 

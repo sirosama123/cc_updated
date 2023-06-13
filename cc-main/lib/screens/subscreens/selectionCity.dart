@@ -78,21 +78,21 @@ class _SelectionCityState extends State<SelectionCity> {
   {'label': 'Zafarwal ', 'value': 'Zafarwal '},
 ];
 
- void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
+//  void initState() {
+//     super.initState();
+//     BackButtonInterceptor.add(myInterceptor);
+//   }
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     BackButtonInterceptor.remove(myInterceptor);
+//     super.dispose();
+//   }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context); 
-    return true;
-  }
+//   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+//     Navigator.pop(context); 
+//     return true;
+//   }
   @override
   Widget build(BuildContext context) {
     

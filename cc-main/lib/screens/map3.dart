@@ -21,46 +21,46 @@ class Map5 extends StatefulWidget {
 class _Map5State extends State<Map5> {
    late TooltipBehavior _tooltipBehavior;
 
-    @override
-    void initState() {
-    _tooltipBehavior = TooltipBehavior(
-                enable: true,               
-              );
+  //   @override
+  //   void initState() {
+  //   _tooltipBehavior = TooltipBehavior(
+  //               enable: true,               
+  //             );
     
-     super.initState();
+  //    super.initState();
     
-    BackButtonInterceptor.add(myInterceptor);
-    } 
-  @override
+  //   BackButtonInterceptor.add(myInterceptor);
+  //   } 
+  // @override
    
    
 
-  @override
-  void dispose() {
+  // @override
+  // void dispose() {
     
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+  //   BackButtonInterceptor.remove(myInterceptor);
+  //   super.dispose();
+  // }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    final Provider11 = Provider.of<Provider1>(context, listen: false); 
-    Provider11.markerIdd.clear();
-    Provider11.latitude.clear();
-    Provider11.longitude.clear();
-    Provider11.title.clear();
-    Provider11.city.clear();
-    Provider11.name.clear();
-    Provider11.contact.clear();
-    Provider11.karachiLabs.clear();
-    Provider11.hyderabadLabs.clear();
-    Provider11.islamabadLabs.clear();
-    Provider11.peshawarLabs.clear();
-    Provider11.rawalpindiLabs.clear();
-    Provider11.faisalabadLabs.clear();
-    print("this is done");
-    Navigator.pop(context);
-    return true;
-  }
+  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  //   final Provider11 = Provider.of<Provider1>(context, listen: false); 
+  //   Provider11.markerIdd.clear();
+  //   Provider11.latitude.clear();
+  //   Provider11.longitude.clear();
+  //   Provider11.title.clear();
+  //   Provider11.city.clear();
+  //   Provider11.name.clear();
+  //   Provider11.contact.clear();
+  //   Provider11.karachiLabs.clear();
+  //   Provider11.hyderabadLabs.clear();
+  //   Provider11.islamabadLabs.clear();
+  //   Provider11.peshawarLabs.clear();
+  //   Provider11.rawalpindiLabs.clear();
+  //   Provider11.faisalabadLabs.clear();
+  //   print("this is done");
+  //   Navigator.pop(context);
+  //   return true;
+  // }
     String?name;
     String?address;
     String?contact;

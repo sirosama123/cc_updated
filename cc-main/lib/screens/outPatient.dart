@@ -156,7 +156,7 @@ class _Landing1State extends State<Landing1> {
       }
     }
     getPanelHospitals() async {
-      getDataInsured(Provider11.cnic);
+    await  getDataInsured(Provider11.cnic);
       final dio = Dio();
       try {
           setState(() {
@@ -193,9 +193,7 @@ class _Landing1State extends State<Landing1> {
           });
       }
     }
-      return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:  Stack(
+      return  Stack(
         children: [
           Scaffold(
              
@@ -224,13 +222,10 @@ class _Landing1State extends State<Landing1> {
                                     ),
                                   GestureDetector(child: Squares(imgAddress: "assets/images/doctor.png", heading: "Doctor Online"),
                                   onTap: (){
-                                      void main() async {
+                                        
 
-  ///////////////////////////////////////////
-  WidgetsFlutterBinding.ensureInitialized();
-  ///////////////////////////////////////////
-  runApp(HDApp());
-}
+                                        WidgetsFlutterBinding.ensureInitialized();
+                                        runApp(HDApp());
                                       // Navigator.push(context,
                                       // MaterialPageRoute(builder: (context) => HomeScreen()));
                                   },),
@@ -298,8 +293,7 @@ class _Landing1State extends State<Landing1> {
                 ),
             ):Container(),
         ],
-      ),
-      
-    );
+      );
+  
   }
 }

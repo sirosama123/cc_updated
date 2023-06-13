@@ -40,7 +40,6 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_svg: ^1.1.6
   smooth_page_indicator: ^1.0.0+2
-  google_fonts: ^3.0.1
   firebase_core: ^2.4.1
   firebase_auth: ^4.2.4
   firebase_storage: ^11.0.10
@@ -75,8 +74,9 @@ dependencies:
   countup: ^0.1.4
   data_table_2: ^2.3.10
   cloud_functions: ^4.0.7
-  syncfusion_flutter_maps: ^20.4.44
-  syncfusion_flutter_treemap: ^20.4.44-beta
+  # syncfusion_flutter_maps: ^20.4.44
+  # syncfusion_flutter_treemap: ^20.4.44-beta
+  # syncfusion_flutter_core: ^20.4.48
   flutter_rating_bar: ^4.0.1
   font_awesome_flutter: ^10.3.0
   hellodoc_service_pkg:
@@ -86,10 +86,11 @@ dependencies:
       url: https://onepub.dev/api/avvdavuhno
   dio: ^4.0.6
   toggle_list: ^0.3.0
+  intl: ^0.17.0
   flutter_neumorphic: ^3.2.0
   geocoding: ^2.1.0
   pdf: ^3.8.4
-  syncfusion_flutter_pdf: ^20.4.54
+
   open_filex: ^4.3.2
   sliding_switch: ^1.1.0
   intl_phone_field: ^3.1.0
@@ -99,12 +100,12 @@ dependencies:
   material_dialogs: ^1.1.4
   wheel_chooser: ^1.1.2
   number_selection: ^1.0.0
-
-  
-
-
-
-
+  syncfusion_flutter_pdf: ^20.4.54
+  google_fonts: ^4.0.4
+  video_player: ^2.6.1
+  flutter_sound: ^9.2.13
+  assets_audio_player: ^3.0.6
+  social_media_recorder: ^0.2.0
 
 
 dev_dependencies:

@@ -25,21 +25,21 @@ class BMIinput extends StatefulWidget {
 
 class _BMIinputState extends State<BMIinput> {
     @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
+  // void initState() {
+  //   super.initState();
+  //   BackButtonInterceptor.add(myInterceptor);
+  // }
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   BackButtonInterceptor.remove(myInterceptor);
+  //   super.dispose();
+  // }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context); // Do some stuff.
-    return true;
-  }
+  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  //   Navigator.pop(context); // Do some stuff.
+  //   return true;
+  // }
 
   TextEditingController age = TextEditingController(text: "20");
   TextEditingController weight = TextEditingController(text: "50");

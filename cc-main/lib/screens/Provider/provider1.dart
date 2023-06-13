@@ -1,6 +1,5 @@
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 
 import '../../class/marker.dart';
@@ -167,6 +166,9 @@ class Provider1 extends ChangeNotifier{
   double? bmi;
   int? bmiAge;
   double? estWeight;
+
+  String? empId;
+  String? pcode;
 
   String? imagePath;
   DateTime? Recieving;

@@ -30,21 +30,21 @@ class _SelectionCityDState extends State<SelectionCityD> {
 
 ];
 
- void initState() {
-    super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
+//  void initState() {
+//     super.initState();
+//     BackButtonInterceptor.add(myInterceptor);
+//   }
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     BackButtonInterceptor.remove(myInterceptor);
+//     super.dispose();
+//   }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.pop(context); // Do some stuff.
-    return true;
-  }
+//   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+//     Navigator.pop(context); // Do some stuff.
+//     return true;
+//   }
   @override
   Widget build(BuildContext context) {
      final Provider11 = Provider.of<Provider1>(context);

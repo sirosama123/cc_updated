@@ -5,12 +5,13 @@ import 'package:project1/screens/Provider/provider1.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/multi3.dart';
 import 'approval2.dart';
+import 'claimDetail.dart';
 
 
 
-class DependentsData2 extends StatelessWidget {
-  String? hsptl_name;
-  DependentsData2({super.key,required this.hsptl_name});
+class ClaimData extends StatelessWidget {
+  var claimdata;
+  ClaimData({super.key,required this.claimdata});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class DependentsData2 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Color(0xff2b578e),
-          title: Text("Dependents"),
+          title: Text("Your Claims"),
           leading: GestureDetector(
             child: Icon(
               Icons.arrow_back_ios,
@@ -38,7 +39,7 @@ class DependentsData2 extends StatelessWidget {
             ),
           ]),
           body: ListView.builder(
-            itemCount: Provider11.data2.length,
+            itemCount: claimdata.length,
             itemBuilder: (context,index){
               return Padding(
                 padding:EdgeInsets.only(top: 5.h,right: 10.w,left: 10.w),
@@ -53,28 +54,36 @@ class DependentsData2 extends StatelessWidget {
                       children: [
                         SizedBox(height: 5.h,),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                          Provider11.data2.values.elementAt(index)['relation'].toString()=='SELF'?Image.asset("assets/images/self.png",height: 20.h,width: 20.w,):Provider11.data2.values.elementAt(index)['relation'].toString()=='SPOUSE'?Image.asset("assets/images/spouse.png",height: 20.h,width: 20.w,):Provider11.data2.values.elementAt(index)['relation'].toString()=='SON'?Image.asset("assets/images/son.png",height: 20.h,width: 20.w,):Image.asset("assets/images/daughter.png",height: 20.h,width: 20.w,),
-                            SizedBox(width: 5.w,),
-                            Multi3(color: Colors.white, subtitle: Provider11.data2.values.elementAt(index)['relation'], weight: FontWeight.bold, size: 16),
+                         Multi3(color: Colors.white, subtitle: "Claim Number", weight: FontWeight.bold, size: 16),
+                            SizedBox(width: 2.w,),
+                            Multi3(color: Colors.white, subtitle: claimdata[index]['claim_no'].toString(), weight: FontWeight.bold, size: 16),
                           ],
                         ),
                         Divider(color: Colors.white,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Multi3(color: Colors.white, subtitle: "Name", weight: FontWeight.bold, size: 16),
+                            Multi3(color: Colors.white, subtitle: "Patient Name", weight: FontWeight.bold, size: 16),
                             SizedBox(width: 5.w,),
-                            Multi3(color: Colors.white, subtitle: Provider11.data2.values.elementAt(index)['name'].toString(), weight: FontWeight.bold, size: 16),
+                            Multi3(color: Colors.white, subtitle: claimdata[index]['patient_name'].toString(), weight: FontWeight.bold, size: 16),
                           ],
                         ),
                          Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Multi3(color: Colors.white, subtitle: "CNIC", weight: FontWeight.bold, size: 16),
+                            Multi3(color: Colors.white, subtitle: "Relation", weight: FontWeight.bold, size: 16),
                             SizedBox(width: 5.w,),
-                            Multi3(color: Colors.white, subtitle: Provider11.data2.values.elementAt(index)['cnic'].toString()==''?"-------------":Provider11.data2.values.elementAt(index)['cnic'].toString(), weight: FontWeight.bold, size: 16),
+                            Multi3(color: Colors.white, subtitle: claimdata[index]['relation'].toString(), weight: FontWeight.bold, size: 16),
+                          ],
+                        ),
+                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Multi3(color: Colors.white, subtitle: "Claim Amount", weight: FontWeight.bold, size: 16),
+                            SizedBox(width: 5.w,),
+                            Multi3(color: Colors.white, subtitle: claimdata[index]['claim_amount'].toString(), weight: FontWeight.bold, size: 16),
                           ],
                         ),
                         Row(
@@ -89,19 +98,22 @@ class DependentsData2 extends StatelessWidget {
                       Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Approval2(
-                                      age: Provider11.data2.values.elementAt(index)['age'].toString(), 
-                                      cnic: Provider11.data2.values.elementAt(index)['cnic'].toString(), 
-                                      dn: "1", 
-                                      dob: Provider11.data2.values.elementAt(index)['dob'].toString(),
-                                      ed: Provider11.data2.values.elementAt(index)['effective_date'].toString(), 
-                                      gen: Provider11.data2.values.elementAt(index)['gender'].toString(),
-                                      hc: Provider11.data2.values.elementAt(index)['healthcode'].toString(), 
-                                      idate: Provider11.data2.values.elementAt(index)['issue_date'].toString(), 
-                                      name:Provider11.data2.values.elementAt(index)['name'].toString(),
-                                      pc: Provider11.data2.values.elementAt(index)['plancode'].toString(),
-                                      relation:Provider11.data2.values.elementAt(index)['relation'].toString(), 
-                                      empName: Provider11.data2['self']['name'], hsptl_name: hsptl_name,
+                                    builder: (context) => ClaimDetails(
+                                      claim_no: claimdata[index]['claim_no'].toString(), 
+                                      claim_status: claimdata[index]['claim_status'].toString(), 
+                                      deduction: claimdata[index]['remarks'].toString(), 
+                                      diagnosis: claimdata[index]['diagnosis'].toString(),
+                                       outPatient: claimdata[index]['patient_name'].toString(), 
+                                       patient_name: claimdata[index]['patient_name'].toString(), 
+                                       provider_detail: claimdata[index]['provider'].toString(), 
+                                       relation: claimdata[index]['relation'].toString(), 
+                                      service_code: claimdata[index]['service_code'].toString(), 
+                                      rejected:  claimdata[index]['dissallow'].toString(), 
+                                      claim_amount:  claimdata[index]['claim_amount'].toString(), 
+                                      claim_recieved_date: claimdata[index]['claim_recieved_date'].toString(), 
+                                      date_of_claim_paid:  claimdata[index]['date_claim_paid'].toString(), 
+                                      date_of_treatment:  claimdata[index]['date_treatment'].toString(), 
+                                      payable_amount:  claimdata[index]['payable_amount'].toString(),
                                       )));
                   },
                   style: NeumorphicStyle(
@@ -112,7 +124,7 @@ class DependentsData2 extends StatelessWidget {
                     //border: NeumorphicBorder()
                   ),
                   padding:  EdgeInsets.all(6.0),
-                  child: Multi3(color: Color(0xff2b578e), subtitle: "Proceed", weight: FontWeight.bold, size: 12)
+                  child: Multi3(color: Color(0xff2b578e), subtitle: "Details", weight: FontWeight.bold, size: 12)
                   ),
                           ],
                         ),

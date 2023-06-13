@@ -18,3 +18,20 @@ class smallDBmain extends StatelessWidget {
     );
   }
 }
+
+class smallDBmain2 extends StatelessWidget {
+  String? head;
+  Color? tcolor;
+   smallDBmain2({super.key,required this.head,required this.tcolor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text("$head",
+      style: GoogleFonts.montserrat(
+        textStyle: TextStyle(color:tcolor , letterSpacing: .5,fontSize: 10.sp,fontWeight: FontWeight.w700) ),
+        textAlign: TextAlign.start,
+        ),
+    );
+  }
+}

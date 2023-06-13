@@ -9,9 +9,7 @@ class Activities extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return   Scaffold(
          appBar: AppBar(
           backgroundColor: Color(0xff2b578e),
             title:const Text("Appointments"),
@@ -87,7 +85,7 @@ class Activities extends StatelessWidget {
               
             ],
           ),
-      ),
+   
     );
   }
 }
