@@ -36,10 +36,9 @@ class _SelectionCityState extends State<SelectionCity> {
   {'label': 'Hafizabad', 'value': 'Hafizabad'}, 
   {'label': 'Harappa', 'value': 'Harappa'},
   {'label': 'Haripur', 'value': 'Haripur'},
-  {'label': 'Hyderabad', 'value': 'Hyderabad'},
+  // {'label': 'Hyderabad', 'value': 'Hyderabad'},
   {'label': 'Islamabad', 'value': 'Islamabad'},
   {'label': 'Jehlum', 'value': 'Jehlum'},
-  {'label': 'Jhelum', 'value': 'Jhelum'},
   {'label': 'Karachi', 'value': 'Karachi'}, 
   {'label': 'Kashmore', 'value': 'Kashmore'},
   {'label': 'Khairpur', 'value': 'Khairpur'},
@@ -49,7 +48,7 @@ class _SelectionCityState extends State<SelectionCity> {
   {'label': 'Layyah', 'value': 'Layyah'},
   {'label': 'Mian Channu', 'value': 'Mian Channu'},
   {'label': 'Mianwali', 'value': 'Mianwali'}, 
-  {'label': 'Mirpur ', 'value': 'Mirpur '},
+  {'label': 'Mirpur Khas', 'value': 'Mirpur Khas'},
   {'label': 'Mithi', 'value': 'Mithi'},
   {'label': 'Multan', 'value': 'Multan'},
   {'label': 'Muzaffarabad', 'value': 'Muzaffarabad'},
@@ -57,14 +56,14 @@ class _SelectionCityState extends State<SelectionCity> {
   {'label': 'Nawabshah', 'value': 'Nawabshah'},
   {'label': 'Okara', 'value': 'Okara'}, 
   {'label': 'Pattoki', 'value': 'Pattoki'},
-  {'label': 'Peshawar', 'value': 'Peshawar'},
   {'label': 'Pind Dadan Khan', 'value': 'Pind Dadan Khan'},
+  // {'label': 'Peshawar', 'value': 'Peshawar'},
   {'label': 'Quetta', 'value': 'Quetta'}, 
   {'label': 'Rahim Yar Khan', 'value': 'Rahim Yar Khan'},
-  {'label': 'Rawalpindi', 'value': 'Rawalpindi'},
+  // {'label': 'Rawalpindi', 'value': 'Rawalpindi'},
   {'label': 'Sahiwal', 'value': 'Sahiwal'},
   {'label': 'Sanghar', 'value': 'Sanghar'}, 
-  {'label': 'Sargodha ', 'value': 'Sargodha '},
+  {'label': 'Sargodha', 'value': 'Sargodha'},
   {'label': 'Sehwan', 'value': 'Sehwan'},
   {'label': 'Sheikhupura', 'value': 'Sheikhupura'},
   {'label': 'Sialkot', 'value': 'Sialkot'},
@@ -75,24 +74,9 @@ class _SelectionCityState extends State<SelectionCity> {
   {'label': 'Taxila', 'value': 'Taxila'},
   {'label': 'Vehari', 'value': 'Vehari'},
   {'label': 'Wah Cantt', 'value': 'Wah Cantt'}, 
-  {'label': 'Zafarwal ', 'value': 'Zafarwal '},
+  {'label': 'Zafarwal', 'value': 'Zafarwal'},
 ];
 
-//  void initState() {
-//     super.initState();
-//     BackButtonInterceptor.add(myInterceptor);
-//   }
-
-//   @override
-//   void dispose() {
-//     BackButtonInterceptor.remove(myInterceptor);
-//     super.dispose();
-//   }
-
-//   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-//     Navigator.pop(context); 
-//     return true;
-//   }
   @override
   Widget build(BuildContext context) {
     
@@ -120,6 +104,11 @@ class _SelectionCityState extends State<SelectionCity> {
     Provider11.lat = 33.6160373;
        Provider11.lon = 72.9460221;
        Provider11.zoom=12;
+  }
+    else if(Provider11.loc == 'Peshawar') {
+     Provider11.lat = 33.993447;
+       Provider11.lon = 71.4337274;
+       Provider11.zoom=5;
   }
   else{
     final abc = []; 
@@ -215,13 +204,14 @@ class _SelectionCityState extends State<SelectionCity> {
                               ),
                             child:  TitleHeading(head: 'Locate Hospitals',),
                             onPressed: () async{
-                                 await Future.delayed(const Duration(seconds: 1));
+                                 await Future.delayed(Duration(seconds: 1));
                                   criteria();
                                   Navigator.push(context,
                                      MaterialPageRoute(builder: (context) => MapMultiMarker()));
                             },
                           )
                       ),  
+                
                 ],
               ),
             ),

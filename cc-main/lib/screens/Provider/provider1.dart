@@ -348,27 +348,12 @@ class Provider1 extends ChangeNotifier{
  }
 
 
+ String? planAmount;
+ String? utilizedAmount;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- List<dynamic> list1 =  [
+  List<dynamic> list1 =  [
   {
    "Hospital Name": "Chughtai Lab Collection Centers",
    "City": "Karachi",
@@ -761,7 +746,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "R-513, Hussain Hazara Goth, Block 11, Gulshan-e-Iqbal, Karachi",
-   "Contact": "3.33E+20",
+   "Contact": "(021) 3485 7771",
    "lat": 24.9140646,
    "lng": 67.0888503
  },
@@ -905,7 +890,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Delhi Mercantile Medical Complex Building Siraj-ud-Duala Road, Off Shaheed-e-Millat Rd, Darul Aman Society PECHS, Karachi",
-   "Contact": "0336-4444817 Muhammad Ali Abbas",
+   "Contact": "0336-4444817 ",
    "lat": 24.8761197,
    "lng": 67.0319327
  },
@@ -914,7 +899,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Arif Defence Medical Centre, DK-1, Khayaban-e-Bukhari / 34th Street, Defence Housing Authority, Phase VI, Karachi",
-   "Contact": "0336-4444817 Muhammad Ali Abbas",
+   "Contact": "0336-4444817 ",
    "lat": 24.7841132,
    "lng": 67.052503
  },
@@ -923,7 +908,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Ground Floor, ISM Building, Adjacent Anklesaria Nursing Home, Garden Road Karachi,",
-   "Contact": "0336-4444817 Muhammad Ali Abbas",
+   "Contact": "0336-4444817 ",
    "lat": 24.8666936,
    "lng": 67.0216593
  },
@@ -932,7 +917,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "E/2 Shamim Apartments Block 10, F.B Area, Adjacent Ayesha Manzil, Roundabout, Shahrah-e-Pakistan, Karachi",
-   "Contact": "0336-4444817 Muhammad Ali Abbas",
+   "Contact": "0336-4444817",
    "lat": 24.9284107,
    "lng": 67.0624569
  },
@@ -941,7 +926,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Unit # 1, 165-N Building, Khayaban-e-Muslim, D.H.A Phase 6 Muslim Commercial Area Karachi",
-   "Contact": "0302-2835590 Adnan Wahedi",
+   "Contact": "0302-2835590",
    "lat": 24.8194649,
    "lng": 67.0196942
  },
@@ -1148,7 +1133,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "B-31, Block-15, Off University Road,Gulshan-e-Iqbal , Karachi",
-   "Contact": "Tel: 021 34801257-9",
+   "Contact": "021 34801257-9",
    "lat": 24.90129,
    "lng": 67.0791228
  },
@@ -1157,7 +1142,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Plot No. 34-C, Badar Commercial,Street 10 , Phase V, Karachi",
-   "Contact": "Tel: 021-35244799, Cell: 0303-0993790",
+   "Contact": "0303-0993790",
    "lat": 24.9014343,
    "lng": 67.0112711
  },
@@ -1166,7 +1151,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Plot No. 18-C, 4th Zamzama Lane,Phase V DHA, Karachi",
-   "Contact": "Tel: 0347-3095416",
+   "Contact": "0347-3095416",
    "lat": 24.8171858,
    "lng": 67.0395946
  },
@@ -1175,7 +1160,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Khayaban-e-Jami, Phase-2, Extension DHA Karachi",
-   "Contact": "Tel: 0333-2870120",
+   "Contact": "0333-2870120",
    "lat": 24.8279375,
    "lng": 67.0381413
  },
@@ -1184,7 +1169,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Plot # 11-C, Khayaban-e-Shahbaz,DHA Phase Vi, Karachi",
-   "Contact": "Tel: 0333-2870121",
+   "Contact": "0333-2870121",
    "lat": 24.808107,
    "lng": 67.0439557
  },
@@ -1193,7 +1178,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Chand Bibi Road, Adj. Civil Hospital,Karachi",
-   "Contact": "Tel: 021-32740041, Cell:0304-0742293",
+   "Contact": "0304-0742293",
    "lat": 24.8601724,
    "lng": 67.0052868
  },
@@ -1202,7 +1187,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Shop No. G2, Prince Avenue, Plot No. 4,Lane No 1, Nazimabad No 3 Karachi",
-   "Contact": "Tel: 0342-5943944",
+   "Contact": "0342-5943944",
    "lat": 24.9153486,
    "lng": 67.0276462
  },
@@ -1211,7 +1196,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Shop No. 11, Dada Terrace, Jamaluddin Afghani Road, Karachi",
-   "Contact": "Tel: 021-34124540, Cell: 0347-9028317",
+   "Contact": "0347-9028317",
    "lat": 24.8847432,
    "lng": 67.0630292
  },
@@ -1220,7 +1205,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "R 45, Sector 5c/2, New Karachi Town,Karachi",
-   "Contact": "Tel: 0333-1149432",
+   "Contact": "0333-1149432",
    "lat": 24.953368,
    "lng": 67.0308402
  },
@@ -1229,7 +1214,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "P/38 Khayabane Rahat 10th St, DHA, Phase 6,Karachi",
-   "Contact": "Tel: 0333-1149408",
+   "Contact": "0333-1149408",
    "lat": 24.8506657,
    "lng": 67.0292136
  },
@@ -1238,7 +1223,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Address: Al-11, Lane 15, Khayaban-e- Hilal, Phase-7, DHA Karachi.",
-   "Contact": "Cell# 021-35244496, 0311-3993145",
+   "Contact": "0311-3993145",
    "lat": 24.8508133,
    "lng": 67.0292136
  },
@@ -1247,7 +1232,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Address: Shop# 1, 2,3m Falaknaz Arcade II Opposite Airport Police Sta  on Shahrah-e Faisal Karachi",
-   "Contact": "Cell# 0311-3993141, 021-34593141",
+   "Contact": "021-34593141",
    "lat": 24.886773,
    "lng": 67.0774966
  },
@@ -1256,7 +1241,7 @@ class Provider1 extends ChangeNotifier{
    "City": "Karachi",
    "Status": "On Panel",
    "Address": "Address: Street No. 8, Near UC office, Madina Masjid, Sector B, Akhter Colony, Karachi.",
-   "Contact": "Cell# 0311-3993123, 0345-6000984",
+   "Contact": "0345-6000984",
    "lat": 24.8565423,
    "lng": 67.0616879
  },];
@@ -1267,7 +1252,7 @@ List<dynamic> hyderabad=[
    "City": "Hyderabad",
    "Status": "On Panel",
    "Address": "Latifabad # 6 , Near Halal-e-Ahmer Hospital, Hyderabad",
-   "Contact": "0346-6154688, 0346-7698954",
+   "Contact": "0346-7698954",
    "lat": 25.3683692,
    "lng": 68.3498874
  },
@@ -1285,7 +1270,7 @@ List<dynamic> hyderabad=[
    "City": "Hyderabad",
    "Status": "On Panel",
    "Address": "shop#3 Nadeem complex Near Muslim Commercial Bank Main Road, Qasimabad. Hyderabad",
-   "Contact": "Shahid (0333-2605740)",
+   "Contact": "(0333-2605740)",
    "lat": 25.3932081,
    "lng": 68.3182969
  },
@@ -1294,7 +1279,7 @@ List<dynamic> hyderabad=[
    "City": "Hyderabad",
    "Status": "On Panel",
    "Address": "Shop No.7, Fatima Heights, Doctors Ln, Soldier Bazaar ,Saddar, Hyderabad",
-   "Contact": "Tel: +92 333 2869740",
+   "Contact": "+92 333 2869740",
    "lat": 25.3932037,
    "lng": 68.2920321
  },
@@ -1303,7 +1288,7 @@ List<dynamic> hyderabad=[
    "City": "Hyderabad",
    "Status": "On Panel",
    "Address": "Address: KT Plot # 80 survay #40 Doctor Lain Saddar Cantt Hyderabad.",
-   "Contact": "Cell# 0311-3993144",
+   "Contact": "0311-3993144",
    "lat": 25.3921376,
    "lng": 67.7665773
  },
@@ -1459,7 +1444,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Main branch: 6-Pak Pavillion Plaza, 65-e, Fazal-e-Haq Road",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.7114388,
    "lng": 73.0522893
  },
@@ -1477,7 +1462,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Plot # 4-E, Shoukat Plaza I-10 Markaz Islamabad",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.6482658,
    "lng": 73.0382453
  },
@@ -1486,7 +1471,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Capital Shopping Centre, Opp Bank of Punjab G-11 Markaz Islamabad",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.6673011,
    "lng": 72.9953088
  },
@@ -1495,7 +1480,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Huma Plaza, Opp Poly Clinic, Fazl e Haq Road Islamabad",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.7172931,
    "lng": 73.0685913
  },
@@ -1504,7 +1489,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Mehran Plaza, Adjacent Abdullah Bin Masood Masjid G-9 Markaz Islamabad.",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.6877114,
    "lng": 73.0317184
  },
@@ -1513,7 +1498,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "8-Ground Floor, Makka Plaza, BLock-D, PWD Housing Society Islamabad.",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.7114388,
    "lng": 73.0588553
  },
@@ -1522,7 +1507,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Aklasc Plaza behind Babri Masjid, G-10 Markaz Islamabad.",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.6770319,
    "lng": 73.0140678
  },
@@ -1531,7 +1516,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Shop# 01, Lower Ground Floor Shalimar Plaza, F-8 Markaz Isd.",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.7116464,
    "lng": 73.0401764
  },
@@ -1540,7 +1525,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Shop no 6, (lower ground floor) Plot no 14, Street Commercial Avenue, Bahria Enclave, Islamabad",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.6972589,
    "lng": 73.1022297
  },
@@ -1549,7 +1534,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": "Hall No. 3A & 6A Lower Ground Floor, Executive Complex , Plot No 14 G-8 Markaz , Islamabad",
-   "Contact": "Tel: 0333-2870124",
+   "Contact": "0333-2870124",
    "lat": 33.6318244,
    "lng": 73.0426765
  },
@@ -1558,7 +1543,7 @@ List<dynamic> islamabad = [
    "City": "Islamabad",
    "Status": "On Panel",
    "Address": " MDC, 1st Floor, Islamabad Corporate Centro, Golra Rd, Islamabad",
-   "Contact": "0333-3058000 Tariq Shah",
+   "Contact": "0333-3058000",
    "lat": 33.6318288,
    "lng": 72.966073
  },
@@ -1589,7 +1574,7 @@ List<dynamic> peshawar = [
    "City": "Peshawar",
    "Status": "On Panel",
    "Address": "Khattak Medical Centre Dabgari Garden Peshawar",
-   "Contact": "0308-4379695 / 091-2214522",
+   "Contact": "0308-4379695",
    "lat": 34.0025537,
    "lng": 71.5580679
  },
@@ -1607,7 +1592,7 @@ List<dynamic> peshawar = [
    "City": "Peshawar",
    "Status": "On Panel",
    "Address": "Shop# 05 Opposite KTH Doctor Hostel University Town Peshawar",
-   "Contact": "0345-4005128 0917087278",
+   "Contact": "0917087278",
    "lat": 33.9989647,
    "lng": 1.4703913
  },
@@ -1616,7 +1601,7 @@ List<dynamic> peshawar = [
    "City": "Peshawar",
    "Status": "On Panel",
    "Address": "OPP HAYYATABAD MEDICAL COMPLEX DOCTOR PLAZA",
-   "Contact": "0917085415-03458402877",
+   "Contact": "03458402877",
    "lat": 33.9940481,
    "lng": 71.4346894
  },
@@ -1634,7 +1619,7 @@ List<dynamic> peshawar = [
    "City": "Peshawar",
    "Status": "On Panel",
    "Address": "43 park road, University town. Peshawar",
-   "Contact": "Mr. Rehman (0333-8599499)",
+   "Contact": "(0333-8599499)",
    "lat": 34.0036811,
    "lng": 71.5567852
  },
@@ -1679,7 +1664,7 @@ List<dynamic> peshawar = [
    "City": "Peshawar",
    "Status": "On Panel",
    "Address": "Phase 5-Hayatabad, Peshawar, Khyber Pakhtunkhwa",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 33.9894359,
    "lng": 70.316752
  },
@@ -1688,7 +1673,7 @@ List<dynamic> peshawar = [
    "City": "Peshawar",
    "Status": "On Panel",
    "Address": "Swabi Main Bazaar NearJamal Medical Centre Opposite DHQ Hospital Khyber Pakhtunkhwa",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 34.122281,
    "lng": 72.4638591
  },
@@ -1697,7 +1682,7 @@ List<dynamic> peshawar = [
    "City": "Peshawar",
    "Status": "On Panel",
    "Address": "Shamsi Rd, Mardan, Khyber Pakhtunkhwa",
-   "Contact": "051-2806327-8, 2348373-5",
+   "Contact": "051-2806327-8",
    "lat": 34.1924453,
    "lng": 1.7593636
  },
@@ -1710,7 +1695,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": " Family Plaza Shop#2 Opp: Gate#3 Holy Family Hospital Rawalpindi",
-   "Contact": " 0345-8402876  ",
+   "Contact": " 0345-8402876",
    "lat": 33.6420664,
    "lng": 73.0567131
  },
@@ -1719,7 +1704,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Shop No.1 Cantt Plaza  Commercial Market. Chaklala Scheme III. Rawalpindi",
-   "Contact": " 0345-8402876 ",
+   "Contact": " 0345-8402876",
    "lat": 33.5848468,
    "lng": 73.0869428
  },
@@ -1746,7 +1731,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Satellite Town Rawalpindi opposite Holy Family Hospital gate # 3",
-   "Contact": "0345-8406745  ",
+   "Contact": "0345-8406745",
    "lat": 33.6420664,
    "lng": 73.0567131
  },
@@ -1755,7 +1740,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "F881 Opp gate #3 Holi Family hospital 5th road Sattelite town.",
-   "Contact": "Mr. Shahid Rafiq (0321-5308456) | Abid (0342-000202",
+   "Contact": "0321-5308456",
    "lat": 33.6403643,
    "lng": 73.0580861
  },
@@ -1764,7 +1749,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "CHUNGI # 20  OPP MUNAWAR COLONY MAIN ADYALA ROAD",
-   "Contact": "051-831 5380  ",
+   "Contact": "051-831 5380",
    "lat": 33.5476982,
    "lng": 73.0549351
  },
@@ -1773,7 +1758,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Civic center,  airport housing society  Gulzar-a-Quaid",
-   "Contact": " 051-549 7153  ",
+   "Contact": " 051-549 7153",
    "lat": 33.5477675,
    "lng": 73.021217
  },
@@ -1782,7 +1767,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Shop No 2  Plaza No 147 Civic Centre",
-   "Contact": " 051-831 2096  ",
+   "Contact": " 051-831 2096",
    "lat": 33.5487807,
    "lng": 73.122652
  },
@@ -1791,7 +1776,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Plot # 57  HB Commercial. Opp. Bahria Internation hospital",
-   "Contact": "0300-077 1720  ",
+   "Contact": "0300-077 1720",
    "lat": 33.4922862,
    "lng": 73.0653249
  },
@@ -1800,7 +1785,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "SHOP # GF-5 Raffay mall chor chowk main peshwar road RWP",
-   "Contact": " 051-874 4430  ",
+   "Contact": " 051-874 4430",
    "lat": 33.6070671,
    "lng": 72.7349209
  },
@@ -1809,7 +1794,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Plaza #55 jinah boulevard  Sector E dha phase 2 islamabad",
-   "Contact": " 051-5419515  ",
+   "Contact": " 051-5419515",
    "lat": 33.5312401,
    "lng": 73.1562345
  },
@@ -1827,7 +1812,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "72-C   Opposite Bilal Hospital Sadiqabad Rawalpindi",
-   "Contact": " 051-843 1779  ",
+   "Contact": " 051-843 1779",
    "lat": 33.6334419,
    "lng": 73.0763738
  },
@@ -1836,7 +1821,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "SHOP # P-1046-2  Perwaiz Plaza Opposite Ayub Medical Centre Main Siadpur Road",
-   "Contact": " 051-8312094  ",
+   "Contact": " 051-8312094",
    "lat": 33.6295906,
    "lng": 73.0618832
  },
@@ -1845,7 +1830,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Kashmir Road Opp. Jahangir Restaurant Saddar Rawalpindi.",
-   "Contact": "051-556 5484  ",
+   "Contact": "051-556 5484",
    "lat": 33.5991684,
    "lng": 73.0541659
  },
@@ -1854,7 +1839,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Shop#1 SMDC-II Plaza Main Soan Double Road Block A",
-   "Contact": " 051-542 8144  ",
+   "Contact": " 051-542 8144",
    "lat": 33.5665786,
    "lng": 73.151446
  },
@@ -1863,7 +1848,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Shop# 3  Basement Adnan Heights  Commercial Area  Chaklala Scheme 3 Chaklala Cantt. Rawalpindi",
-   "Contact": "051-2806327-8",
+   "Contact": "051-28063278",
    "lat": 33.5859734,
    "lng": 73.0857101
  },
@@ -1872,7 +1857,7 @@ List<dynamic> rawalpindi = [
    "City": "Rawalpindi",
    "Status": "On Panel",
    "Address": "Opp B.B Hospital Mallik Plaza Murree Road  Rawalpindi",
-   "Contact": "051-2806327-8",
+   "Contact": "051-28063278",
    "lat": 33.6301868,
    "lng": 73.0227666
  },
@@ -1886,7 +1871,7 @@ List<dynamic> faisalabad = [
    "City": "Faisalabad",
    "Status": "On Panel",
    "Address": "Dr. Habib Shah Chowk, Mandi Farooqabad.",
-   "Contact": "0345-4100356, 0345-8448312",
+   "Contact": "0345-4100356",
    "lat": 31.7414904,
    "lng": 73.8262715
  },
@@ -1895,7 +1880,7 @@ List<dynamic> faisalabad = [
    "City": "Faisalabad",
    "Status": "On Panel",
    "Address": "Main Gulberg Road,Opposite National Hospital,Near Tabaq Restaurant Faisalabad.",
-   "Contact": "041-2647722, 0345-4004790",
+   "Contact": "041-2647722",
    "lat": 31.4219163,
    "lng": 73.0612414
  },
@@ -1904,7 +1889,7 @@ List<dynamic> faisalabad = [
    "City": "Faisalabad",
    "Status": "On Panel",
    "Address": "Akbarabad Chowk Near Allied Hospital Faisalabad",
-   "Contact": "0345-8445046 / 041-2644422 / 0345-8406692",
+   "Contact": "0345-8445046",
    "lat": 31.4439307,
    "lng": 73.0818665
  },
@@ -1913,7 +1898,7 @@ List<dynamic> faisalabad = [
    "City": "Faisalabad",
    "Status": "On Panel",
    "Address": "Saleemi Chowk, Satiana Road, Opp National Bank Faisalabad",
-   "Contact": "041-8727555-03458402874",
+   "Contact": "041-8727555",
    "lat": 31.4249141,
    "lng": 73.0729645
  },
@@ -1922,7 +1907,7 @@ List<dynamic> faisalabad = [
    "City": "Faisalabad",
    "Status": "On Panel",
    "Address": "Susan Road, Madina Town, Faisalabad",
-   "Contact": "0345-4998408, 041-8731166",
+   "Contact": "0345-4998408",
    "lat": 31.4249141,
    "lng": 73.0729645
  },
@@ -1940,7 +1925,7 @@ List<dynamic> faisalabad = [
    "City": "Faisalabad",
    "Status": "On Panel",
    "Address": "Al-Moiz Diagnostic Center, Ghulamabad, Faisalabad",
-   "Contact": "03458402874,041-8727555",
+   "Contact": "03458402874",
    "lat": 31.4395465,
    "lng": 73.012025
  },
@@ -1949,7 +1934,7 @@ List<dynamic> faisalabad = [
    "City": "Faisalabad",
    "Status": "On Panel",
    "Address": "Gojra Road, OPP Dsp Office, Sumandari Distt: Faisalabad.",
-   "Contact": "041-3425586 ,0340-5552747",
+   "Contact": "041-3425586",
    "lat": 31.0625564,
    "lng": 72.9519636
  },
@@ -2124,9 +2109,9 @@ void Faisalabad()async{
     title.add(faisalabad[i]['Address']);
     latitude.add(faisalabad[i]['lat']);
     longitude.add(faisalabad[i]['lng']);
-    faisalabad.add(rawalpindi[i]['City']);
-    faisalabad.add(rawalpindi[i]['Hospital Name']);
-    faisalabad.add(rawalpindi[i]['Contact']);
+   city.add(faisalabad[i]['City']);
+    name.add(faisalabad[i]['Hospital Name']);
+    contact.add(faisalabad[i]['Contact']);
     faisalabadLabs.add(MarkerData(markerIdd[i],latitude[i], longitude[i],title[i],name[i],contact[i],city[i]));
   }
    nameL = name[0];
@@ -2156,7 +2141,7 @@ void Faisalabad()async{
 
 
 
-   var cityList =''' 
+    var cityList =''' 
    [
     {
       "Hospital Name": "Aga Khan University Hospital",
@@ -3820,8 +3805,8 @@ void Faisalabad()async{
       "Province": "Sindh",
       "Address": "peoples medical college hsopital, shaheed benazirabad civil hospital road, nawabshah",
       "Contact": "(021) 99201271",
-      "lat": 24.8535492,
-      "lng": 64.7984303
+      "lat": 26.258107,
+      "lng": 68.3691248
     },
     {
       "Hospital Name": "Sukkur Hospital",
@@ -4571,15 +4556,6 @@ void Faisalabad()async{
       "lng": 66.9975495
     },
     {
-      "Hospital Name": "Khalid Family Hospital",
-      "City": "Zafarwal",
-      "Province": "Punjab",
-      "Address": "Khalid Family Hospital, Zafarwal, Narowal, Punjab",
-      "Contact": "3.03E+20",
-      "lat": 32.3369177,
-      "lng": 74.9011245
-    },
-    {
       "Hospital Name": "General Hospital",
       "City": "Sialkot",
       "Province": "Punjab",
@@ -4587,6 +4563,15 @@ void Faisalabad()async{
       "Contact": "0344-6421789",
       "lat": 32.5201702,
       "lng": 74.5019116
+    },
+    {
+      "Hospital Name": "Khalid Family Hospital",
+      "City": "Zafarwal",
+      "Province": "Punjab",
+      "Address": "Khalid Family Hospital, Zafarwal, Narowal, Punjab",
+      "Contact": "3.03E+20",
+      "lat": 32.3369177,
+      "lng": 74.9011245
     },
     {
       "Hospital Name": "Ahmad Medical & Surgical Hospital",
@@ -4881,10 +4866,172 @@ void Faisalabad()async{
       "City": "Islamabad",
       "Province": "Islamabad",
       "Address": "Main Peshawar Road, Near Gola Morr, H-13 - Islamabad, Rawalpindi",
-      "Contact": "Cell: +92 336 5102904 / Office: +92 51 8449100 (4400)",
+      "Contact": "Cell: +92 336 5102904",
       "lat": 33.6246546,
       "lng": 72.9708722
-    }
+    },
+    {
+      "Hospital Name": "Northwest General Hospital & Research Center",
+      "City": "Peshawar",
+      "Province": "KPK",
+      "Address": "5/B-2, Phase V, Hayatabad,Peshawar, K.P.K,Pakistan",
+      "Contact": "+92-91-5838 000",
+      "lat": 33.995176,
+      "lng": 71.4359214
+    },
+    {
+    "Hospital Name": "Maryum Memorial Hospital (Rawalpindi)",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Peshawar Road, Rawalpindi",
+    "Contact": "051-5481170, 051-5464680-2",
+    "lat": 33.6040245,
+    "lng": 73.0223587
+  },
+  {
+    "Hospital Name": "Maryum Memorial Hospital (Islamabad)",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Bahria Town Civic Center Phase 4, Rawalpindi",
+    "Contact": "051-5733858 (contact person: ahmed ali)",
+    "lat": 33.5494941,
+    "lng": 73.0540071
+  },
+  {
+    "Hospital Name": "Ahmad Medical Complex Rawalpindi",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "70-C Satellite Town, Sadiqabad Road, Rawalpindi",
+    "Contact": "4582231-39",
+    "lat": 33.6080619,
+    "lng": 73.0367547
+  },
+  {
+    "Hospital Name": "Valley Clinic",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "312-A,Peshawar Road, Rawalpindi.",
+    "Contact": "051-860438-5470070",
+    "lat": 33.6040577,
+    "lng": 73.0220461
+  },
+  {
+    "Hospital Name": "Al Suffah Hospital",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Block F, New Katarian satellite town, Rawalpindi.",
+    "Contact": "051-8737487, 0313-5442304",
+    "lat": 33.6420703,
+    "lng": 73.055765
+  },
+  {
+    "Hospital Name": "Bahria International Hospital",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Baharia town, phase 8, Rawal pindi",
+    "Contact": "(051) 5179745",
+    "lat": 33.4922106,
+    "lng": 72.9602687
+  },
+  {
+    "Hospital Name": "Bilal Hospital (Rawalpindi)",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "38-A, Satellite Town, Rawalpindi",
+    "Contact": "(051) 8094533 445-6471-76,,, Faisal Waseem 0300-5337980 EXTT:241",
+    "lat": 33.6337173,
+    "lng": 73.0767367
+  },
+  {
+    "Hospital Name": "Khatoon Hospital",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Block F Police Foundation, Rawalpindi, Punjab",
+    "Contact": "051-8430848",
+    "lat": 33.5640629,
+    "lng": 73.1251688
+  },
+  {
+    "Hospital Name": "WESTRIDGE HOSPITAL & PAIN CENTRE (Pvt.) Limited",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Qayyum Plaza, Seham road, near FG liaquat degree college, Chuhr Harpal, Rawalpindi.",
+    "Contact": "051-8735080 / 051-8739080",
+    "lat": 33.6117794,
+    "lng": 72.9991925
+  },
+  {
+    "Hospital Name": "Amanat Eye Hospital - Rawalpindi",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "10-D Mayo Road? Civil Lines, Rawalpindi",
+    "Contact": "(051) 8439993",
+    "lat": 33.5872562,
+    "lng": 73.064175
+  },
+  {
+    "Hospital Name": "Fauji Foundation Hospital - Rawalpindi",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Jhelum Road, Rawalpindi",
+    "Contact": "0322-8555715",
+    "lat": 33.5531733,
+    "lng": 73.0934289
+  },
+  {
+    "Hospital Name": "Medicare Hospital - Rawalpindi",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Saidpur Rd, Block F New Katarian Satellite Town, Rawalpindi",
+    "Contact": "0314-5130189",
+    "lat": 33.6423999,
+    "lng": 73.0458461
+  },
+  {
+    "Hospital Name": "Azeema Sheikh Hospital - Rawalpindi",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "D Block, Block D Satellite Town, Rawalpindi, Punjab",
+    "Contact": "0315-6897073",
+    "lat": 33.642435,
+    "lng": 73.0458461
+  },
+  {
+    "Hospital Name": "CosmeSurge International Hospital - Rawalpindi.",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Main Said Pur Road Near KAli Tanki Opp. Agha Khan Lab Rawalpindi",
+    "Contact": "051-4452729, 31",
+    "lat": 33.6343037,
+    "lng": 73.0603835
+  },
+  {
+    "Hospital Name": "CityMed Hospital - Rawalpindi",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "3rd Floor, Al-Shifa Tower, Main Jhelum Road, Rawalpindi",
+    "Contact": 3333575733,
+    "lat": 33.5588955,
+    "lng": 73.0892151
+  },
+  {
+    "Hospital Name": "TEMAR DIAGNOSTICS",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "Building No 1,Near R.I.C? Rawal Road? Chaklala Cantt., Rawalpindi, Punjab 46000",
+    "Contact": "(051) 8900001",
+    "lat": 33.6263068,
+    "lng": 73.0630562
+  },
+  {
+    "Hospital Name": "Medway medical care",
+    "City": "Rawalpindi",
+    "Province": "Punjab",
+    "Address": "J3V6+32H, Block F New Katarian Satellite Town, Rawalpindi, Punjab",
+    "Contact": "051-8897878 Dr. Waqar 0333-1527009",
+    "lat": 33.6426919,
+    "lng": 73.0578738
+  }
    
    ]
    ''';

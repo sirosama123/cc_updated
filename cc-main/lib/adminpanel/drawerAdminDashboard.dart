@@ -48,10 +48,7 @@ class _AdminDashboardDrawerState extends State<AdminDashboardDrawer> {
             ChartData('Doctor\nAppointment', 6, Colors.blue),
             ChartData('Online \n appointment', 7, Colors.purple)
         ];
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-
-      home: Scaffold(
+    return Scaffold(
          appBar: AppBar(
         backgroundColor: Color(0xff2b578e),
             title: Text("User DashBoard"),
@@ -398,7 +395,7 @@ class _AdminDashboardDrawerState extends State<AdminDashboardDrawer> {
                         
                       ], //<Widget>[]
                     ),
-      ),
+      
     );
   }
 }

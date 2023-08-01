@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project1/screens/Provider/provider1.dart';
 import 'package:project1/screens/profile.dart';
+import 'package:project1/screens/subscreens/appointmentList.dart';
 import 'package:project1/screens/subscreens/labOrderDetails.dart';
 import 'package:project1/screens/subscreens/medicineOrdersDetail.dart';
 import 'package:project1/widgets/dbSquares.dart';
@@ -195,7 +197,7 @@ class _DashboardDrawerState extends State<DashboardDrawer> {
                                          Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            DBsquare(mainhead: "Doctor Appointments", counts: 6, bgColor: Colors.blue, height: 100,width: 150,),
+                                            ApointmentSizeWidget(),
                                             DBsquare(mainhead: "Online Doctor\nAppointment", counts: 7, bgColor: Colors.purple, height: 100,width: 150,),
                                           ],
                                         )
@@ -253,7 +255,7 @@ class _DashboardDrawerState extends State<DashboardDrawer> {
                                           },
                                           ),
                                         
-                                         smallDBsquare(mainhead: "Doctor Appointments", counts: 6, bgColor: Colors.blue, height: 50,width: 75,),
+                                        ApointmentSizeWidget2(),
                                          smallDBsquare(mainhead: "Online Doctor\nAppointment", counts: 7, bgColor: Colors.purple,  height: 50,width: 75,)
                                       ],
                                     )
@@ -404,3 +406,66 @@ class _DashboardDrawerState extends State<DashboardDrawer> {
             final double? y;
             final Color? color;
     }
+
+    
+class ApointmentSizeWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final Provider11 = Provider.of<Provider1>(context); 
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('appointments').doc(Provider11.uuid).collection('data')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+        if (!snapshot.hasData) {
+          return Text('No data available');
+        }
+
+        int size = snapshot.data!.size;
+        return GestureDetector(
+          onTap: (){
+            Navigator.push(context,
+                       MaterialPageRoute(builder: (context) => AppointList()));
+          },
+          child: DBsquare(mainhead: "Doctor Appointments", counts: double.parse(size.toString()), bgColor: Colors.blue, height: 100,width: 150,));
+      },
+    );
+  }
+}
+
+class ApointmentSizeWidget2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final Provider11 = Provider.of<Provider1>(context); 
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+          .collection('appointments').doc(Provider11.uuid).collection('data')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+        if (!snapshot.hasData) {
+          return Text('No data available');
+        }
+
+        int size = snapshot.data!.size;
+        return GestureDetector(
+          onTap: (){
+         Navigator.push(context,
+         MaterialPageRoute(builder: (context) => AppointList()));
+          },
+          child: smallDBsquare(mainhead: "Doctor Appointments", counts: double.parse(size.toString()), bgColor: Colors.blue, height: 50,width: 70,));
+      },
+    );
+  }
+}

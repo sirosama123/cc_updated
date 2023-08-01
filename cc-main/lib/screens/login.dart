@@ -19,6 +19,7 @@ import 'package:project1/widgets/heading2.dart';
 import 'package:project1/widgets/or.dart';
 import 'package:project1/widgets/square_head.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Login extends StatefulWidget {
@@ -47,23 +48,37 @@ class _LoginState extends State<Login> {
     String? mtoken = " ";
     
 
-   void initState() {
-    FirebaseMessaging.instance.subscribeToTopic("Animal");
-    _passwordVisible = false;
-    }
+
+
   @override
 
   bool _showPassword = false;
   String? uuid;
   String? Lname;
   List productName =[];
+  bool _rememberMe = false;
 
   TextEditingController PasswordController = TextEditingController();
   TextEditingController EmailController = TextEditingController();
   
+
+      _loadSavedCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      EmailController.text = prefs.getString('email') ?? '';
+      PasswordController.text = prefs.getString('password') ?? '';
+
+    });
+  }
+
+   void initState() {
+    _loadSavedCredentials();
+    _passwordVisible = false;
+    }
+
+
   Widget build(BuildContext context) {
     final Provider11 = Provider.of<Provider1>(context); 
-
     getData() async{
   
    FirebaseFirestore.instance
@@ -130,12 +145,17 @@ class _LoginState extends State<Login> {
   }
 
 
-
+      _saveCredentials() async {
+  
+  }
     void Login() async{
       FirebaseAuth auth = FirebaseAuth.instance;
       FirebaseFirestore db = FirebaseFirestore.instance;
-
+    String email = EmailController.text;
+     String password = PasswordController.text;
       final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+      
+   
       try {
         EasyLoading.show(
                         status: 'loading...',
@@ -154,7 +174,12 @@ class _LoginState extends State<Login> {
           collection("users").
           doc(users.user!.uid). 
           get();
-   
+           if (_rememberMe) {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+             await prefs.setString('email', email);
+             await prefs.setString('password', password);
+             await prefs.setBool('rememberMe', _rememberMe);
+           }
           setState(() {
             Provider11.first=data['firstname'];
             Provider11.last=data['lastname'];
@@ -301,6 +326,31 @@ class _LoginState extends State<Login> {
                             ),
                         )
                             ),
+                             Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(),
+                            Row(
+                              children: [
+                                ForgotLink(link: "Remember me"),
+                                Checkbox(
+                                  checkColor: Color(0xff164584),
+                                  focusColor: Colors.red,
+                                fillColor: MaterialStateProperty.all(Colors.white),
+                                  activeColor: Colors.white,
+                                  value: _rememberMe,
+                                  onChanged: ( newValue) {
+                                    
+                                    setState(() {
+                                      _rememberMe = newValue!;
+                                    });
+                                    print(_rememberMe);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       // Padding(
                       //   padding:  EdgeInsets.fromLTRB(200.w,5.h,10.w,10.h),
                       //   child: GestureDetector(child: ForgotLink(link: "forgot password?")
@@ -311,7 +361,7 @@ class _LoginState extends State<Login> {
                       //       );
                       //   },),
                       // ),            
-                      SizedBox(height: 20.h,),    
+                      SizedBox(height: 10.h,),    
                         statee == true ? Container(
                                 height: 50,
                                 width: double.infinity,

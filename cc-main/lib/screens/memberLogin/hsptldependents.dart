@@ -116,7 +116,7 @@ class HsptlDependentsData extends StatelessWidget {
                                       idate: Provider11.data1['data'][index]['IssueDate'].toString(), 
                                       name: Provider11.data1['data'][index]['Name'].toString(),
                                       pc: Provider11.data1['data'][index]['PlanCode'].toString(),
-                                      relation: Provider11.data1['data'][index]['Relation'].toString(), hsptlName: hsptlName, city: city,
+                                      relation: Provider11.data1['data'][index]['Relation'].toString(), hsptlName: hsptlName, city: city, approvalFor: 'hospital',
                                       )));
                   },
                   style: NeumorphicStyle(

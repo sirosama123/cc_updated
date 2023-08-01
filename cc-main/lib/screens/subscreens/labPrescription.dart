@@ -775,9 +775,28 @@ class _LabPrescriptionState extends State<LabPrescription> {
     bool load = false;
     var uuid = Uuid();
    
+
+     DateTime _selectedDate = DateTime.now();
+    DateTime _currentDate = DateTime.now();
+    
+    Future<void> _selectDate(BuildContext context) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: _currentDate,
+      lastDate: DateTime(_currentDate.year + 1), // You can set an end date here if needed
+    );
+
+    if (pickedDate != null && pickedDate != _selectedDate) {
+      setState(() {
+        RecievingDate = pickedDate;
+      });
+    }
+  }
+
     TextEditingController patientname = TextEditingController();
     TextEditingController age = TextEditingController();
-    DateTime? RecievingDate = DateTime(2023,1,7);
+    DateTime? RecievingDate = DateTime.now().add(Duration(days: 1));
     String? timee  = " ";
     List dropdownItemList = [
       {'label': '9:00AM - 9:30AM', 'value': '1'}, // label is required and unique
@@ -818,7 +837,7 @@ class _LabPrescriptionState extends State<LabPrescription> {
     final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendEmail');
     final response = await callable.call(
      <String, dynamic>{
-      'email': 'osama.zellesolutions@gmail.com',
+      'email': 'Hello@crescentcare.pk',
       'cc':"crescentcareapp@gmail.com",
       'subject': 'Crescentcare ${type} Order',
       'body': '''
@@ -1045,10 +1064,7 @@ class _LabPrescriptionState extends State<LabPrescription> {
           msg: "Your Response has been delievered",
           toastLength: Toast.LENGTH_SHORT,
       );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => super.widget));          
+      Navigator.of(context).pop();        
       } catch (e) {
         print("error");
       }
@@ -1267,20 +1283,7 @@ return MaterialApp(
                                       GestureDetector(
                                         child: Square2(imgAddress: "assets/images/calendar.png",),
                                         onTap:  ()async {
-                                                   DateTime? newDate = await showDatePicker (
-                                                      context: context, 
-                                                      initialDate:DateTime(2023) , 
-                                                      firstDate: DateTime(2023), 
-                                                      lastDate: DateTime(2024)
-                                                      );
-                                                      if (newDate == null) {
-                                                        return;
-                                                      } else {
-                                                        setState(() {
-                                                          RecievingDate = newDate;
-                                                        },);
-                                                        
-                                                      }
+                                                    _selectDate(context);
                           
                                                   },
                                         ),
@@ -1448,10 +1451,7 @@ return MaterialApp(
                                   Provider11.notify_med.clear();
                            if (_formKey.currentState!.validate()) {
                    await uploadImageToFirestore();    
-                              Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => super.widget));
+                              Navigator.of(context).pop(); 
                 }
                                 
                              } else {

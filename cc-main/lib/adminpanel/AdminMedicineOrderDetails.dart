@@ -116,9 +116,7 @@ class _AdminMedicineOrderDetailState extends State<AdminMedicineOrderDetail> {
       Provider11.med_dates.clear();
     }
     
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(  
+    return  Scaffold(  
         backgroundColor:Colors.white ,
          appBar: AppBar(
         backgroundColor: Color(0xff2b578e),
@@ -238,7 +236,7 @@ class _AdminMedicineOrderDetailState extends State<AdminMedicineOrderDetail> {
                                     Center(
                                       child: Container(
                                         height: 20.h,
-                                        width: 60.w,
+                                       
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(10),
                                           color: e.status=="pending"?Colors.amber:e.status=="cancelled"?Colors.red:Colors.green
@@ -458,6 +456,6 @@ class _AdminMedicineOrderDetailState extends State<AdminMedicineOrderDetail> {
                 )
           )
       ),
-    ) ));
+    ) );
   }
 }

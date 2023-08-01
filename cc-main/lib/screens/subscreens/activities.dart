@@ -53,7 +53,7 @@ class _Activities1State extends State<Activities1> with TickerProviderStateMixin
     return Scaffold(
        appBar: AppBar(
               backgroundColor: Color(0xff2b578e),
-              title: Text("Out Patient Services"),
+              title: Text("Activities"),
                leading: GestureDetector(
               child: Icon( Icons.arrow_back_ios, color: Colors.white,  ),
                  onTap: () {
@@ -67,39 +67,8 @@ class _Activities1State extends State<Activities1> with TickerProviderStateMixin
               onPressed: () {},
             ), ]
             ),
-        bottomNavigationBar: MotionTabBar(
-          initialSelectedTab: "Home",
-          useSafeArea: true, // default: true, apply safe area wrapper
-          labels: const ["Home", "Notification", "Dashboard"],
-          icons: const [Icons.home,Icons.notifications,  Icons.dashboard],
-         tabSize: 50,
-          tabBarHeight: 55,
-          textStyle: const TextStyle(
-            fontSize: 12,
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-          ),
-          tabIconColor: Colors.white,
-          tabIconSize: 28.0,
-          tabIconSelectedSize: 26.0,
-          tabSelectedColor: Colors.white,
-          tabIconSelectedColor: Color(0xff2b578e),
-          tabBarColor: Color(0xff2b578e),
-          onTabItemSelected: (int value) {
-            setState(() {
-              _tabController!.index = value;
-            });
-          },
-        ),
-        body: TabBarView(
-          physics: NeverScrollableScrollPhysics(), 
-          controller: _tabController,
-          children: <Widget>[
-           Landing1(),
-           Notificationss(),
-           Dashboard(count: 0,)
-          ],
-        ),
+      
+        body: Landing1(),
      
     );
   }

@@ -74,10 +74,7 @@ class _DoctorAppointmentsAdminPanelState extends State<DoctorAppointmentsAdminPa
   @override
  Widget build(BuildContext context) {
     final Stream<QuerySnapshot> admin_appointments = FirebaseFirestore.instance.collection('appointments_admin').snapshots();
-    return MaterialApp(
-      
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return  Scaffold(
             body:StreamBuilder<QuerySnapshot>(
         stream: admin_appointments,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -237,7 +234,7 @@ class _DoctorAppointmentsAdminPanelState extends State<DoctorAppointmentsAdminPa
           );
         },
       ) ,
-      ),
+      
     );
   }
 

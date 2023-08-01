@@ -12,7 +12,7 @@ class BlueLabelss extends StatelessWidget {
     return Container(
       child: Text("$lab",
       style: GoogleFonts.montserrat(
-        textStyle: TextStyle(color: Color(0xff164584), letterSpacing: 0.5,fontSize: 16.sp,fontWeight: FontWeight.w300) ),
+        textStyle: TextStyle(color: Color(0xff164584), letterSpacing: 0.5,fontSize: 14.sp,fontWeight: FontWeight.w300) ),
         textAlign: TextAlign.start,
         ),
     );

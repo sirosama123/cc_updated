@@ -19,10 +19,9 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:project1/widgets/hsptlName.dart';
 import '../../widgets/hospitalName.dart';
 import '../memberLogin/depts.dart';
+import '../noDoctorDesclaimer.dart';
 import '../widgets/memberPageBars.dart';
 import 'appointmentHopsDepts.dart';
-
-
 
 
 class MemberHospitalsApointment extends StatefulWidget {
@@ -87,33 +86,40 @@ class _MemberHospitalsApointmentState extends State<MemberHospitalsApointment> {
         ) ,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.search,color: Colors.white,),
+            icon:Icon(Icons.search,color: Colors.white,),
             
             onPressed: () {},
           ), ]
           ),
       body: Stack(
         children: [
-          Padding(
-            padding:EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
-            child:
-            GridView.count(
-                crossAxisCount: 2, // Number of columns
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              
-                children: List.generate(widget.hospitalcities.length, (index) {
-                  print(widget.hospitalcities);
-                  return GestureDetector(
-                    onTap: (){
-                      print(widget.hospitalcities[index]['depts']);
-                     getDeptHospitals(widget.hospitalcities[index]['name'].toString(),widget.hospitalcities[index]['depts'].toString(),widget.hospitalcities[index]['dr_list'].toString());
-                    },
+          GridView.count(
+              crossAxisCount: 2, // Number of columns
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+            
+              children: List.generate(widget.hospitalcities.length, (index) {
+                print(widget.hospitalcities);
+                return GestureDetector(
+                  onTap: (){
+                    print(widget.hospitalcities[index]['dr_list'].toString());
+                    if (widget.hospitalcities[index]['dr_list'].toString()=='') {
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => NoDoctorDisclaimer(hsptlName: widget.hospitalcities[index]['name'].toString(),)));
+                    } else {
+                      getDeptHospitals(widget.hospitalcities[index]['name'].toString(),widget.hospitalcities[index]['depts'].toString(),widget.hospitalcities[index]['dr_list'].toString());
+                    }
+                //  widget.hospitalcities[index]['dr_list']==null?print("error"):getDeptHospitals(widget.hospitalcities[index]['name'].toString(),widget.hospitalcities[index]['depts'].toString(),widget.hospitalcities[index]['dr_list'].toString());
+                  },
+                  child: Padding(
+                    padding:  EdgeInsets.all(8),
                     child: hsptlName(
                       img: widget.hospitalcities[index]['logo'], 
-                      name: widget.hospitalcities[index]['name']));
-                }),),
-          ),
+                      name: widget.hospitalcities[index]['name']),
+                  ));
+              }),),
            abc==true? Align(
               alignment: Alignment.center,
               child: Container(

@@ -144,18 +144,40 @@ class _HospCitiesState extends State<HospCities> {
                Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                  children: [
-                   GestureDetector(
-                              onTap: (){
-                                getPanelHospitals("https://script.google.com/macros/s/AKfycbzZ2utHnysZGpU5ZYZQn3so8FNFU3ys2mFtbmpEQbYONyXiXzHAapbUWWsQnnpowgunAg/exec","Karachi");
-                               
-                              },
-                              child:Square3(imgAddress: "https://firebasestorage.googleapis.com/v0/b/crescentcareapp-f58eb.appspot.com/o/quaid.png?alt=media&token=94f1bd85-500f-454d-8b19-0bdd8d0ca960", heading:"Karachi") ),
-                    GestureDetector(
-                              onTap: (){
-                                getPanelHospitals("https://script.google.com/macros/s/AKfycbyEnQSzCa2xYE9PfWt19dRGFQNYPspg_gI2Y1BB8I_BJaUuqqB74mRRAEPQ46604mI/exec","Lahore");
-                               
-                              },
-                              child:Square3(imgAddress: "https://cdn-icons-png.flaticon.com/512/5533/5533027.png", heading:"Lahore") ),          
+                    Expanded(
+                      flex: 3,
+                      child:  Padding(
+                        padding:EdgeInsets.all(4),
+                        child: GestureDetector(
+                                onTap: (){
+                                  getPanelHospitals("https://script.google.com/macros/s/AKfycbzZ2utHnysZGpU5ZYZQn3so8FNFU3ys2mFtbmpEQbYONyXiXzHAapbUWWsQnnpowgunAg/exec","Karachi");
+                                 
+                                },
+                                child:Square3(imgAddress: "https://firebasestorage.googleapis.com/v0/b/crescentcareapp-f58eb.appspot.com/o/quaid.png?alt=media&token=94f1bd85-500f-454d-8b19-0bdd8d0ca960", heading:"Karachi") ),
+                      ),),
+                  
+                   Expanded(
+                      flex: 3,
+                      child:  Padding(
+                         padding:EdgeInsets.all(4),
+                        child: GestureDetector(
+                                onTap: (){
+                                  getPanelHospitals("https://script.google.com/macros/s/AKfycbzZ2utHnysZGpU5ZYZQn3so8FNFU3ys2mFtbmpEQbYONyXiXzHAapbUWWsQnnpowgunAg/exec","Karachi");
+                                 
+                                },
+                                child:Square3(imgAddress: "https://firebasestorage.googleapis.com/v0/b/crescentcareapp-f58eb.appspot.com/o/quaid.png?alt=media&token=94f1bd85-500f-454d-8b19-0bdd8d0ca960", heading:"Karachi") ),
+                      ),),
+                  Expanded(
+                      flex: 3,
+                      child:  Padding(
+                         padding:EdgeInsets.all(4),
+                        child: GestureDetector(
+                                onTap: (){
+                                  getPanelHospitals("https://script.google.com/macros/s/AKfycbzZ2utHnysZGpU5ZYZQn3so8FNFU3ys2mFtbmpEQbYONyXiXzHAapbUWWsQnnpowgunAg/exec","Karachi");
+                                 
+                                },
+                                child:Square3(imgAddress: "https://firebasestorage.googleapis.com/v0/b/crescentcareapp-f58eb.appspot.com/o/quaid.png?alt=media&token=94f1bd85-500f-454d-8b19-0bdd8d0ca960", heading:"Karachi") ),
+                      ),),
                  ],
                ),
                SizedBox(height: 10.h,),

@@ -3,6 +3,7 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:hellodoc_service_pkg/main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
@@ -32,6 +33,9 @@ import 'package:project1/widgets/square_head.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:url_launcher/url_launcher.dart' ;
+
+import '../widgets/multi3.dart';
+import '../widgets/roboto.dart';
 
 
 
@@ -72,16 +76,10 @@ class _firstLandingState extends State<firstLanding> with TickerProviderStateMix
     _tabController!.dispose();
   }
 
-  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-  //   final Provider11 = Provider.of<Provider1>(context); 
-  //   Provider11.ClearAll();
-  //   Navigator.pop(context); // Do some stuff.
-  //   return true;
-  // }
 
    File? _image;
    late int _selectedTab = widget.tab!.toInt() ;
-  
+   String initialSelectedTab = 'Home';
 
   List _pages = [
      LandingPage(),
@@ -100,7 +98,7 @@ class _firstLandingState extends State<firstLanding> with TickerProviderStateMix
     
  
     }
-
+  bool closingState = false;
   bool abc = false;
   Widget build(BuildContext context) {
     final Provider11 = Provider.of<Provider1>(context); 
@@ -132,7 +130,8 @@ class _firstLandingState extends State<firstLanding> with TickerProviderStateMix
         print("error");
       }
     }
-    return Stack(
+    return WillPopScope(
+      child: Stack(
       children: [
         Scaffold(
            appBar: AppBar(
@@ -148,13 +147,13 @@ class _firstLandingState extends State<firstLanding> with TickerProviderStateMix
           bottomNavigationBar: MotionTabBar(
             initialSelectedTab: "Home",
             useSafeArea: true, // default: true, apply safe area wrapper
-            labels: const ["Home", "Notification", "Dashboard"],
-            icons: const [Icons.home,Icons.notifications,  Icons.dashboard],
-
+            labels:  ["Home", "Notification", "Dashboard"],
+            icons:  [Icons.home,Icons.notifications,  Icons.dashboard],
+            
             // optional badges, length must be same with labels
             tabSize: 50,
             tabBarHeight: 55,
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               fontSize: 12,
               color: Colors.white,
               fontWeight: FontWeight.w500,
@@ -168,6 +167,7 @@ class _firstLandingState extends State<firstLanding> with TickerProviderStateMix
             onTabItemSelected: (int value) {
               setState(() {
                 _tabController!.index = value;
+                
               });
             },
           ),
@@ -380,8 +380,9 @@ class _firstLandingState extends State<firstLanding> with TickerProviderStateMix
                           Heading3(head: "Doctor Online")
                         ],),
                         onTap: (){
-                         WidgetsFlutterBinding.ensureInitialized();
-                                        runApp(HDApp());
+                          Navigator.push(context,
+                           MaterialPageRoute(builder: (context) => HDApp()));
+                         
                         },
                       ),
                       onTap: (){},
@@ -489,7 +490,131 @@ class _firstLandingState extends State<firstLanding> with TickerProviderStateMix
                   ),
                 ),
             ):Container(),
+
+            Align(
+              alignment: Alignment.center,
+              child: closingState==true?
+               Container(
+                height: double.infinity,
+                width: double.infinity,
+                color:Color(0xff2b578e).withOpacity(0.3),
+                child:Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Container(
+                          height: MediaQuery. of(context). size. height/5,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.r)
+                          ),
+                          child:  Scaffold(
+                            body: Padding(
+                                            padding:EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children:[
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                            Image.asset("assets/images/logo.png",height: 25.h,width: 25.w,),
+                            SizedBox(width: 5.w,),
+                            Roboto(
+                              color: Color(0xff2b578e), 
+                              subtitle: "Attention", 
+                              weight: FontWeight.w700, 
+                              size: 18, 
+                              align: TextAlign.start
+                              ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 7.h,),
+                                                Links(head: "DO YOU WANT TO CLOSE APPLICATION?"),
+                                                SizedBox(height: 7.h,),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                  children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: NeumorphicButton(
+                                onPressed: ()async{
+                                          _signOut();
+                                Provider11.ClearAll();
+                                Navigator.pushReplacementNamed(context, '/');  
+                                  setState(() {
+                                    closingState=true;
+                                  });
+                                   
+                            
+                                 
+                                  
+                                },
+                              style: NeumorphicStyle(
+                                  shadowLightColor: Color(0xff2b578e),
+                                  color: Color(0xff2b578e),
+                                  shape: NeumorphicShape.flat,
+                                  boxShape:
+                                      NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+                                  //border: NeumorphicBorder()
+                                ),
+                                padding:  EdgeInsets.symmetric(horizontal: 15.w,vertical: 5.h),
+                                child: Multi3(color:Colors.white , subtitle: "Yes", weight: FontWeight.bold, size: 12)
+                                ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: NeumorphicButton(
+                                onPressed: ()async{
+                                                   
+                                  setState(() {
+                                    
+                                    closingState=false;
+                                  });
+                                   
+                            
+                                 
+                                  
+                                },
+                              style: NeumorphicStyle(
+                                  shadowLightColor: Color(0xff2b578e),
+                                  color: Color(0xff2b578e),
+                                  shape: NeumorphicShape.flat,
+                                  boxShape:
+                                      NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+                                  //border: NeumorphicBorder()
+                                ),
+                                padding:  EdgeInsets.symmetric(horizontal: 15.w,vertical: 5.h),
+                                child: Multi3(color:Colors.white , subtitle: "No", weight: FontWeight.bold, size: 12)
+                                ),
+                            ),
+                                                  ],
+                                                )
+                                             
+                                              ]
+                                            ),
+                                          ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+             
+              )
+              :Container(),
+            )
       ],
-    );
+    ), 
+       onWillPop: () async {
+        setState(() {
+          closingState=true;
+        });
+        return false; // Allow default back button behavior for other screens
+      },);
   }
 }

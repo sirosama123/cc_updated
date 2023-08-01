@@ -152,9 +152,7 @@ class _AdminLoginState extends State<AdminLogin> {
       }
     }  
    var obsText = true;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(  
+    return Scaffold(  
         
         body: Container(
         height: double.infinity,
@@ -312,7 +310,7 @@ class _AdminLoginState extends State<AdminLogin> {
           ],
       ),
         ),
-      )
+      
     );
   }
 }

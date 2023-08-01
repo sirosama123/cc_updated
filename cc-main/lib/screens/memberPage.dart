@@ -16,7 +16,12 @@ import 'memberLogin/utilization.dart';
 import 'memberLogin2/claimdata.dart';
 
 class MemberPage extends StatefulWidget {
-  const MemberPage({super.key});
+    var utilizedHistory;
+  String? pcode;
+  double? totalAmount;
+  double? totalUtilized;
+  var planData;
+   MemberPage({super.key,required this.pcode,required this.planData,required this.totalAmount,required this.totalUtilized,required this.utilizedHistory});
 
   @override
   State<MemberPage> createState() => _MemberPageState();
@@ -58,8 +63,8 @@ await FlutterEmailSender.send(email);
           setState(() {
             abc=false;
           });
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MemberPage()));
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => MemberPage()));
         } else {
           print('API request failed with status code ${response.statusCode}');
           setState(() {
@@ -146,19 +151,20 @@ await FlutterEmailSender.send(email);
           Set<String> uniqueNames = Set<String>.from(names);
           List<String> resultNames = uniqueNames.toList();
            List<info> finals = [];
-          for (var i = 0; i < abc.length; i++) {
-            if (i==0) {
-              finals.add(info(name: abc[i].name, gender: "", amount: abc[i].amount));
-            } else {
-              if(abc[i].name==finals[i-1].name){
-                finals[i-1].amount=double.parse(finals[i-1].amount.toString())+
-                double.parse(abc[i].amount.toString());
-              }
-              else{
-                finals.add(info(name: abc[i].name, gender: "", amount: abc[i].amount));
-              }
+           try {
+                     for (var element in abc) {
+    int index = finals.indexWhere((info) => info.name == element.name);
+    if (index != -1) {
+      finals[index].amount = (finals[index].amount ?? 0) + (element.amount ?? 0);
+    } else {
+      finals.add(info(name: element.name, gender: element.gender, amount: element.amount));
+    }
+  }
+          print("FINAL LENGTH ${finals.length} ABC LENGTH ${abc.length}");
+          } catch (e) {
+            for (var i = 0; i < abc.length; i++) {
+              print(abc[i].amount);
             }
-          
           }
 
 
@@ -220,126 +226,9 @@ print(sum);
 
 
    UtilizationData(String? plan) async {
-      final dio = Dio();
-      try {
-          setState(() {
-            abc=true;
-          });
-        final response = await dio.get(
-            'https://script.google.com/macros/s/AKfycbyPDQT__HMAQRKzW08vwrGTzHt4XcuYZFn1-cF-nDpNk4T8sLaP58TnUeQzImnMbnG-Yw/exec?plan=${plan}');
-         final response2 = await dio.get(
-            'https://script.google.com/macros/s/AKfycbxBCsQO0T1K94xMb2v-TRlXUrCxQpIJpgRLwgdV6hcpx2XnY69uKRuRcXYLyF48NBCR/exec?member_id=${Provider11.empId}');
-        if (response.statusCode == 200 && response2.statusCode == 200) {
-          final data = response.data;
-          planData=response.data;
-          
-
-
-
-
-          final data2 = response2.data;
-          claims=response2.data;
-          List<double> amount = [];
-          List<dynamic> claim2 = claims['data'];
-          List<info> abc = [];
-          List<info2> profile = [];
-          List<String> names = [];
-          List<info3> completeData = [];
-          for (var i = 0; i < Provider11.data1['data'].length; i++) {
-            profile.add(info2(
-              name: Provider11.data1['data'][i]['Name'], 
-              gender: Provider11.data1['data'][i]['Gender'], 
-              relation: Provider11.data1['data'][i]['Relation']
-              ));
-              
-            print("${profile[i].name}----> name");
-          }
-          for (var i = 0; i < claim2.length; i++) {
-            abc.add(info(name: claim2[i]['patient_name'], gender: "claim2[i]['']", amount: double.parse(claim2[i]['claim_amount'].toString())));
-            names.add( claim2[i]['patient_name']);
-          }
-          Set<String> uniqueNames = Set<String>.from(names);
-          List<String> resultNames = uniqueNames.toList();
-           List<info> finals = [];
-          for (var i = 0; i < abc.length; i++) {
-            if (i==0) {
-              finals.add(info(name: abc[i].name, gender: "", amount: abc[i].amount));
-            } else {
-              if(abc[i].name==finals[i-1].name){
-                finals[i-1].amount=double.parse(finals[i-1].amount.toString())+
-                double.parse(abc[i].amount.toString());
-              }
-              else{
-                finals.add(info(name: abc[i].name, gender: "", amount: abc[i].amount));
-              }
-            }
-          
-          }
-
-
-
-for (var i = 0; i < profile.length; i++) {
-  if (resultNames.contains(profile[i].name)) {
-   int j = resultNames.indexOf(profile[i].name.toString());
-    completeData.add(info3(name: profile[i].name, gender: profile[i].gender, relation: profile[i].relation, amount: finals[j].amount));
-    amount.add(finals[j].amount!);
-  } else {
-    completeData.add(info3(name: profile[i].name, gender: profile[i].gender, relation: profile[i].relation, amount: 0));
-  }
-  print("${completeData[i].name}======>name"+"\n"+"${completeData[i].gender}======>gender"+"\n"+"${completeData[i].amount}======>amount");
-}
-
-
-double sum = amount.fold(0, (double previousValue, double currentElement) => previousValue + currentElement);
-print(sum);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-         Navigator.push(context,
+    Navigator.push(context,
                                 MaterialPageRoute(
-                                    builder: (context) => Utilization(pcode: Provider11.pcode, totalAmount: sum, totalUtilized: sum, utilizedHistory: completeData, planData: planData['data'],)));
-        } else {
-          print('API request failed with status code ${response.statusCode}');
-          setState(() {
-            abc=false;
-          });
-        }
-      } catch (e) {
-        print('Error retrieving data from API: $e');
-        print('Data not exist');
-        setState(() {
-            abc=false;
-          });
-      }
-      setState(() {
-            abc=false;
-          });
+                                    builder: (context) => Utilization(pcode: widget.pcode, totalAmount: widget.totalAmount, totalUtilized: widget.totalUtilized, utilizedHistory: widget.utilizedHistory, planData: widget.planData,)));
     }
 
 
@@ -361,7 +250,7 @@ print(sum);
             abc=true;
           });
         final response = await dio.get(
-            'https://script.google.com/macros/s/AKfycbxgRv64N6mzxutQeYkgR_NQ8szPC59qu8wtq4JJOEvHtre4WXhv0xKKwt38hxzgezMeIw/exec');
+            'https://script.google.com/macros/s/AKfycbww0kAWZP3ylfs9GqmwrB7keeItJ990Q0TRoYQ32Mgu35zF_70-CKB31KhYwskyWXyS/exec');
         if (response.statusCode == 200) {
           final data = response.data;
           pharmacities=response.data;

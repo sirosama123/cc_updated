@@ -10,6 +10,10 @@ import 'package:project1/widgets/slider.dart';
 import 'package:project1/widgets/squares.dart';
 import 'package:project1/widgets/wideSquare.dart';
 
+import '../widgets/links.dart';
+import '../widgets/roboto.dart';
+import '../widgets/square_head.dart';
+
 
 
 class Services1 extends StatefulWidget {
@@ -22,45 +26,113 @@ class Services1 extends StatefulWidget {
 class _Services1State extends State<Services1> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 10.h,),
-                Slider23(),
-                SizedBox(height: 20.h,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 24.w),
-                  child: Container(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                child: Squares(imgAddress: 'assets/images/location1.png', heading: "Hospital Locator"),
+    return Scaffold(
+        appBar: AppBar(
+            backgroundColor: Color(0xff2b578e),
+            title: Text("In Patient Services"),
+             leading: GestureDetector(
+            child: Icon( Icons.arrow_back_ios, color: Colors.white,  ),
+               onTap: () {
+                 Navigator.pop(context);
+                } ,
+        ) ,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.search,color: Colors.white,),
+            
+            onPressed: () {},
+          ), ]
+          ),
+      body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 10.h,),
+                  Slider23(),
+                  SizedBox(height: 20.h,),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Container(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  child: Squares(imgAddress: 'assets/images/location1.png', heading: "Hospital Locator"),
+                                  onTap: (){
+                                      Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => SelectionCity()));
+                                  },
+                                  ),
+                                GestureDetector(child: Squares(imgAddress: "assets/images/discounts.png", heading: "Discount Center"),
                                 onTap: (){
-                                    Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => SelectionCity()));
-                                },
-                                ),
-                              GestureDetector(child: Squares(imgAddress: "assets/images/discounts.png", heading: "Discount Center"),
-                              onTap: (){
-                                   Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => SelectionCityD()));
-                              },),
-                            ],
-                          ),
-                         
-          
-                        ],
-                      ),
-                    ),
-                  ),
+                                     Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => SelectionCityD()));
+                                },),
+                              ],
+                            ),
+                           
+                            SizedBox(height: 20.h,),
+                            Align(
+          alignment: Alignment.center,
+          child: Container(
+            decoration: BoxDecoration(   
+        borderRadius: BorderRadius.circular(10.0),           
+             color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xffA4A4A4),
+                  blurRadius: 6.0,
+                  spreadRadius: 1.0,
+                  offset: Offset(0.0, 0.0),
+                  // Shadow position
                 ),
               ],
             ),
-          );
+            child: Center(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset("assets/images/info.png",height: 25.h,width: 25.w,),
+                          SizedBox(width: 5.w,),
+                          Roboto(
+                            color: Color(0xff2b578e), 
+                            subtitle: "Attention", 
+                            weight: FontWeight.w700, 
+                            size: 18, 
+                            align: TextAlign.start
+                            ),
+                        ],
+                      ),
+                      SizedBox(height: 7.h,),
+                      Links(head: "PLEASE CARRY YOUR ORIGINAL CNIC, HEALTH CARD AND COMPANY CARD WITH YOU."),
+                      
+                   
+                    ]
+                  ),
+                ),
+              ),
+            )
+          ),
+          
+        )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+    );
   }
 }
 

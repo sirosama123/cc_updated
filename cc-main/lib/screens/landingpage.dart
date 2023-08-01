@@ -36,8 +36,137 @@ class _LandingPageState extends State<LandingPage> {
   @override
   bool abc = false;
   Widget build(BuildContext context) {
-    
+       var utilizedHistory;
+  String? pcode;
+  double? totalAmount;
+  double? totalUtilized;
+    var planData;
+     var claims;
     final Provider11 = Provider.of<Provider1>(context);
+    UtilizationData(String? plan) async {
+      final dio = Dio();
+      try {
+          setState(() {
+            abc=true;
+          });
+        final response = await dio.get(
+            'https://script.google.com/macros/s/AKfycbyPDQT__HMAQRKzW08vwrGTzHt4XcuYZFn1-cF-nDpNk4T8sLaP58TnUeQzImnMbnG-Yw/exec?plan=${plan}');
+         final response2 = await dio.get(
+            'https://script.google.com/macros/s/AKfycbxBCsQO0T1K94xMb2v-TRlXUrCxQpIJpgRLwgdV6hcpx2XnY69uKRuRcXYLyF48NBCR/exec?member_id=${Provider11.empId}');
+        if (response.statusCode == 200 && response2.statusCode == 200) {
+          final data = response.data;
+          planData=response.data;
+          
+
+
+
+
+          final data2 = response2.data;
+          claims=response2.data;
+          List<double> amount = [];
+          List<dynamic> claim2 = claims['data'];
+          List<info> abc = [];
+          List<info2> profile = [];
+          List<String> names = [];
+          List<info3> completeData = [];
+          try {
+            for (var i = 0; i < Provider11.data1['data'].length; i++) {
+            profile.add(info2(
+              name: Provider11.data1['data'][i]['Name'], 
+              gender: Provider11.data1['data'][i]['Gender'], 
+              relation: Provider11.data1['data'][i]['Relation']
+              ));
+              
+            print("${profile[i].name}----> name");
+          }
+          } catch (e) {
+            print("error at 1");
+          }
+         try {
+            for (var i = 0; i < claim2.length; i++) {
+            abc.add(info(name: claim2[i]['patient_name'], gender: "claim2[i]['']", amount: double.parse(claim2[i]['claim_amount'].toString())));
+            names.add( claim2[i]['patient_name']);
+            
+          }
+         } catch (e) {
+
+           print("error at 2");
+         }
+          Set<String> uniqueNames = Set<String>.from(names);
+          List<String> resultNames = uniqueNames.toList();
+          List<info> finals = [];
+      
+          try {
+                     for (var element in abc) {
+    int index = finals.indexWhere((info) => info.name == element.name);
+    if (index != -1) {
+      finals[index].amount = (finals[index].amount ?? 0) + (element.amount ?? 0);
+    } else {
+      finals.add(info(name: element.name, gender: element.gender, amount: element.amount));
+    }
+  }
+          print("FINAL LENGTH ${finals.length} ABC LENGTH ${abc.length}");
+          } catch (e) {
+           
+          }
+
+
+
+try {
+  for (var i = 0; i < profile.length; i++) {
+  if (resultNames.contains(profile[i].name)) {
+   int j = resultNames.indexOf(profile[i].name.toString());
+    completeData.add(info3(name: profile[i].name, gender: profile[i].gender, relation: profile[i].relation, amount: finals[j].amount));
+    amount.add(finals[j].amount!);
+  } else {
+    completeData.add(info3(name: profile[i].name, gender: profile[i].gender, relation: profile[i].relation, amount: 0));
+  }
+  // print("${completeData[i].name}======>name"+"\n"+"${completeData[i].gender}======>gender"+"\n"+"${completeData[i].amount}======>amount");
+}
+} catch (e) {
+  print("error at 4");
+}
+
+
+try {
+  double sum = amount.fold(0, (double previousValue, double currentElement) => previousValue + currentElement);
+Provider11.planAmount=planData['data'][0]['outPatient'].toString();
+Provider11.utilizedAmount=sum.toString();
+print(sum);
+print(planData['data'][0]['outPatient'].toString());
+pcode = Provider11.pcode;
+totalAmount = sum;
+totalUtilized= sum;
+utilizedHistory= completeData;
+planData= planData['data'];
+
+} catch (e) {
+  print("error at 5");
+}
+
+
+
+        } else {
+          print('API request failed with status code ${response.statusCode}');
+          setState(() {
+            abc=false;
+          });
+        }
+      } catch (e) {
+        print('Error retrieving data from API: $e');
+        print('Data not exist');
+        setState(() {
+            abc=false;
+          });
+      }
+      setState(() {
+            abc=false;
+          });
+    }
+
+
+
+
 
     getDataInsured(String? cnic) async {
       final dio = Dio();
@@ -53,10 +182,10 @@ class _LandingPageState extends State<LandingPage> {
           Provider11.data1 = data;
           Provider11.empId=data['data'][0]['empId'].toString();
           Provider11.pcode=data['data'][0]['PlanCode'].toString();
-         
+          await UtilizationData(data['data'][0]['PlanCode'].toString());
           data['data'].isEmpty?Navigator.push(
               context, MaterialPageRoute(builder: (context) => MemberDisclaimer())):Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MemberPage()));
+              context, MaterialPageRoute(builder: (context) => MemberPage(pcode: Provider11.pcode, totalAmount: totalAmount, totalUtilized: totalUtilized, utilizedHistory: utilizedHistory, planData: planData,)));
           
         } else {
           print('API request failed with status code ${response.statusCode}');
@@ -142,7 +271,7 @@ class _LandingPageState extends State<LandingPage> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Services()));
+                                              builder: (context) => Services1()));
                                     },
                                   ),
                                   onTap: () {},

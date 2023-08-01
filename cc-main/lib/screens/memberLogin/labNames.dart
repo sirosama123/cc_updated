@@ -22,6 +22,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import '../../widgets/hospitalName.dart';
 import '../../widgets/hsptlName.dart';
 import '../../widgets/square3.dart';
+import '../noLabsData.dart';
 import '../widgets/memberPageBars.dart';
 import 'depts.dart';
 import 'labList.dart';
@@ -44,7 +45,7 @@ class _LabNamesState extends State<LabNames> {
   Widget build(BuildContext context) {
     var labList;
     var pharmalist;
-     getLabsCitywise(String? link) async {
+     getLabsCitywise(String? link,String labName) async {
       final dio = Dio();
       try {
         setState(() {
@@ -58,7 +59,7 @@ class _LabNamesState extends State<LabNames> {
           print(labList['data']);
           // print(data1);
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LabList(lablist: labList['data'], city: widget.city,)));
+              context, MaterialPageRoute(builder: (context) => LabList(lablist: labList['data'], city: widget.city, LabName: labName,)));
         } else {
           print('API request failed with status code ${response.statusCode}');
         }
@@ -133,14 +134,24 @@ class _LabNamesState extends State<LabNames> {
               
                 children: List.generate(widget.labNames.length, (index) {
                   print(widget.labNames);
-                  return GestureDetector(
-                    onTap: (){
-                      getLabsCitywise(widget.labNames[index]['branches']);
-                    },
-                    child:hsptlName(
-                      img: widget.labNames[index]['logo'], 
-                      name:  widget.labNames[index]['name'])
-                   );
+                  return Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: GestureDetector(
+                      onTap: (){
+                        if (widget.labNames[index]['branches'].toString()=='') {
+                          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => NoLabDisclaimer()));
+                          
+                        } else {
+                          getLabsCitywise(widget.labNames[index]['branches'],widget.labNames[index]['name']);
+                        }
+                        
+                      },
+                      child:hsptlName(
+                        img: widget.labNames[index]['logo'], 
+                        name:  widget.labNames[index]['name'])
+                     ),
+                  );
                 }),),
           ),
            abc==true? Align(

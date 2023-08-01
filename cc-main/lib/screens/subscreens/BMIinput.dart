@@ -417,7 +417,7 @@ class _BMIinputState extends State<BMIinput> {
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: Column( mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            NHeading2(head: "Weight"),
+                            NHeading2(head: "Weightt"),
                              Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                                children: [
@@ -432,11 +432,11 @@ class _BMIinputState extends State<BMIinput> {
                                   textAlign: TextAlign.center,
       
                                     controller: weight,
-                                    keyboardType: TextInputType.numberWithOptions(decimal: false),
+                                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                                     inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly,
-                                    LengthLimitingTextInputFormatter(4),
-                            ],
+                                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                                      LengthLimitingTextInputFormatter(7),
+                                    ],
                                   ),
                             ),
                             Links(head: "kg")

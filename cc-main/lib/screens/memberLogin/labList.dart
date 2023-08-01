@@ -28,7 +28,8 @@ import 'depts.dart';
 class LabList extends StatelessWidget {
   List<dynamic> lablist;
   String? city;
-  LabList({super.key,required this.lablist,required this.city});
+  String? LabName;
+  LabList({super.key,required this.lablist,required this.city,required this.LabName});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class LabList extends StatelessWidget {
               height: 150.h,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/chughtai.jpg'),
+                  image: AssetImage('assets/images/lab1.jpg'),
                   fit: BoxFit.fill
                   )
               ),
@@ -71,7 +72,7 @@ class LabList extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: lablist.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return PharmaName(address: lablist[index]['address'].toString(), city: city, name: 'chughtai Lab', aprfor: 'Laboratory', subject: 'Chughtai Laboratory',);
+                  return PharmaName(address: lablist[index]['address'].toString(), city: city, name: '$LabName', aprfor: 'Laboratory', subject: '$LabName',);
                   ListTile(
                     title: Text(lablist[index]['address']),
                   );

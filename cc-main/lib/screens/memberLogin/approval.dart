@@ -1,5 +1,8 @@
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uuid/uuid.dart';
 import '../../widgets/multi3.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -25,6 +28,7 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:flutter/services.dart' show ByteData, Uint8List, rootBundle;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
 
 
@@ -65,9 +69,51 @@ class Approval extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Provider11 = Provider.of<Provider1>(context);
-    generatePdf()async{
+   String? genUuid;
+    generateUid()async{
+      var uuid = Uuid();
+      genUuid = uuid.v1().toString().substring(0,11);
+    }
+
+     sendmail(String url ) async{
+    final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendEmail');
+    final response = await callable.call(
+     <String, dynamic>{
+      'email': 'abdulsamiarain82@gmail.com',
+      'cc':"crescentcareapp@gmail.com",
+      'subject': 'Crescentcare Approval For ${apprFor}',
+      'body': '''
+              ''',
+     'attachment':'${url}'
+     },
+   );}
+
+   Future<String?> uploadFile(File file) async {
+   
+  String fileName = path.basename(file.path);
+  Reference reference = FirebaseStorage.instance.ref('Approvals').child(fileName);
+  UploadTask uploadTask = reference.putFile(file);
+
+  try {
+    TaskSnapshot snapshot = await uploadTask;
+    if (snapshot.state == TaskState.success) {
+      final String downloadUrl = await reference.getDownloadURL();
+      sendmail(downloadUrl);
+      return downloadUrl;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    print("Error uploading file: $error");
+    return null;
+  }
+}
+
+
+generatePdf()async{
        //Create a new PDF documentation
 //Create a new PDF documentation
+await generateUid();
 PdfDocument document = PdfDocument();
 
 final PdfPage page = document.pages.add();
@@ -134,7 +180,7 @@ grid3.headers.add(1);
 
 //Add the rows to the grid
 PdfGridRow header3 = grid3.headers[0];
-header3.cells[0].value = 'APPROVED LIMIT FOR OPD : Rs 1500/_';
+header3.cells[0].value = 'APPROVED LIMIT : ---';
 
 //Add rows to grid
 PdfGridRow row13 = grid3.rows.add();
@@ -142,7 +188,7 @@ row13.cells[0].value = 'Maximum Room and Board Entitlement : Private Room';
 
 //Add rows to grid
 PdfGridRow row14 = grid3.rows.add();
-row14.cells[0].value = 'Length of stay: 00 days';
+row14.cells[0].value = 'Total Remaining Amount of Plan : ${double.parse(Provider11.planAmount.toString())-double.parse(Provider11.utilizedAmount.toString())}';
 
 //Add rows to grid
 PdfGridRow row15 = grid3.rows.add();
@@ -168,7 +214,7 @@ row2.cells[1].value = '$relation';
 //Add rows to grid
 PdfGridRow row4 = grid2.rows.add();
 row4.cells[0].value = 'Employee Name';
-row4.cells[1].value = '${Provider11.name}';
+row4.cells[1].value = '${Provider11.first} ${Provider11.last}';
 
 //Add rows to grid
 PdfGridRow row5 = grid2.rows.add();
@@ -339,7 +385,7 @@ header4.cells[0].value = 'NOTES FOR THE PREFERRED PROVIDER HOSPITAL:';
 
 
 PdfGridRow header5 = grid4.headers[0];
-header5.cells[1].value = 'APPROVED LIMIT FOR OPD : Rs 1500/_';
+header5.cells[1].value = 'APPROVED LIMIT : ---';
 
 //Add rows to grid
 PdfGridRow row131 = grid4.rows.add();
@@ -549,14 +595,14 @@ final directory = await getApplicationSupportDirectory();
 final path = directory.path;
 
 //Create an empty file to write PDF data
-File file = File('$path/Output.pdf');
+File file = File('$path/$genUuid.pdf');
 
 //Write PDF data
 await file.writeAsBytes(bytes, flush: true);
 
 //Open the PDF document in mobile
-OpenFilex.open('$path/Output.pdf');
-
+OpenFilex.open('$path/$genUuid.pdf');
+uploadFile(File('$path/$genUuid.pdf'));
 //Save and dispose the PDF document
 document.dispose(); 
     }

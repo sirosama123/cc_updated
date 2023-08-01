@@ -113,9 +113,7 @@ class _AdminLabOrderDetailState extends State<AdminLabOrderDetail> {
       Provider11.lab_dates.clear();
     }
     
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(  
+    return  Scaffold(  
         backgroundColor:Colors.white ,
          appBar: AppBar(
         backgroundColor: Color(0xff2b578e),
@@ -237,13 +235,13 @@ class _AdminLabOrderDetailState extends State<AdminLabOrderDetail> {
                                     Center(
                                       child: Container(
                                         height: 20.h,
-                                        width: 80.w,
+                                      
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(10),
                                           color: e.status=="pending"?Colors.amber:e.status=="cancelled"?Colors.red:Colors.green
                                         ),
                                         child:  Center(
-                                          child:NHD(head: e.status.toString(), color: Colors.white)
+                                          child:TSB(head: e.status.toString(), color: Colors.white)
                                         ),
                                       )
                                     ),
@@ -466,6 +464,6 @@ class _AdminLabOrderDetailState extends State<AdminLabOrderDetail> {
                 )
           )
       ),
-    ) ));
+    ) );
   }
 }

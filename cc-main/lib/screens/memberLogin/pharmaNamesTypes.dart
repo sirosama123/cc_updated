@@ -5,7 +5,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project1/screens/Provider/provider1.dart';
-import 'package:project1/screens/memberLogin/pharmaNamesTypes.dart';
 import 'package:project1/screens/memberLogin/pharmacyList.dart';
 import 'package:project1/screens/memberLogin/profile.dart';
 import 'package:project1/screens/profile.dart';
@@ -21,41 +20,43 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../widgets/hospitalName.dart';
+import '../../widgets/hsptlName.dart';
 import '../../widgets/square3.dart';
 import '../widgets/memberPageBars.dart';
 import 'depts.dart';
 
 
 
-class PharmaCities extends StatefulWidget {
-  List<dynamic> pharmacities;
-  PharmaCities({super.key,required this.pharmacities});
+class PharmaNames extends StatefulWidget {
+  List<dynamic> pharmaNames;
+  String city;
+  PharmaNames({super.key,required this.pharmaNames,required this.city});
 
   @override
-  State<PharmaCities> createState() => _PharmaCitiesState();
+  State<PharmaNames> createState() => _PharmaNamesState();
 }
 
-class _PharmaCitiesState extends State<PharmaCities> {
+class _PharmaNamesState extends State<PharmaNames> {
   @override
   bool abc = false;
 
   Widget build(BuildContext context) {
     var pharmalist;
-     getPharmaciesCitywise(String? url_pharm_names,String city) async {
+     getPharmaciesCitywise(String? url_pharm_data) async {
       final dio = Dio();
       try {
         setState(() {
           abc=true;
         });
         final response = await dio.get(
-            '$url_pharm_names');
+            '$url_pharm_data');
         if (response.statusCode == 200) {
           final data = response.data;
           pharmalist=response.data;
           print("${pharmalist['data']} ====>");
           // print(data1);
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PharmaNames(pharmaNames:pharmalist['data'], city: '',)));
+              context, MaterialPageRoute(builder: (context) => PharmaList(pharmalist: pharmalist['data'], img: '', city: widget.city,)));
         } else {
           print('API request failed with status code ${response.statusCode}');
         }
@@ -76,7 +77,7 @@ class _PharmaCitiesState extends State<PharmaCities> {
       home: Scaffold(
        appBar: AppBar(
             backgroundColor: Color(0xff2b578e),
-            title: Text("Pharmacy Cities"),
+            title: Text("Pharmacy Names"),
              leading: GestureDetector(
             child: Icon( Icons.arrow_back_ios, color: Colors.white,  ),
                onTap: () {
@@ -95,16 +96,18 @@ class _PharmaCitiesState extends State<PharmaCities> {
           Padding(
             padding:EdgeInsets.only(top: 15.h,right: 10.w,left: 10.w,bottom: 5.h),
             child: GridView.count(
-                crossAxisCount: 3, // Number of columns
+                crossAxisCount: 2, // Number of columns
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               
-                children: List.generate(widget.pharmacities.length, (index) {
+                children: List.generate(widget.pharmaNames.length, (index) {
                   return GestureDetector(
                     onTap: (){
-                      getPharmaciesCitywise(widget.pharmacities[index]['pharma_names'],widget.pharmacities[index]['city']);
+                      getPharmaciesCitywise(widget.pharmaNames[index]['pharmacies']);
                     },
-                    child: Square3(imgAddress: widget.pharmacities[index]['logo'], heading: widget.pharmacities[index]['city']));
+                    child: hsptlName(
+                      img: widget.pharmaNames[index]['logo'], 
+                      name: widget.pharmaNames[index]['name']));
                 }),),
           ),
            abc==true? Align(
