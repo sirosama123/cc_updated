@@ -111,6 +111,7 @@ class _PrescriptionState extends State<Prescription> {
         Order Placer Number : ${Provider11.number}
         Order Recieving Date: ${RecievingDate}
         Order Recieving Time: ${timee}
+        CNIC: ${Provider11.cnic}
               ''',
       'attachment':'${url}'
      },
@@ -448,8 +449,8 @@ return MaterialApp(
                             ],
                               ),
                             SizedBox(height: 7.h,),
-                            Provider11.imagePath==null?Links(head: "Upload prescrition"):GestureDetector(
-                              child: Links(head: "prescrition uploaded"),
+                            Provider11.imagePath==null?Links(head: "Upload prescription"):GestureDetector(
+                              child: Links(head: "prescription uploaded"),
                               onTap: (){       
                               },
                             )        

@@ -297,18 +297,17 @@ final PdfPage page = document.pages.add();
 
 // Load image from assets using the Image.asset method
 // Load image from assets using the Image.asset method
-final ByteData imageData = await rootBundle.load('assets/images/side.png');
+final ByteData imageData = await rootBundle.load('assets/side.png');
 final Uint8List uint8list = imageData.buffer.asUint8List();
 
 // Calculate the height and width of the image
 final PdfBitmap image = PdfBitmap(uint8list);
-final double imageWidth = image.width * 0.50;
-final double imageHeight = image.height * 0.50;
+
 
 // Draw the image on the page at the left side and with required size
-page.graphics.drawImage(image, Rect.fromLTWH(40, 10, imageWidth, imageHeight));
+page.graphics.drawImage(image, Rect.fromLTWH(40, 10, image.width * 0.50.w, image.height * 0.50.h));
 
-final ByteData imageData2 = await rootBundle.load('assets/images/cc.png');
+final ByteData imageData2 = await rootBundle.load('assets/cc.png');
 final Uint8List uint8list2 = imageData2.buffer.asUint8List();
 
 page.graphics.drawString(
@@ -397,7 +396,7 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   ${item['DocumentNo'].toString()}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':     ${item['DocumentNo'].toString()}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(120, 114), Offset(120, 114))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -408,7 +407,7 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   ----', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':     ${item['healthcode'].toString()}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(120, 124), Offset(120, 124))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -419,18 +418,18 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   ----', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':     ${item['empId'].toString()}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(120, 136), Offset(120, 136))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 
 page.graphics.drawString(
-    'Gender/Age', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    'Gender/Age:', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(70, 148), Offset(70, 148))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   ${item['Gender'].toString()}/${item['Age'].toString()}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':     ${item['Gender'].toString()}/${item['Age'].toString()}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(120, 148), Offset(120, 148))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -440,7 +439,7 @@ page.graphics.drawString(
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   ----', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    ':    ${item['PlanCode'].toString()}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(120, 160), Offset(120, 160))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
@@ -459,7 +458,7 @@ page.graphics.drawString(
     );
 // Get the size of the image
   final PdfBitmap image3 = PdfBitmap(uint8list2);
-  final Size imageSize3 = Size(90.w, 60.h);
+  final Size imageSize3 = Size(90, 60);
 
   // Get the size of the page
   final Size pageSize = page.getClientSize();

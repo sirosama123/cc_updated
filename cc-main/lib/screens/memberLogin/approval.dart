@@ -79,10 +79,11 @@ class Approval extends StatelessWidget {
     final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendEmail');
     final response = await callable.call(
      <String, dynamic>{
-      'email': 'abdulsamiarain82@gmail.com',
+      'email': 'Hello@crescentcare.pk',
       'cc':"crescentcareapp@gmail.com",
       'subject': 'Crescentcare Approval For ${apprFor}',
       'body': '''
+            Please Checkout the Attachment.
               ''',
      'attachment':'${url}'
      },
@@ -196,7 +197,7 @@ row15.cells[0].value = 'This includes Previous Limit of Rs. Nil';
 
 //Add rows to grid
 PdfGridRow row16 = grid3.rows.add();
-row16.cells[0].value = 'Diagnosis: Consultation';
+row16.cells[0].value = 'Diagnosis: ${apprFor=='Pharmacy'?'As Per Prescription':'Consultation'}';
 
 //Add the rows to the grid2
 PdfGridRow header2 = grid2.headers[0];
@@ -483,59 +484,59 @@ page.graphics.drawString(
     );
 
 page.graphics.drawString(
-    'Card No.', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 35), Offset(0, 35))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   $cnic', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 35), Offset(50, 35))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 
 page.graphics.drawString(
-    'Policy No.', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 50), Offset(0, 50))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   $dn', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 50), Offset(50, 50))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 
 page.graphics.drawString(
-    'Partner ID', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 65), Offset(0, 65))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   Nil', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 65), Offset(50, 65))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 
 page.graphics.drawString(
-    'Gender/Age', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 80), Offset(0, 80))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   ${gen}/${age}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 80), Offset(50, 80))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    'Product', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 95), Offset(0, 95))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   Nil', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 95), Offset(50, 95))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
-final ByteData imageData2 = await rootBundle.load('assets/images/cc.png');
+final ByteData imageData2 = await rootBundle.load('assets/cc.png');
 final Uint8List uint8list2 = imageData2.buffer.asUint8List();
 
 // Calculate the height and width of the image

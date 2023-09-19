@@ -302,7 +302,7 @@ class DoctorDetail extends StatelessWidget {
                                         Navigator.push(context,
                                           MaterialPageRoute(builder:
                                             (context) => 
-                                            HsptlDependentsData(hsptlName: hsptlName, city: '',)
+                                            HsptlDependentsData(hsptlName: hsptlName, city: '', for1: '',)
                                             )
                                           );
                                       },

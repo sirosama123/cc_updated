@@ -47,6 +47,7 @@ class HsptlApproval extends StatelessWidget {
   String? hsptlName;
   String? city;
   String? approvalFor;
+  String? for1;
   HsptlApproval({
     super.key,
     required this.relation,
@@ -62,7 +63,8 @@ class HsptlApproval extends StatelessWidget {
     required this.ed,
     required this.hsptlName,
     required this.city,
-    required this.approvalFor
+    required this.approvalFor,
+    required this.for1
     });
 
   @override
@@ -78,10 +80,11 @@ class HsptlApproval extends StatelessWidget {
     final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendEmail');
     final response = await callable.call(
      <String, dynamic>{
-      'email': 'abdulsamiarain82@gmail.com',
+      'email': 'Hello@crescentcare.pk',
       'cc':"crescentcareapp@gmail.com",
       'subject': 'Crescentcare Approval For ${approvalFor}',
       'body': '''
+            Please Checkout the Attachment.
               ''',
      'attachment':'${url}'
      },
@@ -482,59 +485,59 @@ page.graphics.drawString(
     );
 
 page.graphics.drawString(
-    'Card No.', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '$for1', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 35), Offset(0, 35))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   cardId', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 35), Offset(50, 35))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 
 page.graphics.drawString(
-    'Policy No.', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 50), Offset(0, 50))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   policyNo', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 50), Offset(50, 50))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 
 page.graphics.drawString(
-    'Partner ID', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 65), Offset(0, 65))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   PartnerId', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 65), Offset(50, 65))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 
 page.graphics.drawString(
-    'Gender/Age', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 80), Offset(0, 80))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   ${gen}/${age}', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 80), Offset(50, 80))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    'Product', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp,),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(0, 95), Offset(0, 95))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
 page.graphics.drawString(
-    ':   Product', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
+    '', PdfStandardFont(PdfFontFamily.helvetica, 9.sp, style: PdfFontStyle.bold),
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 95), Offset(50, 95))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
-final ByteData imageData2 = await rootBundle.load('assets/images/cc.png');
+final ByteData imageData2 = await rootBundle.load('assets/cc.png');
 final Uint8List uint8list2 = imageData2.buffer.asUint8List();
 
 // Calculate the height and width of the image

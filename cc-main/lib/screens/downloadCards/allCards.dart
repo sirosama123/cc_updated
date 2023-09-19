@@ -67,20 +67,20 @@ class AllCards extends StatelessWidget {
 
 // Load image from assets using the Image.asset method
 // Load image from assets using the Image.asset method
-      final ByteData imageData =
-          await rootBundle.load('assets/images/side.png');
-      final Uint8List uint8list = imageData.buffer.asUint8List();
+      // final ByteData imageData =
+      //     await rootBundle.load('assets/images/side.png');
+      // final Uint8List uint8list = imageData.buffer.asUint8List();
 
 // Calculate the height and width of the image
-      final PdfBitmap image = PdfBitmap(uint8list);
-      final double imageWidth = image.width * 0.75;
-      final double imageHeight = image.height * 0.75;
+      // final PdfBitmap image = PdfBitmap(uint8list);
+      // final double imageWidth = image.width * 0.75;
+      // final double imageHeight = image.height * 0.75;
 
 // Draw the image on the page at the left side and with required size
-      page.graphics
-          .drawImage(image, Rect.fromLTWH(0, 10, imageWidth, imageHeight));
+      // page.graphics
+      //     .drawImage(image, Rect.fromLTWH(0, 10, imageWidth, imageHeight));
 
-      final ByteData imageData2 = await rootBundle.load('assets/images/cc.png');
+      final ByteData imageData2 = await rootBundle.load('assets/cc.png');
       final Uint8List uint8list2 = imageData2.buffer.asUint8List();
 
 // Calculate the height and width of the image

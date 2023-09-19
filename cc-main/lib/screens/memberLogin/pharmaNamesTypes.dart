@@ -101,13 +101,16 @@ class _PharmaNamesState extends State<PharmaNames> {
                 mainAxisSpacing: 10,
               
                 children: List.generate(widget.pharmaNames.length, (index) {
-                  return GestureDetector(
-                    onTap: (){
-                      getPharmaciesCitywise(widget.pharmaNames[index]['pharmacies']);
-                    },
-                    child: hsptlName(
-                      img: widget.pharmaNames[index]['logo'], 
-                      name: widget.pharmaNames[index]['name']));
+                  return Padding(
+                    padding:  EdgeInsets.all(4),
+                    child: GestureDetector(
+                      onTap: (){
+                        getPharmaciesCitywise(widget.pharmaNames[index]['pharmacies']);
+                      },
+                      child: hsptlName(
+                        img: widget.pharmaNames[index]['logo'], 
+                        name: widget.pharmaNames[index]['name'])),
+                  );
                 }),),
           ),
            abc==true? Align(

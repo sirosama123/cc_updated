@@ -9,6 +9,7 @@ import 'package:project1/screens/memberLogin/profile.dart';
 import 'package:provider/provider.dart';
 import '../widgets/memberPageBars.dart';
 import '../widgets/memberPageBars2.dart';
+import 'memberLogin/center1.dart';
 import 'memberLogin/city.dart';
 import 'memberLogin/labCities.dart';
 import 'memberLogin/myClaims.dart';
@@ -95,6 +96,44 @@ await FlutterEmailSender.send(email);
           print(labcities['data'].runtimeType);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => LabCities(labcities: labcities['data'],)));
+              EasyLoading.dismiss();
+        } else {
+          print('API request failed with status code ${response.statusCode}');
+          setState(() {
+            abc=false;
+          });
+        }
+      } catch (e) {
+        print('Error retrieving data from API: $e');
+        print('Data not exist');
+        setState(() {
+            abc=false;
+          });
+      }
+      setState(() {
+            abc=false;
+          });
+    }
+
+
+
+
+    getPanelCitiesHsptls() async {
+      final dio = Dio();
+      try {
+          setState(() {
+            abc=true;
+          });
+        final response = await dio.get(
+            'https://script.google.com/macros/s/AKfycbyIGkzACG40DEox2Twfud51iFcuVXj7iuinfvdMPfswQpwYzbg3FcHZmMfG5BYMbumU/exec');
+        if (response.statusCode == 200) {
+          final data = response.data;
+          hospcities=response.data;
+          print(data['data'][0]);
+          print(hospcities['data'].runtimeType);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) =>CenterPage(hospcities: hospcities['data'],)
+               ));
               EasyLoading.dismiss();
         } else {
           print('API request failed with status code ${response.statusCode}');
@@ -328,11 +367,7 @@ print(sum);
                   ),
                   GestureDetector(
                     onTap: (){
-                        Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HospCities()));
-                      //  getPanelHospitals(); 
+                       getPanelCitiesHsptls();
                     },
                     child: MemberPageBar1(
                       heading: 'Panel Hospitals      ',

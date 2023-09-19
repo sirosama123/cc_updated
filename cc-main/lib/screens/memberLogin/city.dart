@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project1/screens/Provider/provider1.dart';
+import 'package:project1/screens/memberLogin/hospitals.dart';
 import 'package:project1/screens/memberLogin/pharmacyList.dart';
 import 'package:project1/screens/memberLogin/profile.dart';
 import 'package:project1/screens/profile.dart';
@@ -23,13 +24,14 @@ import '../../widgets/hospitalName.dart';
 import '../../widgets/square3.dart';
 import '../widgets/memberPageBars.dart';
 import 'depts.dart';
-import 'hospitals.dart';
 import 'labNames.dart';
 
 
+
 class HospCities extends StatefulWidget {
- 
-  HospCities({super.key});
+  List<dynamic> hospcities;
+  String? for1;
+  HospCities({super.key,required this.hospcities,required this.for1});
 
   @override
   State<HospCities> createState() => _HospCitiesState();
@@ -40,8 +42,8 @@ class _HospCitiesState extends State<HospCities> {
   bool abc = false;
 
   Widget build(BuildContext context) {
-      var labNames;
-    getLabsNamesCitywise(String? link,String? city) async {
+      var hsptlNames;
+    getHsptlNamesCitywise(String? link,String? city) async {
       final dio = Dio();
       try {
         setState(() {
@@ -51,11 +53,11 @@ class _HospCitiesState extends State<HospCities> {
             '$link');
         if (response.statusCode == 200) {
           final data = response.data;
-          labNames=response.data;
-          print(labNames['data']);
+          hsptlNames=response.data;
+          print(hsptlNames['data']);
           
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LabNames(labNames: labNames['data'], city: city,)));
+              context, MaterialPageRoute(builder: (context) => MemberHospitals(hospitalcities: hsptlNames['data'], cityName: city, for1: widget.for1,)));
         } else {
           print('API request failed with status code ${response.statusCode}');
         }
@@ -70,42 +72,6 @@ class _HospCitiesState extends State<HospCities> {
         });
       }
     }
-    var hospcities;
-    getPanelHospitals(String link,String city) async {
-      final dio = Dio();
-      try {
-          setState(() {
-            abc=true;
-          });
-        final response = await dio.get(
-            '$link');
-        if (response.statusCode == 200) {
-          final data = response.data;
-          hospcities=response.data;
-          // print('${data['data'][1]}=====');
-          print(hospcities['data'].runtimeType);
-         Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MemberHospitals(hospitalcities: hospcities['data'], cityName: city,)));
-              setState(() {
-            abc=false;
-          });
-        } else {
-          print('API request failed with status code ${response.statusCode}');
-          setState(() {
-            abc=false;
-          });
-        }
-      } catch (e) {
-        print('Error retrieving data from API: $e');
-        print('Data not exist');
-        setState(() {
-            abc=false;
-          });
-      }
-    }
-
 
 
 
@@ -137,68 +103,23 @@ class _HospCitiesState extends State<HospCities> {
           ),
       body: Stack(
         children: [
-         Padding(
-           padding: const EdgeInsets.all(8.0),
-           child: Column(
-             children: [
-               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                 children: [
-                    Expanded(
-                      flex: 3,
-                      child:  Padding(
-                        padding:EdgeInsets.all(4),
-                        child: GestureDetector(
-                                onTap: (){
-                                  getPanelHospitals("https://script.google.com/macros/s/AKfycbzZ2utHnysZGpU5ZYZQn3so8FNFU3ys2mFtbmpEQbYONyXiXzHAapbUWWsQnnpowgunAg/exec","Karachi");
-                                 
-                                },
-                                child:Square3(imgAddress: "https://firebasestorage.googleapis.com/v0/b/crescentcareapp-f58eb.appspot.com/o/quaid.png?alt=media&token=94f1bd85-500f-454d-8b19-0bdd8d0ca960", heading:"Karachi") ),
-                      ),),
-                  
-                   Expanded(
-                      flex: 3,
-                      child:  Padding(
-                         padding:EdgeInsets.all(4),
-                        child: GestureDetector(
-                                onTap: (){
-                                  getPanelHospitals("https://script.google.com/macros/s/AKfycbzZ2utHnysZGpU5ZYZQn3so8FNFU3ys2mFtbmpEQbYONyXiXzHAapbUWWsQnnpowgunAg/exec","Karachi");
-                                 
-                                },
-                                child:Square3(imgAddress: "https://firebasestorage.googleapis.com/v0/b/crescentcareapp-f58eb.appspot.com/o/quaid.png?alt=media&token=94f1bd85-500f-454d-8b19-0bdd8d0ca960", heading:"Karachi") ),
-                      ),),
-                  Expanded(
-                      flex: 3,
-                      child:  Padding(
-                         padding:EdgeInsets.all(4),
-                        child: GestureDetector(
-                                onTap: (){
-                                  getPanelHospitals("https://script.google.com/macros/s/AKfycbzZ2utHnysZGpU5ZYZQn3so8FNFU3ys2mFtbmpEQbYONyXiXzHAapbUWWsQnnpowgunAg/exec","Karachi");
-                                 
-                                },
-                                child:Square3(imgAddress: "https://firebasestorage.googleapis.com/v0/b/crescentcareapp-f58eb.appspot.com/o/quaid.png?alt=media&token=94f1bd85-500f-454d-8b19-0bdd8d0ca960", heading:"Karachi") ),
-                      ),),
-                 ],
-               ),
-               SizedBox(height: 10.h,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 12.w,vertical: 10.h),
-                  child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                   children: [
-                     GestureDetector(
-                                onTap: (){
-                                  getPanelHospitals("https://script.google.com/macros/s/AKfycbwRS2eLWdWE1EzucSAl_uKaVNwyecyknMGVUpTarx7VUGMcqF84I6dlpaeDVnm7aoz4WA/exec","Islamabad");
-                                 
-                                },
-                                child:Square3(imgAddress: "https://cdn-icons-png.flaticon.com/128/1046/1046183.png", heading:"Islamabad") ),
+          Padding(
+            padding:EdgeInsets.only(top: 15.h,right: 10.w,left: 10.w,bottom: 5.h),
+            child: GridView.count(
+                crossAxisCount: 3, // Number of columns
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              
+                children: List.generate(widget.hospcities.length, (index) {
+                  print(widget.hospcities);
+                  return GestureDetector(
+                    onTap: (){
+                      getHsptlNamesCitywise(widget.hospcities[index]['hsptl'],widget.hospcities[index]['city']);
                      
-                   ],
-                               ),
-                ),
-             ],
-           ),
-         ),
+                    },
+                    child: Square3(imgAddress: widget.hospcities[index]['img'], heading: widget.hospcities[index]['city']));
+                }),),
+          ),
            abc==true? Align(
               alignment: Alignment.center,
               child: Container(

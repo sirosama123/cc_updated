@@ -508,7 +508,7 @@ page.graphics.drawString(
     brush: PdfBrushes.black, bounds: Rect.fromPoints(Offset(50, 95), Offset(50, 95))
     // bounds: Rect.fromLTWH(50, 130, 300, 50)
     );
-final ByteData imageData2 = await rootBundle.load('assets/images/cc.png');
+final ByteData imageData2 = await rootBundle.load('assets/cc.png');
 final Uint8List uint8list2 = imageData2.buffer.asUint8List();
 
 // Calculate the height and width of the image

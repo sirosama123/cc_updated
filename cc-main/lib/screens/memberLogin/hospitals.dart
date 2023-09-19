@@ -26,8 +26,9 @@ import 'hsptldependents.dart';
 
 class MemberHospitals extends StatefulWidget {
   List<dynamic> hospitalcities;
+  String? for1;
   String? cityName;
-  MemberHospitals({super.key,required this.hospitalcities,required this.cityName});
+  MemberHospitals({super.key,required this.hospitalcities,required this.cityName,required this.for1});
 
   @override
   State<MemberHospitals> createState() => _MemberHospitalsState();
@@ -105,7 +106,7 @@ class _MemberHospitalsState extends State<MemberHospitals> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HsptlDependentsData(hsptlName: widget.hospitalcities[index]['name'], city: widget.cityName,)
+                                  builder: (context) => HsptlDependentsData(hsptlName: widget.hospitalcities[index]['name'], city: widget.cityName, for1: widget.for1,)
                                  ));
                   },
                   child: Padding(
